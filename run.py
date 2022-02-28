@@ -13,8 +13,20 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('vv_pizzas')
 
-orders = SHEET.worksheet('Orders')
 
-data = orders.get_all_values()
+def get_customer_info():
+    """
+    Request customers name and telephone number for the order
+    """
+    print("Thank you for choosing Vera's Vegan Pizzas!\n")
+    print("Please follow the steps to place your order,")
+    print("and collect 20 minutes later.\n")
 
-print(data)
+    name_str = input("Please provide your name:\n")
+    print(f"Hi {name_str} \n")
+    
+    tel_str = input("Please provide a contact number:\n")
+    print(f"Thanks {name_str}, we will use {tel_str} to contact you if there's an issue with your order\n")
+
+get_customer_info()
+
