@@ -107,16 +107,47 @@ class Size:
                 continue
             return size
 
-
-#def confirm_order():
+class Order:
     """
-    Collate the choices made by the customer
-    Present the choices to the customer
-    Ask the customer to either place the order or,
-    add more items to the order
+    Customer order class
     """
+    def confirm_order():
+        """
+        Confirm the order back to the customer
+        ask the customer to proceed Y/N
+        provide an opportunity to order more items
+        """
+        while True:
+            # need to code how to get the values from the other classes - do we pass them into the main() function?
+            currentOrder = input(f"{Customer.name} you have ordered a {Size.size} {Topping.topping} is this ready to be sent to the kitchen? Y/N:\n")
+            if currentOrder == ('Y').lower():
+                print(f"Thanks. Sending your order to Vera in the kitchen...\n")
+                orders_worksheet = SHEET.worksheet("Orders")
+                orders_worksheet.append_row(custOrder)
+                print(f"Your order has been received, please come and collect in 20 minutes.\n See you soon!\n")
+            elif currentOrder == ('N').lower():
+                moreItems = input(f"That's ok. Would you like to order more items? Y/N\n") 
+                if moreItems == ('Y').lower():
+                    print("I need to code how to add more items")
+                elif moreItems == ('N').lower():
+                    amendOrder = input(f"Would you like to amend this order? Y/N\n")
+                    if amendOrder == ('Y').lower():
+                        print("I need to code how to amend the order")
+                    elif amendOrder == ('N').lower():
+                        confirm_order()
+                    else:
+                        print(f"Invalid choice, please enter either Y or N\n")
+                        continue
+                else:
+                    print(f"Invalid choice, please enter either Y or N\n")
+                    continue      
+            else: 
+                print(f"Invalid choice, please enter either Y or N\n")
+                continue
+            
+            
+        return f"Thanks Customer.name(self) for ordering a Size.size(self) Topping.topping(self)"
 
-    #print(f"Thanks (get_customer_data.({name.capitalize()})))
 
 
 #def update_order_worksheet(custOrder):
@@ -133,7 +164,7 @@ def main():
     custData = Customer.get_customer_data()
     custTopping = Topping.get_topping()
     custSize = Size.get_size()
-    #custOrder = confirm_order()
+    custOrder = Order.confirm_order()
     #update_order_worksheet(custOrder)
 
 
