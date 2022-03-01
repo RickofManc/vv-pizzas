@@ -3,6 +3,7 @@ from google.oauth2.service_account import Credentials
 from tabulate import tabulate # Importing tabulate to present data to the user clearly
 import re # Importing re module for validating mobile phone number
 
+
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
@@ -27,12 +28,13 @@ def get_customer_info():
     Request and validate customers name
     """
     while True:
-        name_str = input("Please provide your name:\n").lower()
-        if name_str.isalpha(): # Validates the customer as entered a character based name
+        name = input("Please provide your name:\n").lower()
+        if name.isalpha(): # Validates the customer as entered a character based name
             break
         else:
-            print("Invalid name, please try again")    
-    print(f"Hi {name_str.capitalize()}\n")
+            print("Invalid name, please try again")  
+        return name  
+    print(f"Hi {name.capitalize()}\n")
     
     """
     Request and validate customers mobile phone number 
@@ -48,14 +50,14 @@ def get_customer_info():
         else:
             print(f"Invalid number. Exactly 11 digits required, starting with 0, please try again")
         return telnum    
-    print(f"Thanks {name_str.capitalize()}, we will use {telnum} to contact you if there's any issue with your order.\n")
+    print(f"Thanks {name.capitalize()}, we will use {telnum} to contact you if there's any issue with your order.\n")
 
 
 def get_topping():
     """
     Present the customer with the choice of toppings and request a choice of 1-4
     """
-    print("Here are todays choices of toppings...")
+    print("Here are todays choices of toppings, Which would you like?")
     print("[1] Margherita")
     print("[2] Romana")
     print("[3] Diavolo")
@@ -66,7 +68,7 @@ def get_topping():
     """
     while True:
         try:
-            topping = int(input("Please choose a topping by typing the number and clicking enter:\n"))
+            topping = int(input("Please choose a topping by typing the corresponding number and clicking enter:\n"))
         except ValueError:
             print("Invalid choice, please enter a number")  
             continue
@@ -82,10 +84,27 @@ def get_size():
     """
     Present the customer with the choice of sizes and request a choice S, M, L
     """
-    print("Please choose a pizza base size...")
+    print("Which size of pizza would you like?")
     print('[S] Small 7"')
     print('[M] Medium 10"')
     print('[L] Large 14"')
+
+    """
+    Request and validate the customers choice is either S, M or L
+    """
+    while True:
+        size = input("Please choose a size by entering the corresponding letter and clicking enter:\n")
+        if size == ('S').lower():
+            print(f"Thanks for choosing Small")
+        elif size == ('M').lower():
+            print(f"Thanks for choosing Medium")
+        elif size == ('L').lower():
+            print(f"Thanks for choosing Large")
+        else:
+            print("Invalid choice, please enter either S, M or L")
+            continue
+        return size
+
 
 
 
