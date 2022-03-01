@@ -47,6 +47,7 @@ def get_customer_info():
             break
         else:
             print(f"Invalid number. Exactly 11 digits required, starting with 0, please try again")
+        return telnum    
     print(f"Thanks {name_str.capitalize()}, we will use {telnum} to contact you if there's any issue with your order.\n")
 
 
@@ -61,19 +62,34 @@ def get_topping():
     print("[4] Forza\n")
 
     """
-    Validate the customers choice is between 1-4
+    Request and validate the customers choice is between 1-4
     """
-    topping = int(input("Please choose a topping by typing the number and clicking enter:\n"))
-# sort out validation for topping selection - think there is an issue with the [1] format so maybve move to a data dictionary or tabulate for the choice.
-    def validate_topping(topping):
-        numTopping = re.compile("[1-4]{1}") # Validates the choice is between 1-4
-        return numTopping.match(topping)
-# think the IF statement is ok just need to validate the selection 
-    if (validate_topping(topping)):
-        print(f"Thanks for choosing a {topping} {get_customer_info().name_str.capitalize()}\n")
-    else:
-        print(f"Invalid choice, please try again")    
+    while True:
+        try:
+            topping = int(input("Please choose a topping by typing the number and clicking enter:\n"))
+        except ValueError:
+            print("Invalid choice, please enter a number")  
+            continue
+        if topping in range(1, 5, 1): # change to a data dictionary so the return print message is a string value
+            print(f"Thanks for choosing a {topping}")
+        else:
+            print("Invalid choice, please try again") 
+            continue
+        return topping
+         
 
-    
+def get_size():
+    """
+    Present the customer with the choice of sizes and request a choice S, M, L
+    """
+    print("Please choose a pizza base size...")
+    print('[S] Small 7"')
+    print('[M] Medium 10"')
+    print('[L] Large 14"')
+
+
+
+
 get_customer_info()
 get_topping()
+get_size()
