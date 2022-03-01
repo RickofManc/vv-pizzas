@@ -16,39 +16,32 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('vv_pizzas')
 
 
-def get_customer_info():
+def get_customer_data():
     """
-    Welcome customer and request key customer information for the order
-    """
-    print("Thank you for choosing Vera's Vegan Pizzas!\n")
-    print("Please follow the steps to place your order,")
-    print("and collect 20 minutes later.\n")
-
-    """
-    Request and validate customers name
+    Request and validate customers name and telephone number
     """
     while True:
-        name = input("Please provide your name:\n").lower()
+        name = input(f"Please provide your name:\n").lower()
         if name.isalpha(): # Validates the customer as entered a character based name
             break
         else:
-            print("Invalid name, please try again")  
+            print(f"Invalid name, please try again\n")  
         return name  
     print(f"Hi {name.capitalize()}\n")
-    
+        
     """
     Request and validate customers mobile phone number 
     """
     def validate_mobile(telnum):
         numPattern = re.compile("(0)?[0-9]{11}") # Validates number to begin with 0 and be 11 digits only
         return numPattern.match(telnum)
-    
+        
     while True:
-        telnum = input("Please provide a mobile contact number:\n")
+        telnum = input(f"Please provide a mobile contact number:\n")
         if (validate_mobile(telnum)):
             break
         else:
-            print(f"Invalid number. Exactly 11 digits required, starting with 0, please try again")
+            print(f"Invalid number. Exactly 11 digits required, starting with 0, please try again\n")
         return telnum    
     print(f"Thanks {name.capitalize()}, we will use {telnum} to contact you if there's any issue with your order.\n")
 
@@ -57,7 +50,7 @@ def get_topping():
     """
     Present the customer with the choice of toppings and request a choice of 1-4
     """
-    print("Here are todays choices of toppings, Which would you like?")
+    print("Here are todays choices of toppings, which would you like?")
     print("[1] Margherita")
     print("[2] Romana")
     print("[3] Diavolo")
@@ -68,14 +61,14 @@ def get_topping():
     """
     while True:
         try:
-            topping = int(input("Please choose a topping by typing the corresponding number and clicking enter:\n"))
+            topping = int(input(f"Please choose a topping by typing the corresponding number and clicking enter:\n"))
         except ValueError:
-            print("Invalid choice, please enter a number")  
+            print(f"Invalid choice, please enter a number\n")  
             continue
         if topping in range(1, 5, 1): # change to a data dictionary so the return print message is a string value
-            print(f"Thanks for choosing a {topping}")
+            print(f"Thanks for choosing a {topping}\n")
         else:
-            print("Invalid choice, please try again") 
+            print(f"Invalid choice, please try again\n") 
             continue
         return topping
          
@@ -93,22 +86,49 @@ def get_size():
     Request and validate the customers choice is either S, M or L
     """
     while True:
-        size = input("Please choose a size by entering the corresponding letter and clicking enter:\n")
+        size = input(f"Please choose a size by entering the corresponding letter and clicking enter:\n")
         if size == ('S').lower():
-            print(f"Thanks for choosing Small")
+            print(f"Thanks for choosing Small\n")
         elif size == ('M').lower():
-            print(f"Thanks for choosing Medium")
+            print(f"Thanks for choosing Medium\n")
         elif size == ('L').lower():
-            print(f"Thanks for choosing Large")
+            print(f"Thanks for choosing Large\n")
         else:
-            print("Invalid choice, please enter either S, M or L")
+            print(f"Invalid choice, please enter either S, M or L\n")
             continue
         return size
 
 
+def get_order():
+    """
+    Collate the choices made by the customer
+    Present the choices to the customer
+    Ask the customer to either place the order or,
+    add more items to the order
+    """
+
+    print(order)
 
 
+def update_order_worksheet(custOrder):
+    print(f"Thanks. Sending your order to Vera in the kitchen...\n")
+    orders_worksheet = SHEET.worksheet("Orders")
+    orders_worksheet.append_row(custOrder)
+    print(f"Your order has been received, please come and collect in 20 minutes.\n See you soon!\n")
 
-get_customer_info()
-get_topping()
-get_size()
+
+def main():
+    """
+    Run all program functions
+    """
+    custData = get_customer_data()
+    custTopping = get_topping()
+    custSize = get_size()
+    custOrder = get_order()
+    update_order_worksheet(custOrder)
+
+
+print("Thank you for choosing Vera's Vegan Pizzas!\n")
+print("Please follow the steps to place your order,")
+print("and collect 20 minutes later.\n")
+main()
