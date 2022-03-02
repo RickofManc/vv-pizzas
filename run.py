@@ -16,35 +16,40 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('vv_pizzas')
 
 
-def get_customer_data():
+def get_customer_name():
     """
-    Request and validate customers name and telephone number
+    Request and validate customers name
     """
     while True:
         name = input("Please provide your name:\n").lower()
         if name.isalpha():  # Validates the customer is characters only
-            break
+            print(f"Hi {name.capitalize()}\n")
         else:
             print("Invalid name, please try again\n")
-        return name
-    print(f"Hi {name.capitalize()}\n")
+            continue
+        return name 
 
+
+def get_customer_number():
+    """
+    Request and validate customers telephone number
+    """
     def validate_mobile(telnum):
         """
-        Request and validate customers mobile phone number.
+        Validates customers mobile phone number.
         Number must begin with 0 and be 11 digits.
         """
         num_pattern = re.compile("(0)?[0-9]{11}")
         return num_pattern.match(telnum)
-
+    # Request telephone number, break if valid or provide error message
     while True:
         telnum = (input("Please provide a mobile contact number:\n"))
         if validate_mobile(telnum):
-            break
+            print(f"Thanks, we will use {telnum} to contact you if there's any issue with your order.\n")
         else:
             print("Invalid number. 11 digits required, starting with 0, please try again\n")
+            continue
         return telnum
-    print(f"Thanks {name.capitalize()}, we will use {telnum} to contact you if there's any issue with your order.\n")
 
 
 def get_pizza():
@@ -65,7 +70,6 @@ def get_pizza():
         tablefmt="psql"),
         "\n"
         )
-
     # Request and validate the customers choice is between 1-4
     while True:
         try:
@@ -120,10 +124,12 @@ def confirm_order():
     ask the customer to proceed Y/N
     provide an opportunity to order more items
     """
+    name = get_customer_name()
+    telnum = get_customer_number()
     pizza = get_pizza()
     size = get_size()
 
-    print(f"Thanks, to confirm, you have ordered a {size} {pizza}")
+    print(f"Thanks {name.capitalize()}, you are ordering a {size} {pizza}")
 
     while True:
         # need to code how to get the values from the other classes \
@@ -158,9 +164,8 @@ def confirm_order():
 
 def main():
     """
-    Run all program functions
+    Run all main program functions
     """
-    get_customer_data()
     confirm_order()
 
 
