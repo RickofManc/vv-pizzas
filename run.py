@@ -27,7 +27,7 @@ def get_customer_name():
         else:
             print("Invalid name, please try again\n")
             continue
-        return name 
+        return name
 
 
 def get_customer_number():
@@ -59,9 +59,9 @@ def get_pizza():
     """
     pizza_table = [
         [1, "Margherita", "Vegan mozzarella and tomato."],
-        [2, "Giardiniera", "Artichoke, mushrooms, red onion, black olives and parsley."],
-        [3, "Diavolo", "Smoky jackfruit 'pepperoni', green peppers, Tabasco, and smoky chilli oil."],
-        [4, "Forza", "Smoky chilli Quorn™, mixed peppers, hot & sweet chilli peppers."]
+        [2, "Giardiniera", "Artichoke, mushrooms, red onion, black olives"],
+        [3, "Diavolo", "Smoky jackfruits, green peppers, chilli oil."],
+        [4, "Forza", "Chilli Quorn™, mixed peppers, sweet chilli peppers."]
         ]
     print("Here are todays pizzas, which would you like?\n")
     print(tabulate(
@@ -125,7 +125,6 @@ def confirm_order():
     provide an opportunity to order more items
     """
     name = get_customer_name()
-    telnum = get_customer_number()
     pizza = get_pizza()
     size = get_size()
 
