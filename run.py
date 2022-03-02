@@ -52,10 +52,20 @@ def get_pizza():
     Present the customer with the choice of pizza,
     and request a choice of 1-4
     """
-    table = [[1, "Margherita", "Vegan mozzarella and tomato."], [2, "Giardiniera", "Artichoke, mushrooms, red onion, black olives and parsley."], [3, "Padana", "Caramelised onion, spinach, red onion and garlic oil."], [4, "Forza", "Smoky chilli Quorn™, mixed peppers, hot & sweet chilli peppers."]]
+    pizza_table = [
+        [1, "Margherita", "Vegan mozzarella and tomato."],
+        [2, "Giardiniera", "Artichoke, mushrooms, red onion, black olives and parsley."],
+        [3, "Padana", "Caramelised onion, spinach, red onion and garlic oil."],
+        [4, "Forza", "Smoky chilli Quorn™, mixed peppers, hot & sweet chilli peppers."]
+        ]
     print("Here are todays pizzas, which would you like?\n")
-    print(tabulate(table, headers=["Item", "Pizza", "Topping"], tablefmt="psql"), "\n")
-    
+    print(tabulate(
+        pizza_table,
+        headers=["Item", "Pizza", "Topping"],
+        tablefmt="psql"),
+        "\n"
+        )
+
     # Request and validate the customers choice is between 1-4
     while True:
         try:
@@ -63,7 +73,7 @@ def get_pizza():
         except ValueError:
             print("Invalid choice, please enter a number\n")
             continue
-        if pizza in range(1, 5, 1):  
+        if pizza in range(1, 5, 1):
             print(f"Thanks for choosing a {pizza}\n")
         else:
             print("Invalid choice, please try again\n")
@@ -76,10 +86,18 @@ def get_size():
     Present the customer with the choice of sizes,
     and request a choice S, M, L
     """
-    print("Which size of pizza would you like?")
-    print('[S] Small 7"')
-    print('[M] Medium 10"')
-    print('[L] Large 14\n"')
+    sizes_table = [
+        ["S", "Small", "8 Inches"],
+        ["M", "Medium", "10 Inches"],
+        ["L", "Large", "14 Inches"]
+        ]
+    print("Which size of pizza would you like?\n")
+    print(tabulate(
+        sizes_table,
+        headers=["Item", "Name", "Size"],
+        tablefmt="psql"),
+        "\n"
+        )
 
     #  Request and validate the customers choice is either S, M or L
     while True:
@@ -106,9 +124,10 @@ def confirm_order():
     size = get_size()
 
     print(f"Thanks, to confirm, you have ordered a {size} {pizza}")
-   
+
     while True:
-        # need to code how to get the values from the other classes - do we pass them into the main() function?
+        # need to code how to get the values from the other classes \
+        # - do we pass them into the main() function?
         cust_order = input("Is this ready to be sent to the kitchen? Y/N:\n")
         if cust_order == ('Y').lower():
             print("Thanks. Sending your order to Vera in the kitchen...\n")
@@ -134,7 +153,7 @@ def confirm_order():
         else:
             print("Invalid choice, please enter either Y or N\n")
             continue
-        return f'{"Thanks Customer.name() for ordering a Size.size() Topping.topping()"}'
+        return "Thanks Customer.name() for ordering a Size.size() Topping.topping()"
 
 
 def main():
