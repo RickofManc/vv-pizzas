@@ -47,31 +47,28 @@ def get_customer_data():
     print(f"Thanks {name.capitalize()}, we will use {telnum} to contact you if there's any issue with your order.\n")
 
 
-def get_topping():
+def get_pizza():
     """
-    Present the customer with the choice of toppings,
+    Present the customer with the choice of pizza,
     and request a choice of 1-4
     """
-    print("Here are todays choices of toppings, which would you like?")
-    print("[1] Margherita")
-    print("[2] Romana")
-    print("[3] Diavolo")
-    print("[4] Forza\n")
-
+    table = [[1, "Margherita", "Vegan mozzarella and tomato."], [2, "Giardiniera", "Artichoke, mushrooms, red onion, black olives and parsley."], [3, "Padana", "Caramelised onion, spinach, red onion and garlic oil."], [4, "Forza", "Smoky chilli Quorn™, mixed peppers, hot & sweet chilli peppers."]]
+    print("Here are todays pizzas, which would you like?\n")
+    print(tabulate(table, headers=["Item", "Pizza", "Topping"], tablefmt="psql"), "\n")
+    
     # Request and validate the customers choice is between 1-4
     while True:
         try:
-            topping = int(input("Please choose a topping by typing the corresponding number and clicking enter:\n"))
+            pizza = int(input("Please choose a pizza by typing the corresponding number and clicking enter:\n"))
         except ValueError:
             print("Invalid choice, please enter a number\n")
             continue
-        # change to a data dict to return print msg is a string value
-        if topping in range(1, 5, 1):  
-            print(f"Thanks for choosing a {topping}\n")
+        if pizza in range(1, 5, 1):  
+            print(f"Thanks for choosing a {pizza}\n")
         else:
             print("Invalid choice, please try again\n")
             continue
-        return topping
+        return pizza
 
 
 def get_size():
@@ -105,10 +102,10 @@ def confirm_order():
     ask the customer to proceed Y/N
     provide an opportunity to order more items
     """
-    topping = get_topping()
+    pizza = get_pizza()
     size = get_size()
 
-    print(f"Thanks, to confirm, you have ordered a {size} {topping}")
+    print(f"Thanks, to confirm, you have ordered a {size} {pizza}")
    
     while True:
         # need to code how to get the values from the other classes - do we pass them into the main() function?
