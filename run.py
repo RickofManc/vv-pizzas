@@ -60,7 +60,7 @@ def get_pizza():
     pizza_table = [
         [1, "Margherita", "Vegan mozzarella and tomato."],
         [2, "Giardiniera", "Artichoke, mushrooms, red onion, black olives and parsley."],
-        [3, "Padana", "Caramelised onion, spinach, red onion and garlic oil."],
+        [3, "Diavolo", "Smoky jackfruit 'pepperoni', green peppers, Tabasco, and smoky chilli oil."],
         [4, "Forza", "Smoky chilli Quorn™, mixed peppers, hot & sweet chilli peppers."]
         ]
     print("Here are todays pizzas, which would you like?\n")
@@ -171,5 +171,5 @@ def main():
 
 print("Thank you for choosing Vera's Vegan Pizzas!\n")
 print("Please follow the steps to place your order,")
-print("and collect 20 minutes later.\n")
+print("then collect 20 minutes later.\n")
 main()
