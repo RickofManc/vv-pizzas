@@ -2,6 +2,7 @@ import re  # Importing re module for validating mobile phone number
 import gspread  # Importing to open and edit pizza ordering spreadsheet
 from google.oauth2.service_account import Credentials
 from tabulate import tabulate  # Importing to present data to the user clearly
+from datetime import datetime  # Importing to add datetime to each order
 
 
 SCOPE = [
@@ -125,6 +126,28 @@ def get_size():
             print("Invalid choice, please enter either S, M or L\n")
             continue
 
+
+def get_time():
+    """
+    Provides ordering time
+    Reformatted to be clearer
+    Applied to each order within confirm_order()
+    """
+    time_now = datetime.now()
+    order_time = time_now.strftime("%H:%M:%S")
+    return order_time
+
+def get_date():
+    """
+    Provides ordering date
+    Reformatted to be clearer
+    Applied to each order within confirm_order()
+    """
+    date_now = datetime.now()
+    order_date = date_now.strftime("%d/%m/%Y")
+    return order_date
+
+
 def update_order_worksheet(data):
     """
     Send order to the Google Worksheet
@@ -146,11 +169,14 @@ def confirm_order():
     telnum = get_customer_number()
     pizza = get_pizza()
     size = get_size()
+    order_time = get_time()
+    order_date = get_date()
     #  Collate order data to be confirmed and sent to the kitchen
-    cust_order = [name.capitalize(), telnum, pizza, size]
+    cust_order = [name.capitalize(), telnum, pizza, size, order_time, order_date]
+    print(cust_order)
     #  Confirm order back to the customer CHANGE {} BELOW TO cust_ORDER
     print(f"Thanks {name.capitalize()}, you are ordering a {size} {pizza}\n")
-   
+  
     while True:
         #  Request the customer to confirm if the order is complete
         #  If not complete, options to either add more items
