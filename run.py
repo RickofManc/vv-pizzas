@@ -57,6 +57,7 @@ def get_pizza():
     Present the customer with the choice of pizza,
     and request a choice of 1-4
     """
+    #  Data to populate the table of pizza choices
     pizza_table = [
         [1, "Margherita", "Vegan mozzarella and tomato."],
         [2, "Giardiniera", "Artichoke, mushrooms, red onion, black olives"],
@@ -72,17 +73,22 @@ def get_pizza():
         )
     # Request and validate the customers choice is between 1-4
     while True:
-        try:
-            pizza = int(input("Please choose a pizza by typing the corresponding number and clicking enter:\n"))
-        except ValueError:
-            print("Invalid choice, please enter a number\n")
-            continue
-        if pizza in range(1, 5, 1):
-            print(f"Thanks for choosing a {pizza}\n")
+        pizza = int(input("Please choose a pizza by typing the corresponding number and clicking enter:\n"))
+        if pizza == 1:
+            print("Yummy! a Margherita!\n")
+            return 'Margherita'
+        elif pizza == 2:
+            print("Yummy! a Giardiniera!\n")
+            return 'Giardiniera'
+        elif pizza == 3:
+            print("Yummy! a Diavolo!\n")
+            return 'Diavolo'
+        elif pizza == 4:
+            print("Yummy! a Forza!\n")
+            return 'Forza'
         else:
-            print("Invalid choice, please try again\n")
+            print("Invalid choice, please enter a number between 1-4\n")
             continue
-        return pizza
 
 
 def get_size():
@@ -90,6 +96,7 @@ def get_size():
     Present the customer with the choice of sizes,
     and request a choice S, M, L
     """
+    #  Tabular data to inform the table of choices for the user
     sizes_table = [
         ["S", "Small", "8 Inches"],
         ["M", "Medium", "10 Inches"],
@@ -102,20 +109,21 @@ def get_size():
         tablefmt="psql"),
         "\n"
         )
-
     #  Request and validate the customers choice is either S, M or L
     while True:
         size = input("Please choose a size by entering the corresponding letter and clicking enter:\n")
         if size == ('S').lower():
             print("Thanks for choosing Small\n")
+            return 'Small'
         elif size == ('M').lower():
             print("Thanks for choosing Medium\n")
+            return 'Medium'
         elif size == ('L').lower():
             print("Thanks for choosing Large\n")
+            return 'Large'
         else:
             print("Invalid choice, please enter either S, M or L\n")
             continue
-        return size
 
 
 def confirm_order():
@@ -128,19 +136,19 @@ def confirm_order():
     pizza = get_pizza()
     size = get_size()
 
-    print(f"Thanks {name.capitalize()}, you are ordering a {size} {pizza}")
+    print(f"Thanks {name.capitalize()}, you are ordering a {size} {pizza}\n")
 
     while True:
         # need to code how to get the values from the other classes \
         # - do we pass them into the main() function?
-        cust_order = input("Is this ready to be sent to the kitchen? Y/N:\n")
+        cust_order = input("Is your order ready to go to the kitchen? Y/N:\n")
         if cust_order == ('Y').lower():
             print("Thanks. Sending your order to Vera in the kitchen...\n")
             orders_worksheet = SHEET.worksheet("Orders")
             orders_worksheet.append_row(cust_order)
             print("Your order has been received, please come and collect in 20 minutes.\n See you soon!\n")
         elif cust_order == ('N').lower():
-            more_items = input("That's ok. Would you like to order more items? Y/N\n")
+            more_items = input("Would you like to order more pizzas? Y/N\n")
             if more_items == ('Y').lower():
                 print("I need to code how to add more items")
             elif more_items == ('N').lower():
