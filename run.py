@@ -125,6 +125,16 @@ def get_size():
             print("Invalid choice, please enter either S, M or L\n")
             continue
 
+def update_order_worksheet(data):
+    """
+    Send order to the Google Worksheet
+    for the kitchen to process
+    """
+    print("Thanks. Sending your order to Vera in the kitchen...\n")
+    orders_worksheet = SHEET.worksheet("Orders")
+    orders_worksheet.append_row(data)
+    print("Your order has been received, please collect in 20 minutes.\nSee you soon!\n")
+
 
 def confirm_order():
     """
@@ -133,21 +143,22 @@ def confirm_order():
     provide an opportunity to order more items
     """
     name = get_customer_name()
+    telnum = get_customer_number()
     pizza = get_pizza()
     size = get_size()
-
+    #  Collate order data to be confirmed and sent to the kitchen
+    cust_order = [name.capitalize(), telnum, pizza, size]
+    #  Confirm order back to the customer CHANGE {} BELOW TO cust_ORDER
     print(f"Thanks {name.capitalize()}, you are ordering a {size} {pizza}\n")
-
+   
     while True:
-        # need to code how to get the values from the other classes \
-        # - do we pass them into the main() function?
-        cust_order = input("Is your order ready to go to the kitchen? Y/N:\n")
-        if cust_order == ('Y').lower():
-            print("Thanks. Sending your order to Vera in the kitchen...\n")
-            orders_worksheet = SHEET.worksheet("Orders")
-            orders_worksheet.append_row(cust_order)
-            print("Your order has been received, please come and collect in 20 minutes.\n See you soon!\n")
-        elif cust_order == ('N').lower():
+        #  Request the customer to confirm if the order is complete
+        #  If not complete, options to either add more items
+        #  If not order more, amend existing order
+        user_confirm = input("Is your order ready to go to the kitchen? Y/N:\n")
+        if user_confirm == ('Y').lower():
+            update_order_worksheet(cust_order)
+        elif user_confirm == ('N').lower():
             more_items = input("Would you like to order more pizzas? Y/N\n")
             if more_items == ('Y').lower():
                 print("I need to code how to add more items")
