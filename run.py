@@ -1,8 +1,11 @@
+"""
+Libraries for supporting the application
+"""
 import re  # Importing re module for validating mobile phone number
+from datetime import datetime  # Importing to add datetime to each order
 import gspread  # Importing to open and edit pizza ordering spreadsheet
 from google.oauth2.service_account import Credentials
 from tabulate import tabulate  # Importing to present data to the user clearly
-from datetime import datetime  # Importing to add datetime to each order
 
 
 SCOPE = [
@@ -46,7 +49,7 @@ def get_customer_number():
     while True:
         telnum = (input("Please provide a mobile contact number:\n"))
         if validate_mobile(telnum):
-            print(f"Thanks, we will use {telnum} to contact you if there's any issue with your order.\n")
+            print(f"Thanks, we will use {telnum} to contact you if there's any issues.\n")
         else:
             print("Invalid number. 11 digits required, starting with 0, please try again\n")
             continue
@@ -74,7 +77,8 @@ def get_pizza():
         )
     # Request and validate the customers choice is between 1-4
     while True:
-        pizza = int(input("Please choose a pizza by typing the corresponding number and clicking enter:\n"))
+        pizza = int(
+            input("Please choose a pizza by typing the item number, then click enter:\n"))
         if pizza == 1:
             print("Yummy! a Margherita!\n")
             return 'Margherita'
@@ -112,7 +116,9 @@ def get_size():
         )
     #  Request and validate the customers choice is either S, M or L
     while True:
-        size = input("Please choose a size by entering the corresponding letter and clicking enter:\n")
+        size = input(
+            "Please choose a size by entering the corresponding letter and clicking enter:\n"
+            )
         if size == ('S').lower():
             print("Thanks for choosing Small\n")
             return 'Small'
@@ -136,6 +142,7 @@ def get_time():
     time_now = datetime.now()
     order_time = time_now.strftime("%H:%M:%S")
     return order_time
+
 
 def get_date():
     """
@@ -172,16 +179,25 @@ def confirm_order():
     order_time = get_time()
     order_date = get_date()
     #  Collate order data to be confirmed and sent to the kitchen
-    cust_order = [name.capitalize(), telnum, pizza, size, order_time, order_date]
+    cust_order = [
+        name.capitalize(),
+        telnum,
+        pizza,
+        size,
+        order_time,
+        order_date
+        ]
     print(cust_order)
     #  Confirm order back to the customer CHANGE {} BELOW TO cust_ORDER
     print(f"Thanks {name.capitalize()}, you are ordering a {size} {pizza}\n")
-  
+
     while True:
         #  Request the customer to confirm if the order is complete
         #  If not complete, options to either add more items
         #  If not order more, amend existing order
-        user_confirm = input("Is your order ready to go to the kitchen? Y/N:\n")
+        user_confirm = input(
+            "Is your order ready to go to the kitchen? Y/N:\n"
+            )
         if user_confirm == ('Y').lower():
             update_order_worksheet(cust_order)
         elif user_confirm == ('N').lower():
@@ -189,7 +205,9 @@ def confirm_order():
             if more_items == ('Y').lower():
                 print("I need to code how to add more items")
             elif more_items == ('N').lower():
-                amend_order = input("Would you like to amend this order? Y/N\n")
+                amend_order = input(
+                    "Would you like to amend this order? Y/N\n"
+                    )
                 if amend_order == ('Y').lower():
                     print("I need to code how to amend the order")
                 elif amend_order == ('N').lower():
