@@ -8,6 +8,7 @@ from google.oauth2.service_account import Credentials
 from tabulate import tabulate  # Importing to present data to the user clearly
 from rich.console import Console  # Add styling to terminal to improve UX
 from rich.traceback import install  # Render tracebacks with syntax formatting
+from rich.table import Table
 
 
 SCOPE = [
@@ -65,20 +66,22 @@ def get_pizza():
     Present the customer with the choice of pizza,
     and request a choice of 1-4
     """
+    #  Table used to present menu to the customer
+    pizza_table = Table()
+    
     #  Data to populate the table of pizza choices
-    pizza_table = [
-        [1, "Margherita", "Vegan mozzarella and tomato."],
-        [2, "Giardiniera", "Artichoke, mushrooms, red onion, black olives"],
-        [3, "Diavolo", "Smoky jackfruits, green peppers, chilli oil."],
-        [4, "Forza", "Chilli Quorn™, mixed peppers, sweet chilli peppers."]
-        ]
+    pizza_table.add_column("Item", justify="center", vertical="middle")
+    pizza_table.add_column("Pizza", justify="left", vertical="middle")
+    pizza_table.add_column("Topping", justify="left", vertical="middle")
+
+    pizza_table.add_row("1", "Margherita", "Vegan mozzarella and tomato")
+    pizza_table.add_row("2", "Giardiniera", "Artichoke, mushrooms, red onion, black olives")
+    pizza_table.add_row("3", "Diavolo", "Smoky jackfruits, green peppers, chilli oil")
+    pizza_table.add_row("4", "Forza", "Chilli Quorn™, mixed peppers, sweet chilli peppers")
+
     print("Here are todays pizzas, which would you like?\n")
-    print(tabulate(
-        pizza_table,
-        headers=["Item", "Pizza", "Topping"],
-        tablefmt="psql"),
-        "\n"
-        )
+    console.print(pizza_table)
+
     # Request and validate the customers choice is between 1-4
     while True:
         pizza = int(
@@ -105,19 +108,21 @@ def get_size():
     Present the customer with the choice of sizes,
     and request a choice S, M, L
     """
-    #  Tabular data to inform the table of choices for the user
-    sizes_table = [
-        ["S", "Small", "8 Inches"],
-        ["M", "Medium", "10 Inches"],
-        ["L", "Large", "14 Inches"]
-        ]
+    #  Table used to present sizes to the customer
+    sizes_table = Table()
+    
+    #  Data to populate the table of pizza sizes
+    sizes_table.add_column("Item", justify="center", vertical="middle")
+    sizes_table.add_column("Name", justify="left", vertical="middle")
+    sizes_table.add_column("Size", justify="left", vertical="middle")
+    
+    sizes_table.add_row("S", "Small", "8 Inches")
+    sizes_table.add_row("M", "Medium", "10 Inches")
+    sizes_table.add_row("L", "Large", "14 Inches")
+
     print("Which size of pizza would you like?\n")
-    print(tabulate(
-        sizes_table,
-        headers=["Item", "Name", "Size"],
-        tablefmt="psql"),
-        "\n"
-        )
+    console.print(sizes_table)
+
     #  Request and validate the customers choice is either S, M or L
     while True:
         size = input(
