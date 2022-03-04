@@ -1,11 +1,13 @@
 """
 Libraries for supporting the application
 """
-import re  # Importing re module for validating mobile phone number
-from datetime import datetime  # Importing to add datetime to each order
-import gspread  # Importing to open and edit pizza ordering spreadsheet
+import re  # To validate mobile phone number
+from datetime import datetime  # To add datetime to each order
+import gspread  # To open and edit pizza ordering spreadsheet
 from google.oauth2.service_account import Credentials
 from tabulate import tabulate  # Importing to present data to the user clearly
+from rich.console import Console  # Add styling to terminal to improve UX
+from rich.traceback import install  # Render tracebacks with syntax formatting
 
 
 SCOPE = [
@@ -18,6 +20,8 @@ CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('vv_pizzas')
+console = Console()
+install(show_locals=True)
 
 
 def get_customer_name():
@@ -25,9 +29,9 @@ def get_customer_name():
     Request and validate customers name
     """
     while True:
-        name = input("Please provide your name:\n").lower()
+        name = console.input("Please provide your name:\n").lower()
         if name.isalpha():  # Validates the customer is characters only
-            print(f"Hi {name.capitalize()}\n")
+            console.print(f"Hi {name.capitalize()} :waving_hand:\n")
         else:
             print("Invalid name, please try again\n")
             continue
@@ -49,7 +53,7 @@ def get_customer_number():
     while True:
         telnum = (input("Please provide a mobile contact number:\n"))
         if validate_mobile(telnum):
-            print(f"Thanks, we will use {telnum} to contact you if there's any issues.\n")
+            print(f"Thanks, we will use {telnum} to contact you if there are any issues.\n")
         else:
             print("Invalid number. 11 digits required, starting with 0, please try again\n")
             continue
@@ -80,16 +84,16 @@ def get_pizza():
         pizza = int(
             input("Please choose a pizza by typing the item number, then click enter:\n"))
         if pizza == 1:
-            print("Yummy! a Margherita!\n")
+            console.print(":yum: a Margherita!\n")
             return 'Margherita'
         elif pizza == 2:
-            print("Yummy! a Giardiniera!\n")
+            console.print(":yum: a Giardiniera!\n")
             return 'Giardiniera'
         elif pizza == 3:
-            print("Yummy! a Diavolo!\n")
+            console.print(":yum: a Diavolo!\n")
             return 'Diavolo'
         elif pizza == 4:
-            print("Yummy! a Forza!\n")
+            console.print(":yum: a Forza!\n")
             return 'Forza'
         else:
             print("Invalid choice, please enter a number between 1-4\n")
@@ -120,13 +124,13 @@ def get_size():
             "Please choose a size by entering the corresponding letter and clicking enter:\n"
             )
         if size == ('S').lower():
-            print("Thanks for choosing Small\n")
+            print("Thanks, you chose Small\n")
             return 'Small'
         elif size == ('M').lower():
-            print("Thanks for choosing Medium\n")
+            print("Thanks, you chose Medium\n")
             return 'Medium'
         elif size == ('L').lower():
-            print("Thanks for choosing Large\n")
+            print("Thanks, you chose Large\n")
             return 'Large'
         else:
             print("Invalid choice, please enter either S, M or L\n")
@@ -160,10 +164,11 @@ def update_order_worksheet(data):
     Send order to the Google Worksheet
     for the kitchen to process
     """
-    print("Thanks. Sending your order to Vera in the kitchen...\n")
+    print("Sending your order to Vera in the kitchen...\n")
     orders_worksheet = SHEET.worksheet("Orders")
     orders_worksheet.append_row(data)
-    print("Your order has been received, please collect in 20 minutes.\nSee you soon!\n")
+    console.print(":thumbsup:")
+    print("Your order has been received, please collect in 20 minutes\nSee you soon!\n")
 
 
 def confirm_order():
@@ -189,7 +194,7 @@ def confirm_order():
         ]
     print(cust_order)
     #  Confirm order back to the customer CHANGE {} BELOW TO cust_ORDER
-    print(f"Thanks {name.capitalize()}, you are ordering a {size} {pizza}\n")
+    console.print(f"Thanks {name.capitalize()}, you are ordering a {size} {pizza} :pizza:\n")
 
     while True:
         #  Request the customer to confirm if the order is complete
@@ -231,7 +236,7 @@ def main():
     confirm_order()
 
 
-print("Thank you for choosing Vera's Vegan Pizzas!\n")
+console.print("[#008C45]Thank you[/] [#F4F5F0]for choosing[/] [#CD212A]Vera's Vegan Pizzas![/]\n", style="bold")
 print("Please follow the steps to place your order,")
 print("then collect 20 minutes later.\n")
 main()
