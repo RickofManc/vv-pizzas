@@ -5,7 +5,6 @@ import re  # To validate mobile phone number
 from datetime import datetime  # To add datetime to each order
 import gspread  # To open and edit pizza ordering spreadsheet
 from google.oauth2.service_account import Credentials
-from tabulate import tabulate  # Importing to present data to the user clearly
 from rich.console import Console  # Add styling to terminal to improve UX
 from rich.traceback import install  # Render tracebacks with syntax formatting
 from rich.table import Table

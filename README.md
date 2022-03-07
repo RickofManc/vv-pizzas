@@ -1,6 +1,6 @@
 # VV Pizzas
 
-![Website Mockup](readme-images/60-secs-to-save-earth.png)
+![Website Mockup]()
 
 [Link to Live Website](https://vv-pizzas.herokuapp.com/)
 
@@ -59,7 +59,7 @@ There are additional benefits of moving to a digitally driven ordering system; i
 
 The roadmap below highlights the high-level strategic opportunities versus the importance and viability/feasibility of development for the MVP (Minimal Viable Product):
 
-![Strategic Opportunities Roadmap](readme-images/strategic-opportunities-roadmap.png)
+![Strategic Opportunities Roadmap]()
 
 
 ### Scope
@@ -114,13 +114,13 @@ As part of this phase wireframes for all screens have produced using [Balsamiq](
 
 The website is responsive through differing screen widths from with the final design requiring CSS Media Queries for max-screen widths of 650px and 405px, ensuring accessibility on any device or desktop monitor.
 
-![Wireframes](readme-images/wireframes.png)
+![Wireframes]()
 
 
 
 ### Surface 
 
-In consideration of the key aim to make learning fun, the visual language has to convey this tone. Therefore the use of arcade styles, known to be fun and engaging was applied in the following areas.
+The key aim for the MVP launch is to have a readable interface for the customer to order. With this in mind the surface theme has retained a simple amd clean style.
 
 
 #### Colour 
@@ -132,50 +132,27 @@ At a high-level the colour palette carries some of the games theme offering;
 * an opportunity to save Earth with Green renewable energy. This particular shade offers a colour that is bright to use for the most important elements of the site,
 * and a neutral balance with calm Dark Blue that also balances the brighter colours.
 
-![Save Earth Game Palette](readme-images/save-earth-game-colour-palette.png)
+![VV Pizza Palette]()
 
 
 #### Fonts
 
-I have selected the free to use font 'Teko' from Google Fonts as the design has a low stroke contrast, square proportions and a structure that appears visually simple which aligns with the arcade style fonts of the 70's and 80's, whilst being more legible. According to the font information "Teko is an excellent choice for use in advertising or for news tickers on television screens (breaking news, etc.)". This style trait will help convey the scenario of an emergency where the user must act quickly, with speed being one of the main methods to achieve a high game score.
 
-![Save Earth Game Font](readme-images/save-earth-game-teko-font.png)
+
+
 
 
 #### Images & Icons
 
-To provide an arcade style to the game vector images and icons were used throughout the website.
-
-![Fossil Fuels Burning](assets/images/power-station-144px.png)
-
-The 'Power Station' icon used to represent fossil fuels was sourced free for commercial use through [Pixabay](https://pixabay.com/vectors/power-station-electricity-3664263/) with credit due to designer Jerzy Gorecki.
-
-![Renewable Energy](assets/images/wind-turbine.png)
-
-The 'Wind Turbine' icon used to hit back at the Power Stations was also sourced free for commercial use through [Pixabay](https://pixabay.com/vectors/wind-turbine-wind-renewable-energy-1894024/) with credit due to designer Laurence Ledanois.
-
-The 'In-game' background vector is sourced from [Adobe Stock](https://stock.adobe.com/uk/images/drought-concept-desert-landscape-rocks-and-stone/318820031) and being used under the paid for Standard License.
-
-The 'End Game' background vector was sourced free for commercial use from [Freepik](https://www.freepik.com/free-vector/wind-turbine-long-road-scene-dam-background_11250726.htm#&position=0&from_view=collections) with attribution due to the Designer brgfx.
-
-The 'Favicon' has been sourced for free commercial use from [Raw Pixel](https://www.rawpixel.com/image/2904421/free-illustration-png-fire-planet-pollution).
-
-![Burning Earth](assets/images/favicon.png)
-
-The '404 Page' background vector is sourced from [Adobe Stock](https://stock.adobe.com/uk/Library/urn:aaid:sc:EU:817bd93c-48b0-4709-a9ae-459b0d2bb485?asset_id=437603661) and being used under the paid for Standard License.
+To provide .
 
 ***
 
 ## Features
 
-### Universal Features
+### Current Features
 
-##### In-game
-There are several in-game features that a user may expect to find when playing a game of this nature;
-* A scoreboard which increments by 1 with every successful hit.
-* A timer counting down how long is left on the users turn.
-* There are sounds to enhance the playing experience in the form of a sound for swiping at the Power Stations, and a different sound when the user successfully stops a Power Station. Both sound effects are wave files created at [jsfxr](https://sfxr.me/).
-* There is also a green screen flash for 50ms when a successful hit has been registered.
+*
 
 ##### Meta data
 
@@ -183,20 +160,15 @@ To support the strategic aim 'Educate on the impact of burning fossil fuels on C
 
 ##### Redirection
 
-A '404 Not Found' page has been added to the website in the event of a failed link or page. This page kindly informs the user of the error and provides a button to navigate them back to the Game Intro screen.
+A '404 Not Found' page has been added to the website in the event of a failed link or page. This page kindly informs the user of the error and provides a button to navigate them back to VV Pizzas website.
 
 
 ### Future Features
 
-Following a successful MVP launch, the game has the opportunity to be further developed over a relatively short period to increase its reach globally. Here is a selection of the key future development features:
-* Change difficulty between 'Easy' and 'Hard' to further challenge users.
-* Differing images of fossil fuels being burnt to increase educational awareness.
-* Different end-game screen if the user score is 0.
-* Animate the images when a hit is recorded.
-* Optional background music to enhance the user experience.
-* To increase speed and focus, background music could quicken with 10 seconds remaining and a voice calls (10, 9, 8...).
-* Share scores with friends and other players on social media.
-* Inform users how their score compares with others through a online leaderboard.
+Following a successful MVP launch, the application had the opportunity to be further developed over a relatively short period to improve the user experience. Here are a few of the immediate features that can be developed:
+* Provide a fully functioning website that offers more information on VV Pizzas
+* Provide a opportunity to pay online prior to collection
+* Provide a real-time update on the order to customer via email/SMS.
 
 
 ***
@@ -218,56 +190,21 @@ The following sections summarise the tests and results.
 
 ### Code 
 
-The code on each file has been tested using the appropriate validation service; W3C Markup for HTML, W3C Jigsaw for CSS and JSHint for JavaScript.
+The code on each file has been tested using the appropriate validation service; W3C Markup for HTML, W3C Jigsaw for CSS and PEP8 Online for Python.
 
 Below are the summarised positive results from these tests:
 
+* **run.py** - 0 Errors / 0 Warnings
 * **index.html** - 0 Errors / 0 Warnings
 * **404.html** - 0 Errors / 0 Warnings
-* **style.css** - 0 Errors / 1 Warning 'Imported style sheet for Google Font has not been checked as part of the direct input validation service. This is a known and acceptable warning.
-* **sweetalert2.css** - 0 Errors / 47 Warnings informing '-webkit-animation is a vendor extension'. This is anticipated and a accepted warning.
-* **script.js** - 0 Errors / 24 Warnings considered acceptable consisting of either;
-    1. 'const' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz) or,
-    2. 'arrow function syntax (=>)' is only available in ES6 (use 'esversion: 6').
-* **sweetalert.js** - 0 Errors / 804 Warnings considered acceptable consisting of either;
-    1. 'const' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz) or,
-    2. 'arrow function syntax (=>)' is only available in ES6 (use 'esversion: 6').
+* **style.css** - 0 Errors / 1 Warning 
 
 
 ### Browser
 
-To ensure site visitors can view and play the '60 Seconds to Save Earth Game' on differing browsers, testing was performed on the test scenarios listed in the table below.
-
-To achieve a 'Pass' the following criteria had to be met across all website pages;
-1. All buttons provide user feedback on hover and execute correctly when clicked.
-2. All images are loaded and displayed correctly at the differing media queries.
-3. All pages retain layout integrity throughout the Body and across the differing media queries
-4. All text uses 'Teko' font style.
-5. The external link activates when clicked, and opens in a new tab or browser window.
-6. The game starts as planned with a countdown from 60 seconds, and users are able to score points.
-7. All in-game sounds and flash effects work throughout the 60 seconds game time.
-8. The end-game screen appears after 60 seconds and provides the user with their final score.
-9. 404 Error Page could be found and users can navigate back to the homepage using the button provided.
-
-
 
 
 ### Device
-
-To ensure site visitors can view and play the '60 Seconds to Save Earth Game' on differing devices, testing was performed on the test scenarios listed in the table below.
-
-To achieve a 'Pass' the following criteria had to be met across all website pages;
-1. All buttons provide user feedback on hover and execute correctly when clicked.
-2. All images are loaded and displayed correctly at the differing media queries.
-3. All pages retain layout integrity throughout the Body and across the differing media queries
-4. All text uses 'Teko' font style.
-5. The external link activates when clicked, and opens in a new tab or browser window.
-6. The game starts as planned with a countdown from 60 seconds, and users are able to score points.
-7. All in-game sounds and flash effects work throughout the 60 seconds game time.
-8. The end-game screen appears after 60 seconds and provides the user with their final score.
-9. 404 Error Page could be found and users can navigate back to the homepage using the button provided.
-
-
 
 
 
@@ -276,14 +213,14 @@ To achieve a 'Pass' the following criteria had to be met across all website page
 
 Each page has been tested using the [Wave (Web Accessibility Evaluation Tool)](https://wave.webaim.org/) where zero errors or alerts were identified.
 
-![Index Page Results](readme-images/index.html-WAVE-test-070222.png) ![404.html Results](readme-images/404.html-WAVE-test-070222.png)
+
 
 
 ### Performance 
 
 Using Lighthouse performance testing within Chrome Developer Tools, all pages performance has been tested on both Desktop and Mobile devices. The results highlighted a slightly slower page load time than is recommended. This was primarily due to the browser attempting to load the JavaScript files at the same time as the DOM and CSS. To resolve this issue the 'defer' attribute was applied in the HTMl Script tags informing the Browser to prioritise the more critical page elements before the JavaScript. This helped to improve the user experience, and see the following positive results.
 
-![Lighthouse Test Results](readme-images/lighthouse-test-results-070222.png)
+![Lighthouse Test Results]()
 
 
 ### User Stories
@@ -296,7 +233,9 @@ Below is a summary of the stories validation.
 
 ### Issues
 
-The issues listed in the table below we identified during late January / early February 2022. Frustratingly some issues remain with fixes required for future releases.
+The issues listed in the table below we identified during March 2022.
+
+*
 
 
 ## Deployment
