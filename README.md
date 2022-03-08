@@ -11,7 +11,7 @@
 
 ## About
 
-Vera's Vegan Pizzas is a popular South Manchester based food truck. The popularity of this delicious "can't believe it's vegan" pizza often leads to long wait times to order. Whilst most customers are happy to wait, Vera feels she is losing customers before they order due to the telephone ordering system. There is a single point of contact to place orders via phone, and if this is frequently engaged, some customers become tired of calling back and will order elsewhere.  
+Vera's Vegan Pizzas is a popular South Manchester based food truck. The popularity of this delicious "can't believe it's vegan" pizza often leads to long wait times to order. Whilst most customers are happy to wait, Vera feels she is losing customers before they order due to the phone ordering system. There is a single point of contact to place orders via phone, and if this is frequently engaged, some customers will order elsewhere.  
 
 
 ***
@@ -39,27 +39,37 @@ Vera's Vegan Pizzas is a popular South Manchester based food truck. The populari
 
 ### Strategy
 
-Vera requires a solution which provides another method for customers to place take-away orders. An online based ordering system should be simple and clear in design and layout and take around a similar amount of time to ordering via telephone. 
+Vera requires a solution that provides another method for customers to place orders. An online based ordering system should be simple and clear in design and layout and take a similar duration to ordering by phone. 
 
-A successful solution should reduce the amount of telephone calls Vera is handling to allow her to focus on creating yummy pizzas.
-Furthermore, as the orders as placed digitally, Vera can execute them as they are received looking at either a phone or laptop.
+A successful solution should reduce the amount of calls Vera is handling to allow her to focus on cooking.
+Furthermore, as the orders as received digitally to a Google based spreadsheet, Vera will be able to execute them in order from viewing the spreadsheet on a digital device.
 
-There are additional benefits of moving to a digitally driven ordering system; in that Vera will have data on the days orders, allowing her to analyse and forecast stock levels for a particular day and/or location.
+There are additional benefits of moving to a digitally driven ordering system; in that Vera will have order data and her fingertips. Allowing Vera to analyse and forecast stock levels for a particular day and/or location far easier than the current paper based method.
 
 
 #### Leading User Stories
 
-* As a user, I want to 
+* As a customer, I want to place an order with VV Pizzas at the first time of trying, so that I don't have to keep calling back.
+* As a customer, I want to understand how long it will take to cook my order, so that I can plan my journey time.
+* As a customer, I want to learn which pizzas are available, so I can choose my preferred option.
+* As a customer, I want to learn which sizes are available, so I can choose the appropriate size for my appetite.
+* As a customer, I want to order multiple pizzas, so I can provide food to more people.
+* As a customer, I want to be able to amend the order before committing, so that if a mistake is made I don't have to restart the order.
+* As the owner, I want to reduce the time spent on the phone and writing orders, so I can focus on executing the orders.
+* As the owner, I want to provide an easier method of ordering pizza, so that our customers are happier.
+* As the owner, I want to be able to control when we can and can't receive orders, so that the kitchen does not become overloaded and the wait time for customers increases.
+* As the owner, I want to have data from the days orders, so that I can learn of customers trends and forecast more accurately.
+
 
 #### Primary strategic aims for the website
-* The application provides a method of receiving and executing orders from customers
-* The application will be intuitive for the customer to follow, and take a similar amount of time as if ordering via telephone.
-* If the solution is popular, customers who had previously ordered elsewhere due to difficulty of getting through via telephone, will place an order, which in turn will increase revenue.
+* The application will provide a method of receiving and executing orders from Vera's customers.
+* The application will be intuitive for the customer to follow, and take a similar amount of time as if ordering by phone.
+* Customers who had previously ordered elsewhere due a continually engaged phone line, will place an order with Vera, which in turn will increase revenue.
 
 
 The roadmap below highlights the high-level strategic opportunities versus the importance and viability/feasibility of development for the MVP (Minimal Viable Product):
 
-![Strategic Opportunities Roadmap]()
+![Strategic Opportunities Roadmap](readme-images/strategic-opportunities-roadmap.png)
 
 
 ### Scope
@@ -75,7 +85,7 @@ Below is a list of the leading features for the application.
 * On screen confirmation of the order before placing with Vera.
 * Provide the order details in a spreadsheet to Vera as they are received.
 
-#### Potentially In Scope Features (Time Dependant for MVP)
+#### Potentially In Scope Features (Time Dependant for MVP launch)
 * Provide the customer with a price to be paid on collection.
 * Add the value of each order within the spreadsheet.
 * Add totals for the days orders within the spreadsheet.
@@ -91,30 +101,30 @@ Below is a list of the leading features for the application.
 
 This website will be structured with the following design considerations;
 * The customer will be welcomed to the CLI (Command Line Interface) with a welcome message from Vera.
-* The customer will be asked to input their name (which for MVP) can be used as the order reference.
-* The customer will then be asked which topping of pizza they would like from the list.
+* The customer will be asked for basic details, including their name which could be used as the order reference for the MVP.
+* The customer will then be asked which pizza they would like from the menu.
 * This will be followed by the size of pizza they would like; Small, Medium, Large
-* Confirmation of their order will be provided, asking them whether they would like to place the order, or, order anything else.
-* If the customer needs to order something else then they will go back to choice of ordering the toppings.
-* If the customer has requested all items then the order will be placed and the Google Sheet updated for Vera
-* Finally a thank you message advising of where to collect will be fed-back to the customer.
+* Confirmation of their order will be provided, asking them whether they would like to place the order, or order anything else.
+* If the customer needs to order more items they will be navigated back the first ordering question.
+* If the customer has requested all items then the order will be placed and the Google Sheet updated for Vera.
+* Finally the customer will be thanked and informed of the time for collection. customer.
 
 
 ### Skeleton
 
-Key to this games accessibility to all generations is a clean design that whilst being simple in style and layout, allows the user to be instantly engaged and wanting to know more.
+Key to the UX attributes is the ease for which customers can place an order. Therefore the website will contain a simple interface that immediately welcomes the customers and takes them through the process with minimal inputs.
 
-When the user clicks the 'Start Game' button the journey will continue through to the game screen, and the game will have commenced. The user should instinctively use the Wind Turbine icon to hit the Power Stations as they pop-up on the screen. 
+The journey should take a similar amount of time to when ordering by phone which should ensure no customers are lost with the change in method. 
 
-Seeing their score increase will encourage the user to hit as many as possible during the remaining time. At the end of the game, the screen background will change from a fossil burning hot landscape, to one of green fields and renewable energy being used. This should evoke a happy user response for succeeding in the challenge. 
+Aesthetically the page background will inform the customer they are ordering pizza, whilst emoji's will be used within the interface to communicate some fun. However, they will not be used to replace words to avoid any confusion with the customer.
 
-Excited from playing once, the user will presented with an option to 'Play Again' in an attempt to further save Earth and better their original score. The button will return the user back to the Start Game screen.
+Should the customer make an error whilst ordering, they will have the ability to amend the order before committing, or by clicking a 'Restart Order' button.
 
-As part of this phase wireframes for all screens have produced using [Balsamiq](https://balsamiq.com/wireframes/) (see samples below - all wireframes can be found within the project [Repo](https://github.com/RickofManc/60-seconds-to-save-earth)).
+As part of this phase wireframes for monitor and smartphone have been produced using [Balsamiq](https://balsamiq.com/wireframes/) (see image below - the wireframes are located within the project [Repo](https://github.com/RickofManc/vv-pizzas)).
 
-The website is responsive through differing screen widths from with the final design requiring CSS Media Queries for max-screen widths of 650px and 405px, ensuring accessibility on any device or desktop monitor.
+The website is responsive through differing screen widths and mobile devices. 
 
-![Wireframes]()
+![Wireframes](readme-images/vv-pizza-wireframes.png)
 
 
 
@@ -125,14 +135,9 @@ The key aim for the MVP launch is to have a readable interface for the customer 
 
 #### Colour 
 
-The game of whac-a-mole released into Japanese arcade centres in the late 70's. As the 80's evolved, Neon colours became visible in arcade centres around the world and in the games themselves. To link the fun of this new game with those of the past, I have selected a neon based colour scheme. The palette was selected for free use from [Color Hunt](https://colorhunt.co/).
+The colour palette signals 'Italy' to the customer, to convey the link with the Italian food of pizza. The Savoy Azure Blue works well around the webpage as a bold colour to communicate information to the customer, it does not work as well within the interface against the black background. Where as the Green and Red from the Italian flag are still readable within the interface, whilst not being overly used to ensure all critical text is readable.
 
-At a high-level the colour palette carries some of the games theme offering;
-* A warning for the end of Earth scenario using Red and Orange hues,
-* an opportunity to save Earth with Green renewable energy. This particular shade offers a colour that is bright to use for the most important elements of the site,
-* and a neutral balance with calm Dark Blue that also balances the brighter colours.
-
-![VV Pizza Palette]()
+![VV Pizza Palette](readme-images/vv-pizza-colour-palette.png)
 
 
 #### Fonts
@@ -228,7 +233,7 @@ Using Lighthouse performance testing within Chrome Developer Tools, all pages pe
 The leading user stories have been tested to ensure the priority aims of the website have been delivered. 
 Below is a summary of the stories validation.
 
-* As a user, I want to
+* 
 
 
 ### Issues
@@ -242,20 +247,20 @@ The issues listed in the table below we identified during March 2022.
 
 This project was deployed using the steps below with version releasing active. Please do not make any changes to files within this repository as any changes pushed to the main branch will be automatically reflected on the live website. Instead please follow the second set of steps which guide you to forking and cloning the website where changes can be made without impact to the live website. Thanks!
 
-1. Logged into [my GitHub repository](https://github.com/RickofManc/60-seconds-to-save-earth)
+1. Logged into [my GitHub repository](https://github.com/RickofManc/vv-pizzas)
 1. Clicked on the "Settings" button in the main Repository menu.
 1. Clicked "Pages" from the left hand side navigation menu.
 1. Within the Source section, clicked the "Branch" button and changed from 'None' to 'Main' in the dropdown menu.
 1. The page automatically refreshed with a url displayed.
 1. Tested the link by clicking on the url.
 
-The live website can be found here https://rickofmanc.github.io/60-seconds-to-save-earth/
+The live website can be found here https://vv-pizzas.herokuapp.com/
 
 To fork this website to either propose changes or to use as an idea for another website, follow these steps:
 1. If you haven't yet, you should first set up Git. Don't forget to set up authentication to GitHub.com from Git as well.
-1. Navigate to the [60 Seconds to Save Earth repository](https://github.com/RickofManc/60-seconds-to-save-earth).
+1. Navigate to the [VV Pizza](https://github.com/RickofManc/vv-pizzas).
 1. Click the 'Fork' button on the upper right part fo the page. It's in between 'Watch' and 'Star'.
-1. You will now have a fork of the 60 Seconds to Save Earth repository added to your GitHub profile. Navigate to your own profile and find the forked repository to add the required files.
+1. You will now have a fork of the VV Pizzas repository added to your GitHub profile. Navigate to your own profile and find the forked repository to add the required files.
 1. Above the list of forked files click the 'Code' button.
 1. A drop-down menu will appear providing a choice of cloning options. Select the one which is applicable to your setup.
 Further details on completing the final step can be found on GitHub's ['Fork a Repo'](https://docs.github.com/en/get-started/quickstart/fork-a-repo) page.
@@ -280,14 +285,13 @@ Further details on completing the final step can be found on GitHub's ['Fork a R
 ### Software & Web Applications
 
 * [Balsamiq](https://balsamiq.com/) - Used to build wireframes in the Skelton phase. 
-* This website was coded using HTML, CCS and JavScript with [GitPod](https://gitpod.io/) used for an IDE and [GitHub](https://github.com/) as a hosting repository.
+* This website was coded using Python3, HTML5, CCS3 and JavScript with [GitPod](https://gitpod.io/) used for an IDE and [GitHub](https://github.com/) as a hosting repository.
 * [W3schools](https://www.w3schools.com/) - Source of 'How to...' information throughout the build.
 * [Stack Overflow](https://stackoverflow.com/) - Source of 'How to...' information on Python code.
 * [Python Tutor](https://pythontutor.com/) - For testing sections of code.
 * [FreeConvert](https://www.freeconvert.com/) - For converting and compressing images to improve performance.
 * [Wave](https://wave.webaim.org/) - Accessibility Testing to ensure content is readable for all users.
 * [HTML Validator](https://validator.w3.org/) - For validating HMTL code.
-* [CSS Validator](https://validator.w3.org/) - For validating CSS code.
 * [PEP8 Validator](http://pep8online.com/)  - For validating Python code.
 * [Code Beautify](https://codebeautify.org/) - For validating the layout of all code.
 * [IE NetREnderer](https://netrenderer.com/index.php) - For testing website functionality on IE versions 7-10.
