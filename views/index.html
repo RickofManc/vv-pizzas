@@ -1,27 +1,29 @@
 <body>
+    <Header id="header">
+      <h1>VV Pizzas</h1>
+    </Header>
     <button onclick="window.location.reload()">Restart Order</button>
     <div id="terminal"></div>
-
+    <footer id="footer">
+        <p>Call Vera on 07665544332 if have any issues with placing your order here
+            </p>
+        </footer>
     <script>
-        var term = new Terminal({
-            cols: 80,
-            rows: 24
-        });
-        term.open(document.getElementById('terminal'));
-        term.writeln('Running startup command: python3 run.py');
-        term.writeln('');
-
-        var ws = new WebSocket(location.protocol.replace('http', 'ws') + '//' + location.hostname + (location.port ? (
-            ':' + location.port) : '') + '/');
-
-        ws.onopen = function () {
-            new attach.attach(term, ws);
-        };
-
-        ws.onerror = function (e) {
-            console.log(e);
-        };
-        // Set focus in the terminal
-        document.getElementsByClassName("xterm-helper-textarea")[0].focus();
+      var term = new Terminal({
+        cols: 80,
+        rows: 24
+      });
+      term.open(document.getElementById('terminal'));
+      term.writeln('Running startup command: python3 run.py');
+      term.writeln('');
+      var ws = new WebSocket(location.protocol.replace('http', 'ws') + '//' + location.hostname + (location.port ? (':' + location.port) : '') + '/');
+      ws.onopen = function() {
+        new attach.attach(term, ws);
+      };
+      ws.onerror = function(e) {
+        console.log(e);
+      };
+      // Set focus in the terminal
+      document.getElementsByClassName("xterm-helper-textarea")[0].focus();
     </script>
-</body>
+  </body>

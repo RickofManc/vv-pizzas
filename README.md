@@ -120,6 +120,15 @@ Aesthetically the page background will inform the customer they are ordering piz
 
 Should the customer make an error whilst ordering, they will have the ability to amend the order before committing, or by clicking a 'Restart Order' button.
 
+#### Flowchart
+
+A flowchart outlining the customer journey has been created using [Lucidchart](https://www.lucidchart.com/pages/). The final application may differ slightly as development progresses and from user feedback.
+
+![Flowchart](readme-images/vv-pizzas-flowchart.png)
+
+
+#### Wireframes
+
 As part of this phase wireframes for monitor and smartphone have been produced using [Balsamiq](https://balsamiq.com/wireframes/) (see image below - the wireframes are located within the project [Repo](https://github.com/RickofManc/vv-pizzas)).
 
 The website is responsive through differing screen widths and mobile devices. 
@@ -142,9 +151,9 @@ The colour palette signals 'Italy' to the customer, to convey the link with the 
 
 #### Fonts
 
+'Fira Code' font has been selected for free commercial use from Google Fonts due to it's similar style to the interface font. Fira Code is an extension of the Fira Mono font containing a set of ligatures for common programming multi-character combinations. Whilst these ligatures won't be used within this build, it does highlight the font is quick and easy to read.
 
-
-
+![VV Pizza Font](readme-images/vv-pizza-font.png)
 
 
 #### Images & Icons
@@ -161,11 +170,11 @@ To provide .
 
 ##### Meta data
 
-To support the strategic aim 'Educate on the impact of burning fossil fuels on Climate Change', Meta data has been included within the website HTML head element to increase the traffic to this website. Furthermore the site page has been titled appropriately as another method of informing users of their location.
+Meta data has been included within the website HTML head element to increase the traffic to the website. Furthermore the site page has been titled appropriately as another method of informing users of their location.
 
 ##### Redirection
 
-A '404 Not Found' page has been added to the website in the event of a failed link or page. This page kindly informs the user of the error and provides a button to navigate them back to VV Pizzas website.
+A '404 Not Found' page has been added to the website in the event of a failed link or page. This page kindly informs the user of the error and provides a button to navigate them back to the homepage.
 
 
 ### Future Features
@@ -188,21 +197,21 @@ Following a successful MVP launch, the application had the opportunity to be fur
 
 ## Testing 
 
-Throughout the Build phase Chrome Developer Tools are used to ensure all pages are being developed to remain intuitive, responsive and accessible across all device widths. Primarily the pages were designed at 1920px wide reducing to 320px for mobile devices. These tools and others were used for the Testing phase. Full details and results of this phase can be found within the project [Repo](https://github.com/RickofManc/60-seconds-to-save-earth).
+Throughout the Build phase Python Tutor, PEP8 Online and Chrome Developer Tools are used to ensure all pages are being developed to remain intuitive, responsive and accessible across all device widths. These tools and others were used for the Testing phase. Full details and results of this phase can be found within the project [Repo](https://github.com/RickofManc/vv-pizzas).
 
 The following sections summarise the tests and results.
 
 
 ### Code 
 
-The code on each file has been tested using the appropriate validation service; W3C Markup for HTML, W3C Jigsaw for CSS and PEP8 Online for Python.
+The code on each file has been tested using the appropriate validation service; W3C Markup for HTML and PEP8 Online for Python.
 
 Below are the summarised positive results from these tests:
 
 * **run.py** - 0 Errors / 0 Warnings
+* **layout.html** - 0 Errors / 0 Warnings
 * **index.html** - 0 Errors / 0 Warnings
 * **404.html** - 0 Errors / 0 Warnings
-* **style.css** - 0 Errors / 1 Warning 
 
 
 ### Browser
@@ -216,31 +225,30 @@ Below are the summarised positive results from these tests:
 
 ### Accessibility 
 
-Each page has been tested using the [Wave (Web Accessibility Evaluation Tool)](https://wave.webaim.org/) where zero errors or alerts were identified.
+Each page has been tested using the [Wave (Web Accessibility Evaluation Tool)](https://wave.webaim.org/) 
 
 
 
 
 ### Performance 
 
-Using Lighthouse performance testing within Chrome Developer Tools, all pages performance has been tested on both Desktop and Mobile devices. The results highlighted a slightly slower page load time than is recommended. This was primarily due to the browser attempting to load the JavaScript files at the same time as the DOM and CSS. To resolve this issue the 'defer' attribute was applied in the HTMl Script tags informing the Browser to prioritise the more critical page elements before the JavaScript. This helped to improve the user experience, and see the following positive results.
+
 
 ![Lighthouse Test Results]()
 
 
 ### User Stories
 
-The leading user stories have been tested to ensure the priority aims of the website have been delivered. 
-Below is a summary of the stories validation.
+The leading user stories have been tested to ensure the priority aims of the website have been delivered. Below is a summary of the stories validation.
 
-* 
+
 
 
 ### Issues
 
 The issues listed in the table below we identified during March 2022.
 
-*
+
 
 
 ## Deployment
