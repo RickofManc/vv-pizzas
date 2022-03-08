@@ -16,20 +16,27 @@
         </style>
     <title>VV Pizza</title>
     <style>
-      html, body {
-        position: relative;
+      body {
         margin: 0;
         height: 100vh;
         font-family: "Fira Code", "monospace", "sans-serif";
         background: url("../images/main-background-image-reduced.webp") repeat #F4F5F0;
       }
 
-      #header {
-        width: 400px;
-        float: left;
-        margin: 10px;
+      header {
+        width: 100%;
+        top: 0;
+        margin-bottom: 10px;
+        text-align: center;
+        padding: 10px;
         color: #0A36AF;
-        font-size: 700;
+        font-weight: 800;
+      }
+
+      .header-text {
+        float: left;
+        color: #0A36AF;
+        font-weight: 800;
       }
 
       button {
@@ -44,17 +51,23 @@
         border-radius: 8px;
       }
 
-      #footer {
-          position: sticky;
-          bottom: 0;
-          width: 100%;
-          height: 10px;
-          text-align: center;
-          padding: 1px;
-          margin-top: 1px;
-          font-size: medium;
-          color: #F4F5F0;
-          background-color: #0A36AF;
+      button a:hover {
+        background-color: #008C45;
+      }
+
+      footer {
+        bottom: 0;
+        width: 100%;
+        height: 10px;
+        text-align: center;
+        padding: 11px;
+        margin-top: 10px;
+        background-color: #0A36AF;
+      }
+
+      .footer-text {
+        color: #F4F5F0;
+        font-weight: 500;
       }
 
       /**
