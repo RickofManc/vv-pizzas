@@ -112,15 +112,15 @@ def get_size():
     """
     #  Table used to present sizes to the customer
     sizes_table = Table()
-    
+
     #  Data to populate the table of pizza sizes
     sizes_table.add_column("Item", justify="center", vertical="middle")
     sizes_table.add_column("Name", justify="left", vertical="middle")
     sizes_table.add_column("Size", justify="left", vertical="middle")
     sizes_table.add_column("Price", justify="right", vertical="middle")
-    
+
     sizes_table.add_row("S", "Small", "8 Inches", f"{currency(4.50)}")
-    sizes_table.add_row("M", "Medium", "10 Inches",f"{currency(7.50)}")
+    sizes_table.add_row("M", "Medium", "10 Inches", f"{currency(7.50)}")
     sizes_table.add_row("L", "Large", "14 Inches", f"{currency(4.50)}")
 
     print("Which size of pizza would you like?\n")
@@ -131,13 +131,13 @@ def get_size():
         size = input(
             "Please choose a size by entering the corresponding letter and clicking enter:\n"
             )
-        if size == ('S').lower():
+        if size.upper() == ('S'):
             print("Thanks, you chose Small\n")
             return 'Small'
-        elif size == ('M').lower():
+        elif size.upper() == ('M'):
             print("Thanks, you chose Medium\n")
             return 'Medium'
-        elif size == ('L').lower():
+        elif size.upper() == ('L'):
             print("Thanks, you chose Large\n")
             return 'Large'
         else:
