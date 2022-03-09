@@ -1,7 +1,7 @@
 """
 Libraries for supporting the application
 """
-import re  # To validate mobile phone number
+import re  # To support name and phone number validation
 from datetime import datetime  # To add datetime to each order
 import locale  # To set the currency for pizza prices
 import gspread  # To open and edit pizza ordering spreadsheet
@@ -32,8 +32,8 @@ def get_customer_name():
     Request and validate customers name
     """
     while True:
-        name = console.input("Please provide your name:\n").lower()
-        if name.isalpha():  # Validates the customer is characters only
+        name = console.input("Please provide your name:\n").strip()
+        if re.match(r"[\s\S,.\?]+$", name):  # Validates the customer is characters only
             console.print(f"Hi {name.capitalize()} :waving_hand:\n")
         else:
             print("Invalid name, please try again\n")
@@ -50,7 +50,7 @@ def get_customer_number():
         Validates customers mobile phone number.
         Number must begin with 0 and be 11 digits.
         """
-        num_pattern = re.compile("(0)?[0-9]{11}")
+        num_pattern = re.compile("(0)?[0-9]{11}").strip()
         return num_pattern.match(telnum)
     # Request telephone number, break if valid or provide error message
     while True:
