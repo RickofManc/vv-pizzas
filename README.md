@@ -11,7 +11,7 @@
 
 ## About
 
-Vera's Vegan Pizzas is a popular South Manchester based food truck. The popularity of this delicious "can't believe it's vegan" pizza often leads to long wait times to order. Whilst most customers are happy to wait, Vera feels she is losing customers before they order due to the phone ordering system. There is a single point of contact to place orders via phone, and if this is frequently engaged, some customers will order elsewhere.  
+Vera's Vegan Pizzas is a popular South Manchester based food truck. The popularity of this delicious "can't believe it's vegan" pizza often leads to long wait times to order. Whilst most customers are happy to wait, Vera feels she is losing customers before they order due to the current phone ordering method. There is a single point of contact to place orders via phone, and if this is frequently engaged, some customers order elsewhere.  
 
 
 ***
@@ -26,6 +26,7 @@ Vera's Vegan Pizzas is a popular South Manchester based food truck. The populari
     * [Skeleton](#Skeleton)
     * [Surface](#Surface)
 * [Features](#Features)
+* [Data Model](#Data-Model)
 * [Testing](#Testing)
 * [Deployment](#Deployment)
 * [Credits](#Credit)
@@ -91,6 +92,7 @@ Below is a list of the leading features for the application.
 * Add totals for the days orders within the spreadsheet.
 
 #### Out of Scope Features (for a future release)
+* Mobile phone application. 
 * Options for ordering custom toppings.
 * Email confirmation of the placed order.
 * Provide the customer with the opportunity to pay online.
@@ -180,15 +182,16 @@ A '404 Not Found' page has been added to the website in the event of a failed li
 ### Future Features
 
 Following a successful MVP launch, the application had the opportunity to be further developed over a relatively short period to improve the user experience. Here are a few of the immediate features that can be developed:
-* Provide a fully functioning website that offers more information on VV Pizzas
-* Provide a opportunity to pay online prior to collection
-* Provide a real-time update on the order to customer via email/SMS.
+* Application for mobile devices.
+* Website features i.e. About, Contact, Map, Social Media.
+* Pay online prior to collection
+* Real-time update on the order to customer via email/SMS.
 
 
 ***
 
 
-## Data Model 
+## Data-Model 
 
 
 
@@ -197,7 +200,7 @@ Following a successful MVP launch, the application had the opportunity to be fur
 
 ## Testing 
 
-Throughout the Build phase Python Tutor, PEP8 Online and Chrome Developer Tools are used to ensure all pages are being developed to remain intuitive, responsive and accessible across all device widths. These tools and others were used for the Testing phase. Full details and results of this phase can be found within the project [Repo](https://github.com/RickofManc/vv-pizzas).
+Throughout the Build phase Python Tutor, PEP8 Online and Chrome Developer Tools are used to ensure all pages are being developed to remain intuitive, responsive and accessible across several screen widths. These tools and others were used for the Testing phase. Full details and results of this phase can be found within the project [Repo](https://github.com/RickofManc/vv-pizzas).
 
 The following sections summarise the tests and results.
 
@@ -206,32 +209,26 @@ The following sections summarise the tests and results.
 
 The code on each file has been tested using the appropriate validation service; W3C Markup for HTML and PEP8 Online for Python.
 
-Below are the summarised positive results from these tests:
+Below are the summarised results from these tests:
 
 * **run.py** - 0 Errors / 0 Warnings
 * **layout.html** - 0 Errors / 0 Warnings
-* **index.html** - 0 Errors / 0 Warnings
+* **index.html** - 1 Errors / 2 Warnings; relating to the absence of boiler pate <!DOCTYPE HTML> which is to expected given the structure of the website and this being coded to the layout.html file.
 * **404.html** - 0 Errors / 0 Warnings
 
 
 ### Browser
 
 
-
 ### Device
-
-
 
 
 ### Accessibility 
 
-Each page has been tested using the [Wave (Web Accessibility Evaluation Tool)](https://wave.webaim.org/) 
-
-
+The homepage has been tested using the [Wave (Web Accessibility Evaluation Tool)](https://wave.webaim.org/) with zero alerts or errors received. 
 
 
 ### Performance 
-
 
 
 ![Lighthouse Test Results]()
@@ -242,37 +239,140 @@ Each page has been tested using the [Wave (Web Accessibility Evaluation Tool)](h
 The leading user stories have been tested to ensure the priority aims of the website have been delivered. Below is a summary of the stories validation.
 
 
-
-
 ### Issues
 
 The issues listed in the table below we identified during March 2022.
 
 
-
-
 ## Deployment
 
-This project was deployed using the steps below with version releasing active. Please do not make any changes to files within this repository as any changes pushed to the main branch will be automatically reflected on the live website. Instead please follow the second set of steps which guide you to forking and cloning the website where changes can be made without impact to the live website. Thanks!
+This project was deployed using the steps below with version releasing active. Please do not make any changes to files within this repository as any changes pushed to the main branch will be automatically reflected on the live website. Instead please follow the steps below which guide you to forking the website where changes can be made without impact to the live website. Thanks!
 
-1. Logged into [my GitHub repository](https://github.com/RickofManc/vv-pizzas)
-1. Clicked on the "Settings" button in the main Repository menu.
-1. Clicked "Pages" from the left hand side navigation menu.
-1. Within the Source section, clicked the "Branch" button and changed from 'None' to 'Main' in the dropdown menu.
-1. The page automatically refreshed with a url displayed.
-1. Tested the link by clicking on the url.
 
-The live website can be found here https://vv-pizzas.herokuapp.com/
+### Fork and Deploy with Github
+
+<details>
+    <summary></summary>
 
 To fork this website to either propose changes or to use as an idea for another website, follow these steps:
-1. If you haven't yet, you should first set up Git. Don't forget to set up authentication to GitHub.com from Git as well.
+1. If you haven't yet, you should first set up Git. Don't forget to set up authentication to GitHub.com from Git as well
 1. Navigate to the [VV Pizza](https://github.com/RickofManc/vv-pizzas).
-1. Click the 'Fork' button on the upper right part fo the page. It's in between 'Watch' and 'Star'.
+1. Click the 'Fork' button on the upper right part fo the page. It's in between 'Watch' and 'Star'
 1. You will now have a fork of the VV Pizzas repository added to your GitHub profile. Navigate to your own profile and find the forked repository to add the required files.
-1. Above the list of forked files click the 'Code' button.
-1. A drop-down menu will appear providing a choice of cloning options. Select the one which is applicable to your setup.
-Further details on completing the final step can be found on GitHub's ['Fork a Repo'](https://docs.github.com/en/get-started/quickstart/fork-a-repo) page.
+1. Above the list of forked files click the 'Code' button
+1. A drop-down menu will appear providing a choice of cloning options. Select the one which is applicable to your setup
+Further details on completing the final step can be found on GitHub's [Fork a Repo](https://docs.github.com/en/get-started/quickstart/fork-a-repo) page
 
+To deploy from Github follow this steps:
+1. Log into your Github repository, create a Github account if necessary
+1. Click 'Settings' in the main Repository menu
+1. Click 'Pages' from the left hand side navigation menu
+1. Within the Source section, click the "Branch" button and change from 'None' to 'Main'
+1. The page should automatically refresh with a url displayed
+1. Test the link by clicking on the url
+
+The url for this website can be found here https://vv-pizzas.herokuapp.com/
+
+</details>
+
+### Create data model and integrate using an API
+
+<details>
+    <summary></summary>
+
+Create a Spreadsheet (Data Model)
+1. Login to your Google account, create an account if necessary
+1. Navigate to Sheets, Googles version of Microsoft Excel
+1. Start a new spreadsheet, amend the title at the top i.e. VV Pizzas
+1. Create 2 Sheets or Tabs, titling one 'Orders' and the other 'Cost'
+1. In the first row of the Orders sheet, add the following column headers;
+    * Name, TelNum, Pizza, Size, Time, Date, Quantity, Price
+1. In the first row of the Cost sheet, add the following column headers;
+    * Size, Price
+
+Setup API
+1. Navigate to [Google Cloud Platform](https://cloud.google.com/gcp?utm_source=google&utm_medium=cpc&utm_campaign=emea-gb-all-en-bkws-all-all-trial-e-gcp-1011340&utm_content=text-ad-none-any-DEV_c-CRE_500227884420-ADGP_Hybrid%20%7C%20BKWS%20-%20EXA%20%7C%20Txt%20~%20GCP%20~%20General%23v1-KWID_43700060384861702-kwd-26415313501-userloc_9041106&utm_term=KW_google%20cloud%20platform-NET_g-PLAC_&gclid=CjwKCAiAvaGRBhBlEiwAiY-yMH6ZzZToth-9fTjp0B_qAE91ulGwN7jIb0KBGW5TbmN8Z5w9JE1noRoCSmIQAvD_BwE&gclsrc=aw.ds)
+1. If you do not already have a profile then follow the basic steps for creating an Account, via clicking on the 'Get Started for Free' button in the upper right corner
+1. Once the previous step is complete, create a new project with a unique title
+1. You should now arrive at the project dashboard and be ready to setup the required credentials;
+    * Access the navigation menu from clicking on the hamburger button
+    * Select APIs and Services, followed by 'Library'
+    * Search for and select Google Drive API -> Enable
+    * Search for and select Google Sheets API -> Enable
+    * Click Enable to navigate to 'API and Services Overview' 
+    * Click Create Credentials in the upper left of the screen
+    * For Credential Type, select 'Google Drive' from the dropdown
+    * For 'What data will you be accessing' select Application Data
+    * For 'Are you planning to use this API with Compute Engine...?' choose 'No, I'm not...'
+    * Click Next
+    * Within the Create Service Account page, enter a Service Account Name
+    * Click Create and Continue
+    * Next within 'Grant this service account access to project', choose Basic -> Editor from the 'Select a Role' dropdown
+    * Click Continue
+    * Next within 'Grant users access to this service account', choose 'Done'
+    * On the following, click on the 'Service Account Name' you created to navigate to the config page
+    * Navigate to the Keys section
+    * Select 'Add Key' dropdown -> Create New Key.
+    * Select 'JSON' -> Create - the file will download to your machine
+    * From your local downloads folder, add file directly to your Gitpod workspace, and rename the file to creds.json
+    * Within the file, copy the value for 'client email'. Paste this email address into the 'Share' area of your Google Spreadsheet, assigning the role of Editor
+
+Enable API within IDE
+1. From within your Gitpod IDE terminal, enter 'pip3 install gspread google-auth'
+1. At the top of your Python file add the following lines:
+
+    ```
+    import gspread
+    from google.oauth2.service_account import Credentials
+    ```
+    
+1. Below this add the following code:
+
+    ```
+        SCOPE = [
+            "https://www.googleapis.com/auth/spreadsheets",
+            "https://www.googleapis.com/auth/drive.file",
+            "https://www.googleapis.com/auth/drive"
+            ]
+
+        CREDS = Credentials.from_service_account_file('creds.json')
+        SCOPED_CREDS = CREDS.with_scopes(SCOPE)
+        GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
+        SHEET = GSPREAD_CLIENT.open('vv_pizzas')
+        console = Console()
+        install(show_locals=True)
+    ```
+</details>
+
+
+### Deploy with Heroku
+<details>
+    <summary></summary>
+
+* The requirements.txt file in the IDE must be updated to package all dependencies. To do this;
+    1. Enter the following into the terminal: 'pip3 freeze > requirements.txt'
+    1. Commit the changes and push to Github
+
+* Next, follow the steps below;
+    1. Login to [Heroku](https://heroku.com/), create an account if necessary
+    1. Once at your Dashboard, click 'Create New App'
+    1. Enter a name for your application, this must be unique, and select a region
+    1. Click 'Create App'
+    1. At the Application Configuration page, apply the following to the Settings and Deploy sections:
+        * Within 'Settings', scroll down to the Config Vars section to apply the credentials being used by the application. In the Reveal Config Vars enter 'CREDS' for the Key field, and paste the all the contents from the creds.json file into the Value field
+        * Click 'Add'
+        * Add another Config Var with the Key of 'PORT' and the Value of '8000'
+        * Within Settings, scroll down to the Buildpacks sections, click to Add a Buildpack
+        * Select Python from the pop-up window and Save
+        * Add the Node.js Buildpack using the same method
+        * Navigate to the Deploy section, select Github as the deployment method, and connect to Github when prompted
+        * Use your the Github repository name created for this project
+        * Finally, scroll down to and select to deploy 'Automatically' as this will ensure each time you push code in Github, the pages through Heroku are updated
+    1. Your application can be run from the Application Configuration section, click 'Open App'
+
+</details>
+
+    
 
 ***
 
@@ -287,7 +387,10 @@ Further details on completing the final step can be found on GitHub's ['Fork a R
 
 ### Python Libraries
 
-
+* [Regular Expression (or RE)](https://docs.python.org/3/library/re.html) to validate the customers mobile number structure
+* [Datetime](https://docs.python.org/3/library/datetime.html) to add the date and time to the order before sending to the kitchen.
+* [Google Spreadsheet](https://docs.google.com/spreadsheets/d/1-0Hu5_4mXknpqb36h5K3NuboPPn9xHJsGvmpaZjTMtU/edit#gid=1680754323) as the data model for which orders are received.
+* [Rich Console](https://rich.readthedocs.io/en/stable/console.html) to style the terminal content.
 
 
 ### Software & Web Applications
