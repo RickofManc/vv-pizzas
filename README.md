@@ -133,7 +133,7 @@ A flowchart outlining the customer journey has been created using [Lucidchart](h
 
 As part of this phase wireframes for monitor and smartphone have been produced using [Balsamiq](https://balsamiq.com/wireframes/) (see image below - the wireframes are located within the project [Repo](https://github.com/RickofManc/vv-pizzas)).
 
-The website is responsive through differing screen widths and mobile devices. 
+The website is responsive through differing screen widths but currently not on mobile devices - a future development will see the app developed for smartphones. 
 
 ![Wireframes](readme-images/vv-pizza-wireframes.png)
 

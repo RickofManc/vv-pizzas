@@ -3,6 +3,7 @@ Libraries for supporting the application
 """
 import re  # To validate mobile phone number
 from datetime import datetime  # To add datetime to each order
+import locale  # To set the currency for pizza prices
 import gspread  # To open and edit pizza ordering spreadsheet
 from google.oauth2.service_account import Credentials
 from rich.console import Console  # Add styling to terminal to improve UX
@@ -22,6 +23,8 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('vv_pizzas')
 console = Console()
 install(show_locals=True)
+locale.setlocale(locale.LC_ALL, '')
+currency = lambda x: locale.currency(x, grouping=True, symbol=True)
 
 
 def get_customer_name():
@@ -114,10 +117,11 @@ def get_size():
     sizes_table.add_column("Item", justify="center", vertical="middle")
     sizes_table.add_column("Name", justify="left", vertical="middle")
     sizes_table.add_column("Size", justify="left", vertical="middle")
+    sizes_table.add_column("Price", justify="right", vertical="middle")
     
-    sizes_table.add_row("S", "Small", "8 Inches")
-    sizes_table.add_row("M", "Medium", "10 Inches")
-    sizes_table.add_row("L", "Large", "14 Inches")
+    sizes_table.add_row("S", "Small", "8 Inches", f"{currency(4.50)}")
+    sizes_table.add_row("M", "Medium", "10 Inches",f"{currency(7.50)}")
+    sizes_table.add_row("L", "Large", "14 Inches", f"{currency(4.50)}")
 
     print("Which size of pizza would you like?\n")
     console.print(sizes_table)
@@ -139,6 +143,13 @@ def get_size():
         else:
             print("Invalid choice, please enter either S, M or L\n")
             continue
+
+
+def get_price():
+    """
+    Receives input from get_size()
+    to calculate the price for the order
+    """
 
 
 def get_time():
@@ -236,11 +247,12 @@ def confirm_order():
 def main():
     """
     Run all main program functions
+    Including welcome message
     """
+    console.print("[#008C45]Thank you[/] [#F4F5F0]for choosing[/] [#CD212A]Vera's Vegan Pizzas![/]\n", style="bold")
+    print("Please follow the steps to place your order,")
+    print("then collect 20 minutes later.\n")
     confirm_order()
 
 
-console.print("[#008C45]Thank you[/] [#F4F5F0]for choosing[/] [#CD212A]Vera's Vegan Pizzas![/]\n", style="bold")
-print("Please follow the steps to place your order,")
-print("then collect 20 minutes later.\n")
 main()
