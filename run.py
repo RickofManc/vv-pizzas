@@ -86,18 +86,17 @@ def get_pizza():
 
     # Request and validate the customers choice is between 1-4
     while True:
-        pizza = int(
-            input("Please choose a pizza by typing the item number, then click enter:\n"))
-        if pizza == 1:
+        pizza = input("Please choose a pizza by typing the item number, then click enter:\n")
+        if pizza == "1":
             console.print(":yum: a Margherita!\n")
             return 'Margherita'
-        elif pizza == 2:
+        elif pizza == "2":
             console.print(":yum: a Giardiniera!\n")
             return 'Giardiniera'
-        elif pizza == 3:
+        elif pizza == "3":
             console.print(":yum: a Diavolo!\n")
             return 'Diavolo'
-        elif pizza == 4:
+        elif pizza == "4":
             console.print(":yum: a Forza!\n")
             return 'Forza'
         else:
