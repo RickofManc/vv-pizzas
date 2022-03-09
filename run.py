@@ -33,7 +33,7 @@ def get_customer_name():
     """
     while True:
         name = console.input("Please provide your name:\n").strip()
-        if re.match(r"[\s\S,.\?]+$", name):  # Validates the customer is characters only
+        if re.match(r"[\s\S\?]", name):  # Validates the customer is characters only
             console.print(f"Hi {name.capitalize()} :waving_hand:\n")
         else:
             print("Invalid name, please try again\n")
@@ -50,7 +50,7 @@ def get_customer_number():
         Validates customers mobile phone number.
         Number must begin with 0 and be 11 digits.
         """
-        num_pattern = re.compile("(0)?[0-9]{11}").strip()
+        num_pattern = re.compile(r"\d{11}")
         return num_pattern.match(telnum)
     # Request telephone number, break if valid or provide error message
     while True:
