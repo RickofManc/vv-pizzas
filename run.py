@@ -23,8 +23,8 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('vv_pizzas')
 console = Console()
 install(show_locals=True)
-locale.setlocale(locale.LC_ALL, '')
-currency = lambda x: locale.currency(x, grouping=True, symbol=True)
+locale.setlocale(locale.LC_ALL, 'gv_GB.UTF-8')
+GB_currency = lambda x: locale.currency(x, grouping=True, symbol=True)
 
 
 def get_customer_name():
@@ -128,9 +128,9 @@ def get_size():
     sizes_table.add_column("Size", justify="left", vertical="middle")
     sizes_table.add_column("Price", justify="right", vertical="middle")
 
-    sizes_table.add_row("S", "Small", "8 Inches", f"{currency(4.50)}")
-    sizes_table.add_row("M", "Medium", "10 Inches", f"{currency(7.50)}")
-    sizes_table.add_row("L", "Large", "14 Inches", f"{currency(4.50)}")
+    sizes_table.add_row("S", "Small", "8 Inches", f"{GB_currency(4.50)}")
+    sizes_table.add_row("M", "Medium", "10 Inches", f"{GB_currency(7.50)}")
+    sizes_table.add_row("L", "Large", "14 Inches", f"{GB_currency(10.50)}")
 
     print("Which size of pizza would you like?\n")
     console.print(sizes_table)
@@ -164,7 +164,7 @@ def get_quantity():
     # Requests the customer inputs number of pizzas, break if valid or provide error message    
     while True:
         qty = int(input("How many would you like? (max 6 pizzas per person)\n"))
-        if qty in range(1, 6, 1):
+        if qty in range(1, 7, 1):
             return qty
         else:
             print("Invalid entry, please specify a number between 1-6\n")
@@ -184,7 +184,7 @@ def get_cost(cust_size, qty):
         cost = qty * 7.50
     elif cust_size == ("Large"):
         cost = qty * 10.50
-    return cost
+    return f"{GB_currency(cost)}"
 
 
 def get_time():
