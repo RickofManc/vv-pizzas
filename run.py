@@ -52,9 +52,9 @@ def get_customer_number():
         """
         num_pattern = re.compile(r"\d{11}")
         return num_pattern.match(telnum)
-    # Request telephone number, break if valid or provide error message
+    # Requests telephone number, break if valid or provide error message
     while True:
-        telnum = (input("Please provide a mobile contact number:\n"))
+        telnum = input("Please provide a mobile contact number:\n")
         if validate_mobile(telnum):
             print(f"Thanks, we will use {telnum} to contact you if there are any issues.\n")
         else:
@@ -155,7 +155,23 @@ def get_size():
         return cust_size
 
 
-def get_cost(cust_size):
+def get_quantity():
+    """
+    Asks the customer to specify 
+    how many pizzas they would
+    like to purchase
+    """
+    # Requests the customer inputs number of pizzas, break if valid or provide error message    
+    while True:
+        qty = int(input("How many would you like? (max 6 pizzas per person)\n"))
+        if qty in range(1, 6, 1):
+            return qty
+        else:
+            print("Invalid entry, please specify a number between 1-6\n")
+            continue
+
+
+def get_cost(cust_size, qty):
     """
     Receives input from get_size()
     to calculate the price for the order
@@ -163,11 +179,11 @@ def get_cost(cust_size):
     """
     cost = 0
     if cust_size == ("Small"):
-        cost = 4.50
+        cost = qty * 4.50
     elif cust_size == ("Medium"):
-        cost = 7.50
+        cost = qty * 7.50
     elif cust_size == ("Large"):
-        cost = 10.50
+        cost = qty * 10.50
     return cost
 
 
@@ -215,7 +231,8 @@ def confirm_order():
     telnum = get_customer_number()
     pizza = get_pizza()
     cust_size = get_size()
-    cost = get_cost(cust_size)
+    qty = get_quantity()
+    cost = get_cost(cust_size, qty)
     order_time = get_time()
     order_date = get_date()
     #  Collate order data to be confirmed and sent to the kitchen
@@ -224,13 +241,14 @@ def confirm_order():
         telnum,
         pizza,
         cust_size,
+        qty,
         cost,
         order_time,
         order_date
         ]
     print(cust_order)
     #  Confirm order back to the customer CHANGE {} BELOW TO cust_ORDER
-    console.print(f"Thanks {name.capitalize()}, please confirm your order is;\n {cust_size} {pizza} costing {cost} :pizza:\n")
+    console.print(f"Thanks {name.capitalize()}, please confirm your order is;\n {qty} {cust_size} {pizza} for {cost} :pizza:\n")
 
     while True:
         #  Request the customer to confirm if the order is complete
