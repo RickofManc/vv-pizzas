@@ -69,9 +69,9 @@ def get_pizza():
     and request a choice of 1-4
     """
     #  Table used to present menu to the customer
+    menu = SHEET.worksheet("Pizzas").get_all_values()
     pizza_table = Table()
     
-    #  Data to populate the table of pizza choices
     pizza_table.add_column("Item", justify="center", vertical="middle")
     pizza_table.add_column("Pizza", justify="left", vertical="middle")
     pizza_table.add_column("Topping", justify="left", vertical="middle")
@@ -80,6 +80,16 @@ def get_pizza():
     pizza_table.add_row("2", "Giardiniera", "Artichoke, mushrooms, red onion, black olives")
     pizza_table.add_row("3", "Diavolo", "Smoky jackfruits, green peppers, chilli oil")
     pizza_table.add_row("4", "Forza", "Chilli Quorn™, mixed peppers, sweet chilli peppers")
+
+    #  Data to populate the table of pizza choices
+    #  pizza_table.add_column("Item", justify="center", vertical="middle")
+    #  pizza_table.add_column("Pizza", justify="left", vertical="middle")
+    #  pizza_table.add_column("Topping", justify="left", vertical="middle")
+
+    #  pizza_table.add_row("1", "Margherita", "Vegan mozzarella and tomato")
+    #  pizza_table.add_row("2", "Giardiniera", "Artichoke, mushrooms, red onion, black olives")
+    #  pizza_table.add_row("3", "Diavolo", "Smoky jackfruits, green peppers, chilli oil")
+    #  pizza_table.add_row("4", "Forza", "Chilli Quorn™, mixed peppers, sweet chilli peppers")
 
     print("Here are todays pizzas, which would you like?\n")
     console.print(pizza_table)
@@ -127,28 +137,38 @@ def get_size():
 
     #  Request and validate the customers choice is either S, M or L
     while True:
-        size = input(
+        cust_size = input(
             "Please choose a size by entering the corresponding letter and clicking enter:\n"
             )
-        if size.upper() == ('S'):
+        if cust_size.upper() == ("S"):
+            cust_size = "Small"
             print("Thanks, you chose Small\n")
-            return 'Small'
-        elif size.upper() == ('M'):
+        elif cust_size.upper() == ("M"):
+            cust_size = "Medium"
             print("Thanks, you chose Medium\n")
-            return 'Medium'
-        elif size.upper() == ('L'):
+        elif cust_size.upper() == ("L"):
+            cust_size = "Large"
             print("Thanks, you chose Large\n")
-            return 'Large'
         else:
             print("Invalid choice, please enter either S, M or L\n")
             continue
+        return cust_size
 
 
-def get_price():
+def get_cost(cust_size):
     """
     Receives input from get_size()
     to calculate the price for the order
+    depending on the size request
     """
+    cost = 0
+    if cust_size == ("Small"):
+        cost = 4.50
+    elif cust_size == ("Medium"):
+        cost = 7.50
+    elif cust_size == ("Large"):
+        cost = 10.50
+    return cost
 
 
 def get_time():
@@ -194,7 +214,8 @@ def confirm_order():
     name = get_customer_name()
     telnum = get_customer_number()
     pizza = get_pizza()
-    size = get_size()
+    cust_size = get_size()
+    cost = get_cost(cust_size)
     order_time = get_time()
     order_date = get_date()
     #  Collate order data to be confirmed and sent to the kitchen
@@ -202,13 +223,14 @@ def confirm_order():
         name.capitalize(),
         telnum,
         pizza,
-        size,
+        cust_size,
+        cost,
         order_time,
         order_date
         ]
     print(cust_order)
     #  Confirm order back to the customer CHANGE {} BELOW TO cust_ORDER
-    console.print(f"Thanks {name.capitalize()}, you are ordering a {size} {pizza} :pizza:\n")
+    console.print(f"Thanks {name.capitalize()}, please confirm your order is;\n {cust_size} {pizza} costing {cost} :pizza:\n")
 
     while True:
         #  Request the customer to confirm if the order is complete
@@ -217,19 +239,19 @@ def confirm_order():
         user_confirm = input(
             "Is your order ready to go to the kitchen? Y/N:\n"
             )
-        if user_confirm == ('Y').lower():
+        if user_confirm.upper() == ('Y'):
             update_order_worksheet(cust_order)
-        elif user_confirm == ('N').lower():
+        elif user_confirm.upper() == ('N'):
             more_items = input("Would you like to order more pizzas? Y/N\n")
-            if more_items == ('Y').lower():
+            if more_items.upper() == ('Y'):
                 print("I need to code how to add more items")
-            elif more_items == ('N').lower():
+            elif more_items.upper() == ('N'):
                 amend_order = input(
                     "Would you like to amend this order? Y/N\n"
                     )
-                if amend_order == ('Y').lower():
+                if amend_order.upper() == ('Y'):
                     print("I need to code how to amend the order")
-                elif amend_order == ('N').lower():
+                elif amend_order.upper() == ('N'):
                     confirm_order()
                 else:
                     print("Invalid choice, please enter either Y or N\n")
