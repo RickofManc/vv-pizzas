@@ -23,8 +23,16 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('vv_pizzas')
 console = Console()
 install(show_locals=True)
-locale.setlocale(locale.LC_ALL, 'gv_GB.UTF-8')
+locale.setlocale(locale.LC_ALL, '')
 GB_currency = lambda x: locale.currency(x, grouping=True, symbol=True)
+
+
+def clear():
+    """
+    Clears the screen to allow for 
+    the next content or menu
+    """
+    print('\033c')
 
 
 def get_customer_name():
@@ -33,7 +41,8 @@ def get_customer_name():
     """
     while True:
         name = console.input("Please provide your name:\n").strip()
-        if re.match(r"[\s\S\?]", name):  # Validates the customer is characters only
+        # Validates the customer is characters only
+        if re.match(r"[\s\S\?]", name):
             console.print(f"Hi {name.capitalize()} :waving_hand:\n")
         else:
             print("Invalid name, please try again\n")
@@ -56,9 +65,11 @@ def get_customer_number():
     while True:
         telnum = input("Please provide a mobile contact number:\n")
         if validate_mobile(telnum):
-            print(f"Thanks, we will use {telnum} to contact you if there are any issues.\n")
+            print(f"Thanks, we will use {telnum} to contact you if"
+                  " there are any issues.\n")
         else:
-            print("Invalid number. 11 digits required, starting with 0, please try again\n")
+            print("Invalid number. 11 digits required, starting with 0,"
+                  " please try again\n")
             continue
         return telnum
 
@@ -69,17 +80,19 @@ def get_pizza():
     and request a choice of 1-4
     """
     #  Table used to present menu to the customer
-    menu = SHEET.worksheet("Pizzas").get_all_values()
+    #  menu = SHEET.worksheet("Pizzas").get_all_values()
     pizza_table = Table()
-    
     pizza_table.add_column("Item", justify="center", vertical="middle")
     pizza_table.add_column("Pizza", justify="left", vertical="middle")
     pizza_table.add_column("Topping", justify="left", vertical="middle")
 
     pizza_table.add_row("1", "Margherita", "Vegan mozzarella and tomato")
-    pizza_table.add_row("2", "Giardiniera", "Artichoke, mushrooms, red onion, black olives")
-    pizza_table.add_row("3", "Diavolo", "Smoky jackfruits, green peppers, chilli oil")
-    pizza_table.add_row("4", "Forza", "Chilli Quorn™, mixed peppers, sweet chilli peppers")
+    pizza_table.add_row("2", "Giardiniera", "Artichoke, mushrooms, red onion,"
+                        " black olives")
+    pizza_table.add_row("3", "Diavolo", "Smoky jackfruits, green peppers,"
+                        "chilli oil")
+    pizza_table.add_row("4", "Forza", "Chilli Quorn™, mixed peppers,"
+                        " sweet chilli peppers")
 
     #  Data to populate the table of pizza choices
     #  pizza_table.add_column("Item", justify="center", vertical="middle")
@@ -96,7 +109,8 @@ def get_pizza():
 
     # Request and validate the customers choice is between 1-4
     while True:
-        pizza = input("Please choose a pizza by typing the item number, then click enter:\n")
+        pizza = input("Please choose a pizza by typing the item number,"
+                      " then click enter.\n")
         if pizza == "1":
             console.print(":yum: a Margherita!\n")
             return 'Margherita'
@@ -137,9 +151,8 @@ def get_size():
 
     #  Request and validate the customers choice is either S, M or L
     while True:
-        cust_size = input(
-            "Please choose a size by entering the corresponding letter and clicking enter:\n"
-            )
+        cust_size = input("Please choose a size by entering the corresponding"
+                          " letter and clicking enter:\n")
         if cust_size.upper() == ("S"):
             cust_size = "Small"
             print("Thanks, you chose Small\n")
@@ -157,13 +170,15 @@ def get_size():
 
 def get_quantity():
     """
-    Asks the customer to specify 
+    Asks the customer to specify
     how many pizzas they would
     like to purchase
     """
-    # Requests the customer inputs number of pizzas, break if valid or provide error message    
+    # Requests the customer inputs number of pizzas,
+    # break if valid or provide error message
     while True:
-        qty = int(input("How many would you like? (max 6 pizzas per person)\n"))
+        qty = int(input("How many would you like?"
+                        " (max 6 pizzas per order)\n"))
         if qty in range(1, 7, 1):
             return qty
         else:
@@ -218,7 +233,8 @@ def update_order_worksheet(data):
     orders_worksheet = SHEET.worksheet("Orders")
     orders_worksheet.append_row(data)
     console.print(":thumbsup:")
-    print("Your order has been received, please collect in 20 minutes\nSee you soon!\n")
+    print("Your order has been received, please collect in 20 minutes\n")
+    print("See you soon!\n")
 
 
 def confirm_order():
@@ -228,13 +244,18 @@ def confirm_order():
     provide an opportunity to order more items
     """
     name = get_customer_name()
+    clear()
     telnum = get_customer_number()
+    clear()
     pizza = get_pizza()
+    clear()
     cust_size = get_size()
     qty = get_quantity()
     cost = get_cost(cust_size, qty)
     order_time = get_time()
     order_date = get_date()
+    clear()
+
     #  Collate order data to be confirmed and sent to the kitchen
     cust_order = [
         name.capitalize(),
@@ -247,8 +268,10 @@ def confirm_order():
         order_date
         ]
     print(cust_order)
+
     #  Confirm order back to the customer CHANGE {} BELOW TO cust_ORDER
-    console.print(f"Thanks {name.capitalize()}, please confirm your order is;\n {qty} {cust_size} {pizza} for {cost} :pizza:\n")
+    console.print(f"Thanks {name.capitalize()}, you are ordering;\n"
+                  f"{qty} {cust_size} {pizza} for {cost} :pizza:\n")
 
     while True:
         #  Request the customer to confirm if the order is complete
@@ -280,7 +303,6 @@ def confirm_order():
         else:
             print("Invalid choice, please enter either Y or N\n")
             continue
-        return "Thanks Customer.name() for ordering a Size.size() Topping.topping()"
 
 
 def main():
@@ -288,7 +310,8 @@ def main():
     Run all main program functions
     Including welcome message
     """
-    console.print("[#008C45]Thank you[/] [#F4F5F0]for choosing[/] [#CD212A]Vera's Vegan Pizzas![/]\n", style="bold")
+    console.print("[#008C45]Thank you[/] [#F4F5F0]for choosing[/] [#CD212A]"
+                  "Vera's Vegan Pizzas![/]\n", style="bold")
     print("Please follow the steps to place your order,")
     print("then collect 20 minutes later.\n")
     confirm_order()
