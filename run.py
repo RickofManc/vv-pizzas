@@ -35,6 +35,20 @@ def clear():
     print('\033c')
 
 
+def exit():
+    """
+    Exits user to the main menu
+    """
+    while True:
+        print("Enter E to exit to the main menu\n")
+        exit = input("Enter your choice here:\n")
+        if exit.upper() == ("E"):
+            main()
+        else:
+            print("Invalid choice, please type E and click Enter")
+            continue
+
+
 def get_customer_name():
     """
     Request and validate customers name
@@ -63,7 +77,9 @@ def get_customer_number():
         return num_pattern.match(telnum)
     # Requests telephone number, break if valid or provide error message
     while True:
-        telnum = input("Please provide a mobile contact number:\n")
+        print("Please provide a mobile phone number, that starts with a zero"
+              " and is 11 digits\n")
+        telnum = input("Enter your number here:\n")
         if validate_mobile(telnum):
             print(f"Thanks, we will use {telnum} to contact you if"
                   " there are any issues.\n")
@@ -109,20 +125,20 @@ def get_pizza():
 
     # Request and validate the customers choice is between 1-4
     while True:
-        pizza = input("Please choose a pizza by typing the item number,"
-                      " then click enter.\n")
+        print("Please select an option by entering a number between 1-4.\n")
+        pizza = input("Enter your choice here:\n")
         if pizza == "1":
             console.print(":yum: a Margherita!\n")
-            return 'Margherita'
+            return "Margherita"
         elif pizza == "2":
             console.print(":yum: a Giardiniera!\n")
-            return 'Giardiniera'
+            return "Giardiniera"
         elif pizza == "3":
             console.print(":yum: a Diavolo!\n")
-            return 'Diavolo'
+            return "Diavolo"
         elif pizza == "4":
             console.print(":yum: a Forza!\n")
-            return 'Forza'
+            return "Forza"
         else:
             print("Invalid choice, please enter a number between 1-4\n")
             continue
@@ -151,17 +167,20 @@ def get_size():
 
     #  Request and validate the customers choice is either S, M or L
     while True:
-        cust_size = input("Please choose a size by entering the corresponding"
-                          " letter and clicking enter:\n")
+        print("Please select either S, M or L\n")
+        cust_size = input("Enter your choice here:\n")
         if cust_size.upper() == ("S"):
             cust_size = "Small"
             print("Thanks, you chose Small\n")
+            break
         elif cust_size.upper() == ("M"):
             cust_size = "Medium"
             print("Thanks, you chose Medium\n")
+            break
         elif cust_size.upper() == ("L"):
             cust_size = "Large"
             print("Thanks, you chose Large\n")
+            break
         else:
             print("Invalid choice, please enter either S, M or L\n")
             continue
@@ -177,13 +196,14 @@ def get_quantity():
     # Requests the customer inputs number of pizzas,
     # break if valid or provide error message
     while True:
-        qty = int(input("How many would you like?"
-                        " (max 6 pizzas per order)\n"))
+        print("How many would you like? Please choose between 1-6\n")
+        qty = int(input("Enter your choice here:\n"))
         if qty in range(1, 7, 1):
-            return qty
+            break
         else:
             print("Invalid entry, please specify a number between 1-6\n")
             continue
+        return qty
 
 
 def get_cost(cust_size, qty):
@@ -232,19 +252,19 @@ def update_order_worksheet(data):
     print("Sending your order to Vera in the kitchen...\n")
     orders_worksheet = SHEET.worksheet("Orders")
     orders_worksheet.append_row(data)
-    console.print(":thumbsup:")
+    console.print(":thumbsup: :it:\n")
     print("Your order has been received, please collect in 20 minutes\n")
     print("See you soon!\n")
+    exit()
 
 
-def confirm_order():
+def place_order():
     """
-    Confirm the order back to the customer
-    ask the customer to proceed Y/N
-    provide an opportunity to order more items
+    Steps for the customer to place an order
+    also provides an opportunity to order more items
     """
-    name = get_customer_name()
     clear()
+    name = get_customer_name()
     telnum = get_customer_number()
     clear()
     pizza = get_pizza()
@@ -293,7 +313,7 @@ def confirm_order():
                 if amend_order.upper() == ('Y'):
                     print("I need to code how to amend the order")
                 elif amend_order.upper() == ('N'):
-                    confirm_order()
+                    place_order()
                 else:
                     print("Invalid choice, please enter either Y or N\n")
                     continue
@@ -310,11 +330,28 @@ def main():
     Run all main program functions
     Including welcome message
     """
-    console.print("[#008C45]Thank you[/] [#F4F5F0]for choosing[/] [#CD212A]"
-                  "Vera's Vegan Pizzas![/]\n", style="bold")
-    print("Please follow the steps to place your order,")
-    print("then collect 20 minutes later.\n")
-    confirm_order()
+    while True:
+        clear()
+        console.print("[#008C45]Thank you[/] [#F4F5F0]for choosing[/] [#CD212A]"
+                      "Vera's Vegan Pizzas![/]\n", style="bold")
+        console.print("Main Menu", style="bold")
+        print("1. Place An Order")
+        print("2. View Live Orders")
+        print("3. Exit\n")
+        print("Please select an option by entering a number between 1-3\n")
+
+        selection = input("Enter your choice here:\n")
+
+        if selection == "1":
+            place_order()
+        elif selection == "2":
+            view_live_orders()
+        elif selection == "3":
+            print("Bye Bye!")
+            break
+        else:
+            print("Invalid choice, please enter a number between 1-3")
+            continue
 
 
 main()
