@@ -98,32 +98,20 @@ def get_pizza():
     Present the customer with the choice of pizza,
     and request a choice of 1-4
     """
-    #  Table used to present menu to the customer
-    #  menu = SHEET.worksheet("Pizzas").get_all_values()
-    pizza_table = Table()
+    print("Here are todays menu, which pizza would you like?\n")
+
+    menu = SHEET.worksheet("Pizzas").get_all_values()
+    menu.pop(0)  # Remove the header row
+     
+    #  Data to populate the table of pizza choices
+    pizza_table = Table(show_header=True, header_style="bold")
     pizza_table.add_column("Item", justify="center", vertical="middle")
     pizza_table.add_column("Pizza", justify="left", vertical="middle")
     pizza_table.add_column("Topping", justify="left", vertical="middle")
 
-    pizza_table.add_row("1", "Margherita", "Vegan mozzarella and tomato")
-    pizza_table.add_row("2", "Giardiniera", "Artichoke, mushrooms, red onion,"
-                        " black olives")
-    pizza_table.add_row("3", "Diavolo", "Smoky jackfruits, green peppers,"
-                        "chilli oil")
-    pizza_table.add_row("4", "Forza", "Chilli Quorn™, mixed peppers,"
-                        " sweet chilli peppers")
+    for row in zip(*menu):
+        pizza_table.add_row(*row)
 
-    #  Data to populate the table of pizza choices
-    #  pizza_table.add_column("Item", justify="center", vertical="middle")
-    #  pizza_table.add_column("Pizza", justify="left", vertical="middle")
-    #  pizza_table.add_column("Topping", justify="left", vertical="middle")
-
-    #  pizza_table.add_row("1", "Margherita", "Vegan mozzarella and tomato")
-    #  pizza_table.add_row("2", "Giardiniera", "Artichoke, mushrooms, red onion, black olives")
-    #  pizza_table.add_row("3", "Diavolo", "Smoky jackfruits, green peppers, chilli oil")
-    #  pizza_table.add_row("4", "Forza", "Chilli Quorn™, mixed peppers, sweet chilli peppers")
-
-    print("Here are todays pizzas, which would you like?\n")
     console.print(pizza_table)
 
     # Request and validate the customers choice is between 1-4
@@ -254,7 +242,7 @@ def update_order_worksheet(data):
     for the kitchen to process
     """
     def send_order():
-        sleep(0.02)
+        sleep(0.015)
     
     for _ in track(range(100), description="[green]Sending order"
                                            " to the kitchen\n"):
@@ -279,7 +267,7 @@ def place_order():
     time.sleep(2.5)
     clear()
     pizza = get_pizza()
-    time.sleep(2.5)
+    time.sleep(2)
     clear()
     cust_size = get_size()
     qty = get_quantity()
@@ -350,10 +338,6 @@ def view_live_orders():
     print(live_orders)
 
 
-
-
-
-
 def main():
     """
     Main menu screen complete
@@ -361,8 +345,8 @@ def main():
     """
     while True:
         clear()
-        console.print("[#008C45]Thank you[/] [#F4F5F0]for choosing[/] [#CD212A]"
-                      "Vera's Vegan Pizzas![/]\n", style="bold")
+        console.print("[#008C45]Thank you[/] [#F4F5F0]for choosing[/]"
+                      " [#CD212A]Vera's Vegan Pizzas![/]\n", style="bold")
         console.print("Main Menu", style="bold")
         print("1. Place An Order")
         print("2. View Live Orders")
