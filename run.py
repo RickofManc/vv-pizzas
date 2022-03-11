@@ -10,8 +10,8 @@ from google.oauth2.service_account import Credentials
 from rich.console import Console  # Add styling to string for improved UX
 from rich.traceback import install  # Render tracebacks with syntax formatting
 from rich.table import Table  # To set the pizza and size options in a table
-from rich.progress import track  # To add a progress bar when sending orders to the kitchen
-from time import sleep  # To support the progress bar for sending orders to the kitchen
+from rich.progress import track  # To add a progress bar for sending orders
+from time import sleep  # To support the progress bar in sending orders
 
 
 SCOPE = [
@@ -114,7 +114,7 @@ def get_pizza():
 
     console.print(pizza_table)
 
-    # Request and validate the customers choice is between 1-4
+    #  Request and validate the customers choice is between 1-4
     while True:
         print("Please select an option by entering a number between 1-4.\n")
         pizza = input("Enter your choice here:\n")
@@ -333,7 +333,7 @@ def view_live_orders():
     """
     print("Here comes the current live orders...\n")
     live_orders = SHEET.worksheet("Orders").get_all_values()
-    live_orders.pop(0)  # remove headers to be readded in view_live_orders 
+    live_orders.pop(0)  # remove headers to be added in view_live_orders 
     live_orders.insert(0, ["Name", "Phone Number", "Pizza", "Size", "Quantity", "Price", "Date", "Time"])
     print(live_orders)
 
