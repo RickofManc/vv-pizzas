@@ -3,15 +3,16 @@ Imported libraries supporting the application
 """
 import re  # To support name and phone number validation
 from datetime import datetime  # To add datetime to each order
+import sys  # To provide the user with an exit from the ordering system
 import time  # To add a pause between certain functions executing
 import locale  # To set the currency for pizza prices
+from time import sleep  # To support the progress bar in sending orders
 import gspread  # To open and edit pizza ordering spreadsheet
 from google.oauth2.service_account import Credentials
 from rich.console import Console  # Add styling to string for improved UX
 from rich.traceback import install  # Render tracebacks with syntax formatting
 from rich.table import Table  # To set the pizza and size options in a table
 from rich.progress import track  # To add a progress bar for sending orders
-from time import sleep  # To support the progress bar in sending orders
 
 
 SCOPE = [
@@ -229,12 +230,17 @@ def get_size():
 
 def get_quantity():
     """
-    Asks the customer to specify
-    how many pizzas they would
-    like to purchase
+    Provides a question to the user asking;
+    How many pizzas they would like to order?
+        Params:
+            While loop requests user to input a choice between 1-6
+            If valid while loop breaks
+            Else requests the user tries again
+        Returns:
+            qty(int): used within place_order()
     """
-    # Requests the customer inputs number of pizzas,
-    # break if valid or provide error message
+    #  While loop to request user inputs valid quantity between 1-6
+    #  If not valid, error message asks the user to try again
     while True:
         print("How many would you like?")
         print("Please choose between 1-6\n")
@@ -249,9 +255,15 @@ def get_quantity():
 
 def get_cost(cust_size, qty):
     """
-    Receives input from get_size()
-    to calculate the price for the order
-    depending on the size request
+    Calculates the cost of the pizza
+        Params:
+            cust_size: users choice of size S, M or L
+            qty: users choice of order quantity 1-6
+            If statement used to multiply:
+                cost of pizza size * quantity
+        Returns:
+            f string with calculated cost and GBP symbol
+            Used within place_order()
     """
     cost = 0
     if cust_size == ("Small"):
@@ -265,9 +277,15 @@ def get_cost(cust_size, qty):
 
 def get_time():
     """
-    Provides ordering time
-    Reformatted to be clearer
-    Applied to each order within place_order()
+    Calculates the ordering time.
+    Used in conjunction with get_date() within place_order().
+    This helps inform the kitchen on the priority to execute orders.
+        Params:
+            uses time import module
+            datetime.now method applied to time_now variable of current time
+            format time_now into string literals using strftime method
+        Returns:
+            order_time: Used within place_order()
     """
     time_now = datetime.now()
     order_time = time_now.strftime("%H:%M:%S")
@@ -276,9 +294,15 @@ def get_time():
 
 def get_date():
     """
-    Provides ordering date
-    Reformatted to be clearer
-    Applied to each order within place_order()
+    Calculates the ordering date.
+    Used in conjunction with get_time() within place_order().
+    This helps inform the kitchen on the priority to execute orders.
+        Params:
+            uses time import module
+            datetime.now method informs date_now variable of current date
+            format date_now into string literals using strftime method
+        Returns:
+            order_date: Used within place_order()
     """
     date_now = datetime.now()
     order_date = date_now.strftime("%d/%m/%Y")
@@ -287,16 +311,30 @@ def get_date():
 
 def update_order_worksheet(data):
     """
-    Send order to the Google Worksheet
-    for the kitchen to process
+    Inserts provided order data to external spreadsheet
+    Encompasses functionality to illustrate a progress bar
+    to the user whilst their order is being sent to the
+    kitchen.
     """
     def send_order():
+        """
+        Using Sleep method from Time module and Rich Progress module
+        a progress bar is displayed that takes 0.015 seconds
+        to move from 0-100
+            Params:
+                Uses Track method from Progress module
+                Sets a range of 0-100 and colour of Green
+                For loop progress through the range,
+                taking 0.015 seconds to complete
+        """
         sleep(0.015)
-    
-    for _ in track(range(100), description="[green]Sending order"
-                                           " to the kitchen\n"):
-        send_order()
-    
+        for _ in track(range(100), description="[green]Sending order to the"
+                                               " kitchen\n"):
+            send_order()
+    #  Identifies the applicable worksheet from the external spreadsheet
+    #  Appends the users order to the last row of that worksheet
+    #  Print statement confirms the order has been sent to the kitchen
+    #  Provides an opportunity for the user to navigate back to the Main Menu
     orders_worksheet = SHEET.worksheet("Orders")
     orders_worksheet.append_row(data)
     console.print(":thumbsup:\n")
@@ -307,25 +345,42 @@ def update_order_worksheet(data):
 
 def place_order():
     """
-    Steps for the customer to place an order
-    also provides an opportunity to order more items
+    Provides steps for the user to follow to order a pizza.
+    Global functions are called in a logical order.
+    These functions return values that are compiled into the order.
+    While loop is used to ask the user to either;
+        a. Confirm the order
+        b. Amend the order
+        c. Add more items
+        d. Exit to main menu
     """
+    #  Clears screen ready for next screen
     clear()
+    #  Requests and returns the users name and contact phone number
     name = get_customer_name()
     telnum = get_customer_number()
+    #  Sets a delay to allow time for user to read message
     time.sleep(2.5)
+    #  Clears screen ready for next screen
     clear()
+    # Receives return value
     pizza = get_pizza()
+    #  Sets a delay to allow time for user to read message
     time.sleep(2)
+    #  Clears screen ready for next screen
     clear()
+    #  Requests and returns user choice of size and qty
     cust_size = get_size()
     qty = get_quantity()
+    #  Calculates and returns the cost of the order
     cost = get_cost(cust_size, qty)
+    #  Calculates and returns the ordering time and date
     order_time = get_time()
     order_date = get_date()
+    #  Clears screen ready for next screen
     clear()
 
-    #  Collate order data to be confirmed and sent to the kitchen
+    #  List collate the returned values from functions to confirm order
     cust_order = [
         name.capitalize(),
         telnum,
@@ -338,14 +393,14 @@ def place_order():
         ]
     print(cust_order)
 
-    #  Confirm order back to the customer CHANGE {} BELOW TO cust_ORDER
+    #  Confirm order back to the customer
     console.print(f"Thanks {name.capitalize()}, you are ordering;\n"
                   f"{qty} {cust_size} {pizza} for {cost} :pizza:\n")
-
+    #  While loop to request user confirms order is complete
+    #  If not complete, user has options to order more items
+    #  If not ordering more items, options to amend this order
+    #  If not a valid input, error message asks the user to try again
     while True:
-        #  Request the customer to confirm if the order is complete
-        #  If not complete, options to either add more items
-        #  If not order more, amend existing order
         user_confirm = input(
             "Is your order ready to go to the kitchen? Y/N:\n"
             )
@@ -376,24 +431,39 @@ def place_order():
 
 def view_live_orders():
     """
-    Get the data from the orders spreadsheet,
-    remove the data from past days to leave
-    todays orders to show the customer
+    Displays the current live orders to the user so they can view
+    the status of their order.
+    Removes sensitive data; Telnum, Price
+    Removes orders where kitchen have updated status to 'Complete'.
+        Params:
+            
+        Returns:
+        
     """
     print("Here comes the current live orders...\n")
     live_orders = SHEET.worksheet("Orders").get_all_values()
-    live_orders.pop(0)  # remove headers to be added in view_live_orders 
-    live_orders.insert(0, ["Name", "Phone Number", "Pizza", "Size", "Quantity", "Price", "Date", "Time"])
+    live_orders.pop(0)  # Removes headers from top row of spreadsheet
+    live_orders.insert(0, ['"Name", "Phone Number", "Pizza", "Size",'
+                           ' "Quantity", "Price", "Date", "Time"'])
     print(live_orders)
 
 
 def main():
     """
-    Main menu screen complete
-    with welcome message
+    Execute first functionality for the user interface.
+    Provides a welcome message and Main Menu with 3 choices.
+        Params:
+            Requests user to input a number between 1-3
+            If statement executes a function dependent on input
+            1: place_order()
+            2: view_live_orders()
+            3: exits system using sys.exit()
+            Else requests the user tries again
     """
+    #  While loop to request user inputs valid quantity between 1-3
+    #  If not valid, error message asks the user to try again
     while True:
-        clear()
+        clear()  # Clears any previous content to print welcome and menu below
         console.print("[#008C45]Thank you[/] [#F4F5F0]for choosing[/]"
                       " [#CD212A]Vera's Vegan Pizzas![/]\n", style="bold")
         console.print("Main Menu", style="bold")
@@ -401,16 +471,13 @@ def main():
         print("2. View Live Orders")
         print("3. Exit Ordering System\n")
         print("Please select an option by entering a number between 1-3\n")
-
         selection = input("Enter your choice here:\n")
-
         if selection == "1":
             place_order()
         elif selection == "2":
             view_live_orders()
         elif selection == "3":
-            print("Please come back soon - Bye Bye!")
-            break
+            sys.exit("Please come back soon - Bye Bye!")
         else:
             print("Invalid choice, please enter a number between 1-3")
             continue
