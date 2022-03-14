@@ -1,5 +1,5 @@
 """
-Libraries for supporting the application
+Imported libraries supporting the application
 """
 import re  # To support name and phone number validation
 from datetime import datetime  # To add datetime to each order
@@ -24,24 +24,31 @@ CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('vv_pizzas')
-console = Console()
-install(show_locals=True)
-locale.setlocale(locale.LC_ALL, '')
+console = Console()  # Provides access to Rich console debugging
+install(show_locals=True)  # Allows Rich display local variable values
+locale.setlocale(locale.LC_ALL, '')  # Allows dynamic display local settings
+# Code to adopt GBP £ symbol within pizza pricing table
 GB_currency = lambda x: locale.currency(x, grouping=True, symbol=True)
 
 
 def clear():
     """
-    Clears the screen to allow for
-    the next content or menu
+    Clears the screen to allow for the next content to be displayed.
+    Used primarily within place_order() to improve UX.
     """
     print('\033c')
 
 
 def exit_to_main_menu():
     """
-    Exits user to the main menu
+    Returns user to the Main Menu.
+        Params:
+            If 'E' returns user to Main Menu
+            Else asks user to enter 'E'
+        Returns:
+            If valid navigates user to Main Menu
     """
+    #  While loop to request and validate user enters 'E'
     while True:
         print("Enter E to exit to the main menu\n")
         exit_to_main = input("Enter your choice here:\n")
@@ -54,11 +61,19 @@ def exit_to_main_menu():
 
 def get_customer_name():
     """
-    Request and validate customers name
+    Requests and validates users name.
+        Params:
+            Requests user to input name and strip leading/lagging whitespaces
+            If statement validates the input matches RE conditions
+            Else requests the user tries again
+        Returns:
+            Print statement confirming input is valid
+            Name (str): used within place_order()
     """
+    #  While loop to request user inputs valid name
+    #  If not valid, error message asks the user to try again
     while True:
         name = console.input("Please provide your name:\n").strip()
-        # Validates the customer is characters only
         if re.match(r"[\s\S\?]", name):
             console.print(f"Hi {name.capitalize()} :waving_hand:\n")
         else:
@@ -69,16 +84,28 @@ def get_customer_name():
 
 def get_customer_number():
     """
-    Request and validate customers telephone number
+    Requests and validates users contact phone number.
+        Params:
+            While True user must enter 11 digit number starting with 0
+            Validate_mobile() validate telnum variable using Re pattern match
+            Else requests the user tries again
+        Returns:
+            Print statement confirming input is valid
+            telnum (str): used within place_order()
     """
     def validate_mobile(telnum):
         """
-        Validates customers mobile phone number.
-        Number must begin with 0 and be 11 digits.
+        Validates user contact phone number.
+            Params:
+                telnum: input value from get_customer_number()
+                Validates the number using RE Compile method
+            Returns:
+                telnum: to get_customer_number() while loop
         """
         num_pattern = re.compile(r"\d{11}")
         return num_pattern.match(telnum)
-    # Requests telephone number, break if valid or provide error message
+    #  While loop to request user inputs valid contact phone number
+    #  If not valid, error message asks the user to try again
     while True:
         print("Please provide a mobile phone number, that starts with a zero"
               " and is 11 digits\n")
@@ -95,26 +122,36 @@ def get_customer_number():
 
 def get_pizza():
     """
-    Present the customer with the choice of pizza,
-    and request a choice of 1-4
+    Provides a menu of todays pizzas, requesting user to choose from 1-4.
+        Params:
+            Receives data from external spreadsheet
+            Populates table rows with this data
+            While loop requests user to input a choice between 1-4
+            Else requests the user tries again
+        Returns:
+            Print statement confirming input is valid
+            {Pizza choice}(str): used within place_order()
     """
+    #  Print statement to inform user of what content is displayed
     print("Here are todays menu, which pizza would you like?\n")
-
+    #  Menu options for current days pizzas from external spreadsheet
     menu = SHEET.worksheet("Pizzas").get_all_values()
-    menu.pop(0)  # Remove the header row
-     
-    #  Data to populate the table of pizza choices
+    #  Removes header row to allow for code based headers below
+    menu.pop(0)
+    #  Setting the table columns with headers for the external data to populate
     pizza_table = Table(show_header=True, header_style="bold")
     pizza_table.add_column("Item", justify="center", vertical="middle")
     pizza_table.add_column("Pizza", justify="left", vertical="middle")
     pizza_table.add_column("Topping", justify="left", vertical="middle")
-
+    #  For loop to add the rows of data from 'menu'
     for row in zip(*menu):
         pizza_table.add_row(*row)
 
+    #  Prints the table with todays pizza choices from data above
     console.print(pizza_table)
 
-    #  Request and validate the customers choice is between 1-4
+    #  While loop to request user inputs valid pizza choice between 1-4
+    #  If not valid, error message asks the user to try again
     while True:
         print("Please select an option by entering a number between 1-4.\n")
         pizza = input("Enter your choice here:\n")
@@ -137,13 +174,24 @@ def get_pizza():
 
 def get_size():
     """
-    Present the customer with the choice of sizes,
-    and request a choice S, M, L
+    Provides a table fo pizza sizes and prices,
+    requesting user to input choice.
+        Params:
+            Receives data from external spreadsheet
+            Populates table rows with this data
+            While loop requests user to input either S, M or L
+            Else requests the user tries again
+        Returns:
+            Print statement confirming input is valid
+            cust_size: used within place_order()
     """
-    #  Table used to present sizes to the customer
+    #  Print statement to inform user of what content is displayed
+    print("Which size of pizza would you like?\n")
+
+    #  Table variable used to present sizes to the customer
     sizes_table = Table()
 
-    #  Data to populate the table of pizza sizes
+    #  Setting the table columns with headers for the external data to populate
     sizes_table.add_column("Item", justify="center", vertical="middle")
     sizes_table.add_column("Name", justify="left", vertical="middle")
     sizes_table.add_column("Size", justify="left", vertical="middle")
@@ -153,10 +201,11 @@ def get_size():
     sizes_table.add_row("M", "Medium", "10 Inches", f"{GB_currency(7.50)}")
     sizes_table.add_row("L", "Large", "14 Inches", f"{GB_currency(10.50)}")
 
-    print("Which size of pizza would you like?\n")
+    #  Prints the table with todays pizza choices from data above
     console.print(sizes_table)
 
-    #  Request and validate the customers choice is either S, M or L
+    #  While loop to request user inputs valid size of either S, M or L
+    #  If not valid, error message asks the user to try again
     while True:
         print("Please select either S, M or L\n")
         cust_size = input("Enter your choice here:\n")
@@ -367,4 +416,6 @@ def main():
             continue
 
 
-main()
+if __name__ == "__main__":
+    # Execute main Python function
+    main()
