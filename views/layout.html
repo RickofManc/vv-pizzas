@@ -16,86 +16,85 @@
         </style>
     <title>VV Pizza</title>
     <style>
+      /* Styles for the HTML page */
       html {
-        background-image: image-url("assets/images/main-background-image-reduced.webp");
-      }
-      
+        background-color: #008C45;
+        opacity: 0.5;
+      }      
+      /* Styles for the body of the HTML page */
       body {
         margin: 0 auto;
-        max-width: 800px;
+        max-width: 50rem;
         height: 100vh;
         font-family: "Fira Code", "monospace", "sans-serif";
       }
-
+      
+      /* Styles for main Div container */
       .main-content {
         display: contents;
         position: relative;
       }
 
+      /* Styles for Header element */
       header {
-        height: 60px;
+        height: 4rem;
         top: 0;
-        margin-bottom: 10px;
+        margin-bottom: 0.625rem;
         text-align: center;
-        padding: 10px;
-        color: #0A36AF;
-        font-weight: 800;
-        vertical-align: middle;
+        padding: 0.625rem;
       }
-
+      /* Styles for Header text within Header element */
       .header-text {
         float: left;
-        color: #0A36AF;
+        color: #F4F5F0;
         font-weight: 800;
-        margin: 10px;
+        margin: 0.625rem;
         padding: 0;
       }
 
-      button {
-        width: 150px;
-        height: 40px;
+      /* Styles for Button object within Header element */
+      .restart-button {
+        width: 9.375rem;
+        height: 2.5rem;
         float: right;
-        background-color: #0A36AF;
-        border: 1px solid grey;
-        color: white;
+        background-color: #F4F5F0;
+        transition: background-color .4s;
+        border: 0.0625rem solid grey;
+        color: #0A36AF;
         font-family: "Fira Code", "monospace", "sans-serif";
         text-transform: uppercase;
-        margin: 10px;
-        border-radius: 8px;
+        margin: 0.625rem;
+        border-radius: 0.5rem;
       }
-
-      button a:hover {
+      /* Restart button changes colour on hover to improve UX */
+      .restart-button:hover {
         background-color: #008C45;
       }
 
-      .homepage-background-image {
-        background: #F4F5F0;
-        opacity: 0.5;
-        margin: 0.5rem;
-      }
-
+      /* Styles for the Footer element */
       footer {
         bottom: 0;
         height: 30px;
         text-align: center;
         margin-top: 10px;
       }
-
+      /* Styles for the Footer text within the Footer element */
       .footer-text {
         color: #0A36AF;
         font-weight: 500;
-        margin: 5px;
+        margin: 0.3125rem;
       }
 
+      /* Start of styles for terminal */
       #terminal {
-          margin: 0 30px 0 30px;
+          margin: 0 1.875rem;
       }
 
       /**
         * Default styles for xterm.js
         */
       .xterm {
-        font-feature-settings: "liga"0;
+        font-feature-settings: "liga" 0;
         position: relative;
         user-select: none;
         -ms-user-select: none;
@@ -160,7 +159,7 @@
         top: 0;
         bottom: 0;
         background-color: rgb(0, 0, 0);
-        width: 730px;
+        width: 45.625rem;
       }
 
       .xterm .xterm-screen {
