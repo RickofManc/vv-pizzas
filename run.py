@@ -471,11 +471,24 @@ def view_live_orders():
         
     """
     print("Here comes the current live orders...\n")
-    live_orders = SHEET.worksheet("Orders").get_all_values()
-    live_orders.pop(0)  # Removes headers from top row of spreadsheet
-    live_orders.insert(0, ['"Name", "Phone Number", "Pizza", "Size",'
-                           ' "Quantity", "Price", "Date", "Time"'])
-    print(live_orders)
+    live_orders_data = SHEET.worksheet("Orders").get_all_values()
+    for data in live_orders_data:
+        data.pop(1)
+        data.pop(5)
+        print(data)
+
+    orders_table = Table(show_header=True)
+
+    orders_table.add_column("Name", justify="center", vertical="middle")
+    orders_table.add_column("Pizza", justify="left", vertical="middle")
+    orders_table.add_column("Size", justify="right", vertical="middle")
+    orders_table.add_column("Quantity", justify="right", vertical="middle")
+    orders_table.add_column("Date", justify="right", vertical="middle")
+    orders_table.add_column("Time", justify="right", vertical="middle")
+
+    orders_table.add_row(zip(*data))
+           
+    console.print(orders_table)
 
 
 def main():
