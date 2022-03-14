@@ -25,10 +25,10 @@ CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('vv_pizzas')
-console = Console()  # Provides access to Rich console debugging
+console = Console(highlight=False)  # Provides Rich library default formatting
 install(show_locals=True)  # Allows Rich display local variable values
-locale.setlocale(locale.LC_ALL, '')  # Allows dynamic display local settings
-# Code to adopt GBP £ symbol within pizza pricing table
+locale.setlocale(locale.LC_ALL, 'en_GB.UTF-8')  # Provides £ symbol
+# Code to call £ symbol for use with get_size()
 GB_currency = lambda x: locale.currency(x, grouping=True, symbol=True)
 
 
@@ -40,29 +40,10 @@ def clear():
     print('\033c')
 
 
-def exit_to_main_menu():
-    """
-    Returns user to the Main Menu.
-        Params:
-            If 'E' returns user to Main Menu
-            Else asks user to enter 'E'
-        Returns:
-            If valid navigates user to Main Menu
-    """
-    #  While loop to request and validate user enters 'E'
-    while True:
-        print("Enter E to exit to the main menu\n")
-        exit_to_main = input("Enter your choice here:\n")
-        if exit_to_main.upper() == ("E"):
-            main()
-        else:
-            print("Invalid choice, please type E and click Enter")
-            continue
-
-
 def get_customer_name():
     """
     Requests and validates users name.
+    Provides opportunity for the user to exit to Main Menu.
         Params:
             Requests user to input name and strip leading/lagging whitespaces
             If statement validates the input matches RE conditions
@@ -74,6 +55,7 @@ def get_customer_name():
     #  While loop to provide sub-menu options
     #  If not valid, error message asks the user to try again
     while True:
+        console.print("What would you like to do next?\n", style="bold")
         print("1. Continue to provide your details")
         print("2. Exit to Main Menu\n")
         print("Please select an option by entering either 1 or 2\n")
@@ -81,7 +63,7 @@ def get_customer_name():
         if selection == "1":
             break
         elif selection == "2":
-            exit_to_main_menu()
+            main()
         else:
             print("Invalid choice, please enter a number between 1-3")
             continue
@@ -149,7 +131,8 @@ def get_pizza():
             {Pizza choice}(str): used within place_order()
     """
     #  Print statement to inform user of what content is displayed
-    print("Here are todays menu, which pizza would you like?\n")
+    console.print("Here's todays menu, which pizza would you like?"
+                  "\n", style="bold")
     #  Menu options for current days pizzas from external spreadsheet
     menu = SHEET.worksheet("Pizzas").get_all_values()
     #  Removes header row to allow for code based headers below
@@ -167,13 +150,13 @@ def get_pizza():
     console.print(pizza_table)
 
     #  While loop to request user inputs valid pizza choice between 1-4
-    #  Provides an opportunity for the user to restart order or exit to Main Menu
+    #  Provides opportunity for the user to restart order or exit to Main Menu
     #  If not valid, error message asks the user to try again
     while True:
-        print("Please select an option by entering a number between 1-4.\n"
-              "Or enter;\n"
-              "R to restart your order\n"
-              "E to exit to the Main Menu\n")
+        console.print("Please choose and enter an item number from the table\n"
+                      "Or enter;\n"
+                      "(R) to restart your order\n"
+                      "(E) to exit to the Main Menu\n")
         pizza = input("Enter your choice here:\n")
         if pizza == "1":
             console.print(":yum: a Margherita!\n")
@@ -190,7 +173,7 @@ def get_pizza():
         elif pizza.upper() == "R":
             break
         elif pizza.upper() == "E":
-            exit_to_main_menu()
+            main()
         else:
             print("Invalid choice, please enter either a number between 1-4,"
                   "or letters R or E\n")
@@ -212,7 +195,7 @@ def get_size():
             cust_size: used within place_order()
     """
     #  Print statement to inform user of what content is displayed
-    print("Which size of pizza would you like?\n")
+    console.print("Which size of pizza would you like?\n", style="bold")
 
     #  Table variable used to present sizes to the customer
     sizes_table = Table()
@@ -225,32 +208,41 @@ def get_size():
 
     sizes_table.add_row("S", "Small", "8 Inches", f"{GB_currency(4.50)}")
     sizes_table.add_row("M", "Medium", "10 Inches", f"{GB_currency(7.50)}")
-    sizes_table.add_row("L", "Large", "14 Inches", f"{GB_currency(10.50)}")
+    sizes_table.add_row("L", "Large", "14 Inches", f"{GB_currency(10.50)}\n")
 
     #  Prints the table with todays pizza choices from data above
     console.print(sizes_table)
 
     #  While loop to request user inputs valid size of either S, M or L
+    #  Provides opportunity for the user to restart order or exit to Main Menu
     #  If not valid, error message asks the user to try again
     while True:
-        print("Please select either S, M or L\n")
+        console.print("Please choose and enter an item letter from the table\n"
+                      "Or enter;\n"
+                      "(R) to restart your order\n"
+                      "(E) to exit to the Main Menu\n")
         cust_size = input("Enter your choice here:\n")
         if cust_size.upper() == ("S"):
             cust_size = "Small"
             print("Thanks, you chose Small\n")
-            break
+            return cust_size
         elif cust_size.upper() == ("M"):
             cust_size = "Medium"
             print("Thanks, you chose Medium\n")
-            break
+            return cust_size
         elif cust_size.upper() == ("L"):
             cust_size = "Large"
-            print("Thanks, you chose Large\n")
+            print("Thanks, you chose Large")
+            return cust_size
+        elif cust_size.upper() == "R":
             break
+        elif cust_size.upper() == "E":
+            main()
         else:
-            print("Invalid choice, please enter either S, M or L\n")
+            print("Invalid choice, please enter a size of either S, M or L\n"
+                  "or R for Restart, E for Exit\n")
             continue
-    return cust_size
+    place_order()
 
 
 def get_quantity():
@@ -265,17 +257,30 @@ def get_quantity():
             qty(int): used within place_order()
     """
     #  While loop to request user inputs valid quantity between 1-6
+    #  Provides opportunity for the user to restart order or exit to Main Menu
     #  If not valid, error message asks the user to try again
     while True:
-        print("How many would you like?")
-        print("Please choose between 1-6\n")
-        qty = int(input("Enter your choice here:\n"))
-        if qty in range(1, 7, 1):
+        console.print("How many would you like?\n", style="blue on white bold")
+        console.print("Please enter a quantity between 1-6\n"
+                      "Or enter;\n"
+                      "(P) to return to the previous question\n"
+                      "(R) to restart your order\n"
+                      "(E) to exit to the Main Menu\n")
+        qty = input("Enter your choice here:\n")
+        if qty.isnumeric() in range(1, 7, 1):
+            return int(qty)
+        elif qty.upper() == "P":
+            clear()
+            get_size()
+        elif qty.upper() == "R":
             break
+        elif qty.upper() == "E":
+            main()
         else:
-            print("Invalid choice, please enter a number between 1-6\n")
+            print("Invalid choice, please enter a number between 1-6\n"
+                  "or letters R or E\n")
             continue
-    return qty
+    place_order()
 
 
 def get_cost(cust_size, qty):
@@ -353,19 +358,19 @@ def update_order_worksheet(data):
                 taking 0.015 seconds to complete
         """
         sleep(0.015)
-        for _ in track(range(100), description="[green]Sending order to the"
-                                               " kitchen\n"):
-            send_order()
+    for _ in track(range(100), description="[green]Sending order to the"
+                                           " kitchen\n"):
+        send_order()
     #  Identifies the applicable worksheet from the external spreadsheet
     #  Appends the users order to the last row of that worksheet
     #  Print statement confirms the order has been sent to the kitchen
-    #  Provides an opportunity for the user to navigate back to the Main Menu
+    #  Provides a step for the user to navigate back to the Main Menu
     orders_worksheet = SHEET.worksheet("Orders")
     orders_worksheet.append_row(data)
     console.print(":thumbsup:\n")
     print("Your order has been received, please collect in 20 minutes\n")
     print("See you soon!\n")
-    exit_to_main_menu()
+    main()
 
 
 def place_order():
