@@ -71,9 +71,24 @@ def get_customer_name():
             Print statement confirming input is valid
             Name (str): used within place_order()
     """
-    #  While loop to request user inputs valid name
+    #  While loop to provide sub-menu options
     #  If not valid, error message asks the user to try again
     while True:
+        print("1. Continue to provide your details")
+        print("2. Exit to Main Menu\n")
+        print("Please select an option by entering either 1 or 2\n")
+        selection = input("Enter your choice here:\n")
+        if selection == "1":
+            break
+        elif selection == "2":
+            exit_to_main_menu()
+        else:
+            print("Invalid choice, please enter a number between 1-3")
+            continue
+    #  If option 1, While loop to request users details
+    #  If not valid, error message asks the user to try again
+    while True:
+        clear()
         name = console.input("Please provide your name:\n").strip()
         if re.match(r"[\s\S\?]", name):
             console.print(f"Hi {name.capitalize()} :waving_hand:\n")
@@ -152,9 +167,13 @@ def get_pizza():
     console.print(pizza_table)
 
     #  While loop to request user inputs valid pizza choice between 1-4
+    #  Provides an opportunity for the user to restart order or exit to Main Menu
     #  If not valid, error message asks the user to try again
     while True:
-        print("Please select an option by entering a number between 1-4.\n")
+        print("Please select an option by entering a number between 1-4.\n"
+              "Or enter;\n"
+              "R to restart your order\n"
+              "E to exit to the Main Menu\n")
         pizza = input("Enter your choice here:\n")
         if pizza == "1":
             console.print(":yum: a Margherita!\n")
@@ -168,9 +187,15 @@ def get_pizza():
         elif pizza == "4":
             console.print(":yum: a Forza!\n")
             return "Forza"
+        elif pizza.upper() == "R":
+            break
+        elif pizza.upper() == "E":
+            exit_to_main_menu()
         else:
-            print("Invalid choice, please enter a number between 1-4\n")
+            print("Invalid choice, please enter either a number between 1-4,"
+                  "or letters R or E\n")
             continue
+    place_order()
 
 
 def get_size():
