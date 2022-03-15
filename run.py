@@ -6,6 +6,7 @@ from datetime import datetime  # To add datetime to each order
 import sys  # To provide the user with an exit from the ordering system
 import time  # To add a pause between certain functions executing
 import locale  # To set the currency for pizza prices
+import random  # To create sequential order references
 from time import sleep  # To support the progress bar in sending orders
 import gspread  # To open and edit pizza ordering spreadsheet
 from google.oauth2.service_account import Credentials
@@ -55,7 +56,8 @@ def get_customer_name():
     #  While loop to provide sub-menu options
     #  If not valid, error message asks the user to try again
     while True:
-        console.print("What would you like to do next?\n", style="bold")
+        console.print("What would you like to do"
+                      " next?\n", style="blue on white bold")
         print("1. Continue to provide your details")
         print("2. Exit to Main Menu\n")
         print("Please select an option by entering either 1 or 2\n")
@@ -195,7 +197,7 @@ def get_size():
             cust_size: used within place_order()
     """
     #  Print statement to inform user of what content is displayed
-    console.print("Which size of pizza would you like?\n", style="bold")
+    console.print("Which size would you like?\n", style="blue on white bold")
 
     #  Table variable used to present sizes to the customer
     sizes_table = Table()
@@ -339,6 +341,20 @@ def get_date():
     return order_date
 
 
+def get_reference():
+    """
+    Generates random number used as the order reference.
+        Params:
+            uses random module
+            calculates 1 random number within a range of 1-2000
+        Returns:
+            order_ref: as a string value with square brackets removed
+            Used within place_order()
+    """
+    order_ref = random.sample(range(1, 2000), 1)
+    return str(order_ref).replace('[', '').replace(']', '')
+
+
 def update_order_worksheet(data):
     """
     Inserts provided order data to external spreadsheet
@@ -364,12 +380,14 @@ def update_order_worksheet(data):
     #  Identifies the applicable worksheet from the external spreadsheet
     #  Appends the users order to the last row of that worksheet
     #  Print statement confirms the order has been sent to the kitchen
-    #  Provides a step for the user to navigate back to the Main Menu
+    #  Returns user back to the Main Menu after time to read the msg
     orders_worksheet = SHEET.worksheet("Orders")
     orders_worksheet.append_row(data)
     console.print(":thumbsup:\n")
-    print("Your order has been received, please collect in 20 minutes\n")
+    print("Your order has been received\n"
+          "Please collect in 20 minutes using your reference\n")
     print("See you soon!\n")
+    time.sleep(5)
     main()
 
 
@@ -407,11 +425,14 @@ def place_order():
     #  Calculates and returns the ordering time and date
     order_time = get_time()
     order_date = get_date()
+    #  Generates random order reference
+    order_ref = get_reference()
     #  Clears screen ready for next screen
     clear()
 
     #  List collate the returned values from functions to confirm order
     cust_order = [
+        order_ref,
         name.capitalize(),
         telnum,
         pizza,
@@ -423,17 +444,17 @@ def place_order():
         ]
     print(cust_order)
 
-    #  Confirm order back to the customer
+    #  Confirm order back to the customer and provide order reference
     console.print(f"Thanks {name.capitalize()}, you are ordering;\n"
-                  f"{qty} {cust_size} {pizza} for {cost} :pizza:\n")
+                  f"{qty} {cust_size} {pizza} for {cost} :pizza:\n"
+                  f"Your reference for the order is {order_ref}\n")
     #  While loop to request user confirms order is complete
     #  If not complete, user has options to order more items
     #  If not ordering more items, options to amend this order
     #  If not a valid input, error message asks the user to try again
     while True:
         user_confirm = input(
-            "Is your order ready to go to the kitchen? Y/N:\n"
-            )
+            "Is your order ready to go to the kitchen? Y/N:\n")
         if user_confirm.upper() == ('Y'):
             update_order_worksheet(cust_order)
         elif user_confirm.upper() == ('N'):
@@ -465,9 +486,7 @@ def view_live_orders():
     the status of their order.
     Removes sensitive data; Telnum, Price
     Removes orders where kitchen have updated status to 'Complete'.
-        Params:
-            
-        Returns:
+    Params:Returns:
         
     """
     print("Here comes the current live orders...\n")
@@ -475,25 +494,23 @@ def view_live_orders():
     for data in live_orders_data:
         data.pop(1)
         data.pop(5)
+        return data    
 
-    col_len = {i: max(map(len, inner)) for i , inner in enumerate(zip(*data))}
+    col_len = {i: max(map(len, inner)) for i, inner in enumerate(zip(*data))}
 
     for inner in data:
         for col, word in enumerate(inner):
             print(f'{word:{col_len[col]}}', end=' | ')
-        print()
+        print(data)
 
-    orders_table = Table(show_header=True)
-
+    orders_table = Table()
     orders_table.add_column("Name", justify="center", vertical="middle")
     orders_table.add_column("Pizza", justify="left", vertical="middle")
     orders_table.add_column("Size", justify="right", vertical="middle")
     orders_table.add_column("Quantity", justify="right", vertical="middle")
     orders_table.add_column("Date", justify="right", vertical="middle")
     orders_table.add_column("Time", justify="right", vertical="middle")
-
-    orders_table.add_row(zip(*data))
-           
+    orders_table.add_row(zip(*data))     
     console.print(orders_table)
 
 
