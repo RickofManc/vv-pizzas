@@ -8,6 +8,7 @@ import time  # To add a pause between certain functions executing
 import locale  # To set the currency for pizza prices
 import random  # To create sequential order references
 from time import sleep  # To support the progress bar in sending orders
+import pandas as pd
 import gspread  # To open and edit pizza ordering spreadsheet
 from google.oauth2.service_account import Credentials
 from rich.console import Console  # Add styling to string for improved UX
@@ -28,7 +29,7 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('vv_pizzas')
 console = Console(highlight=False)  # Provides Rich library default formatting
 install(show_locals=True)  # Allows Rich display local variable values
-locale.setlocale(locale.LC_ALL, 'en_GB.UTF-8')  # Provides £ symbol
+locale.setlocale(locale.LC_ALL, '')  # Provides £ symbol
 # Code to call £ symbol for use with get_size()
 GB_currency = lambda x: locale.currency(x, grouping=True, symbol=True)
 
@@ -506,34 +507,18 @@ def view_live_orders():
     """
     Displays the current live orders to the user so they can view
     the status of their order.
-    Removes sensitive data; Telnum, Price
-    Removes orders where kitchen have updated status to 'Complete'.
-    Params:Returns:
-        
+        Params:
+            Uses Pandas DataFrame to display data from spreadsheet
+            Removes columns with sensitive data; Phone Number, Cost
+            Removes orders with 'Completed' status
+        Returns:
+            df: DataFrame with current live orders   
     """
     print("Here comes the current live orders...\n")
-    live_orders_data = SHEET.worksheet("Orders").get_all_values()
-    for data in live_orders_data:
-        data.pop(1)
-        data.pop(5)
-        return data    
-
-    col_len = {i: max(map(len, inner)) for i, inner in enumerate(zip(*data))}
-
-    for inner in data:
-        for col, word in enumerate(inner):
-            print(f'{word:{col_len[col]}}', end=' | ')
-        print(data)
-
-    orders_table = Table()
-    orders_table.add_column("Name", justify="center", vertical="middle")
-    orders_table.add_column("Pizza", justify="left", vertical="middle")
-    orders_table.add_column("Size", justify="right", vertical="middle")
-    orders_table.add_column("Quantity", justify="right", vertical="middle")
-    orders_table.add_column("Date", justify="right", vertical="middle")
-    orders_table.add_column("Time", justify="right", vertical="middle")
-    orders_table.add_row(zip(*data))     
-    console.print(orders_table)
+    df = pd.DataFrame(SHEET.worksheet("Orders").get_all_records())
+    df = df.drop(columns=['Phone Number', 'Cost'])
+    print(df)
+    sleep(10)
 
 
 def main():
