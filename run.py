@@ -475,7 +475,13 @@ def view_live_orders():
     for data in live_orders_data:
         data.pop(1)
         data.pop(5)
-        print(data)
+
+    col_len = {i: max(map(len, inner)) for i , inner in enumerate(zip(*data))}
+
+    for inner in data:
+        for col, word in enumerate(inner):
+            print(f'{word:{col_len[col]}}', end=' | ')
+        print()
 
     orders_table = Table(show_header=True)
 
