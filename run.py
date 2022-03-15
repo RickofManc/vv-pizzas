@@ -512,13 +512,32 @@ def view_live_orders():
             Removes columns with sensitive data; Phone Number, Cost
             Removes orders with 'Completed' status
         Returns:
-            df: DataFrame with current live orders   
+            df: DataFrame with current live orders  
     """
     print("Here comes the current live orders...\n")
     df = pd.DataFrame(SHEET.worksheet("Orders").get_all_records())
-    df = df.drop(columns=['Phone Number', 'Cost'])
+    df = df.drop(columns=["Phone Number", "Cost"])
+    df = df[df.Status != "Completed"]
     print(df)
-    sleep(10)
+
+    #  While loop to request user inputs valid quantity between 1-3
+    #  If not valid, error message asks the user to try again
+    while True:
+        console.print("\nWhen ready, please choose from the following options:\n", style="bold")
+        print("1. Return to Main Menu")
+        print("2. Place An Order")
+        print("3. Exit Ordering System")
+        print("Please select an option by entering a number between 1-3\n")
+        selection = input("Enter your choice here:\n")
+        if selection == "1":
+            main()
+        elif selection == "2":
+            place_order()
+        elif selection == "3":
+            sys.exit("Please come back soon - Bye Bye!")
+        else:
+            print("Invalid choice, please enter a number between 1-3")
+            continue
 
 
 def main():
