@@ -102,7 +102,7 @@ def get_customer_number():
             Returns:
                 telnum: to get_customer_number() while loop
         """
-        num_pattern = re.compile(r"\d{11}")
+        num_pattern = re.compile(r"^(07\d{9}|447\d{9})$")
         return num_pattern.match(telnum)
     #  While loop to request user inputs valid contact phone number
     #  If not valid, error message asks the user to try again
@@ -399,8 +399,8 @@ def place_order():
     These functions return values that are compiled into the order.
     While loop is used to ask the user to either;
         a. Confirm the order
-        b. Amend the order
-        c. Add more items
+        b. Add pizza
+        c. Remove pizza
         d. Exit to main menu
     """
     #  Clears screen ready for next screen
@@ -459,12 +459,12 @@ def place_order():
         if user_confirm.upper() == ('Y'):
             update_order_worksheet(cust_order)
         elif user_confirm.upper() == ('N'):
-            more_items = input("Would you like to order more pizzas? Y/N\n")
+            more_items = input("Would you like to add another pizza? Y/N\n")
             if more_items.upper() == ('Y'):
-                print("I need to code how to add more items")
+                add_pizza()
             elif more_items.upper() == ('N'):
                 amend_order = input(
-                    "Would you like to amend this order? Y/N\n"
+                    "Would you like remove a pizza? Y/N\n"
                     )
                 if amend_order.upper() == ('Y'):
                     print("I need to code how to amend the order")
@@ -479,6 +479,27 @@ def place_order():
         else:
             print("Invalid choice, please enter either Y or N\n")
             continue
+
+
+def add_pizza():
+    """
+    Provides an opportunity for the user to add more pizzas
+    to their order.
+    """
+    clear()
+    # Receives return value
+    pizza = get_pizza()
+    #  Sets a delay to allow time for user to read message
+    time.sleep(2)
+    #  Clears screen ready for next screen
+    clear()
+    #  Requests and returns user choice of size and qty
+    cust_size = get_size()
+    qty = get_quantity()
+    #  Calculates and returns the cost of the order
+    cost = get_cost(cust_size, qty)
+    cust_order.extend([pizza, cust_size, qty, cost])
+    print(cust_order)
 
 
 def view_live_orders():
