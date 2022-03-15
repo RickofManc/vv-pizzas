@@ -145,8 +145,8 @@ def get_pizza():
     pizza_table.add_column("Pizza", justify="left", vertical="middle")
     pizza_table.add_column("Topping", justify="left", vertical="middle")
     #  For loop to add the rows of data from 'menu'
-    for row in zip(*menu):
-        pizza_table.add_row(*row)
+    for menu in zip(*menu):
+        pizza_table.add_row(*menu)
 
     #  Prints the table with todays pizza choices from data above
     console.print(pizza_table)
@@ -198,19 +198,20 @@ def get_size():
     """
     #  Print statement to inform user of what content is displayed
     console.print("Which size would you like?\n", style="blue on white bold")
-
+    #  Options for pizza size and cost from external spreadsheet
+    sizes = SHEET.worksheet("Sizes").get_all_values()
+    #  Removes header row to allow for code based headers below
+    sizes.pop(0)
     #  Table variable used to present sizes to the customer
-    sizes_table = Table()
-
+    sizes_table = Table(show_header=True, header_style="bold")
     #  Setting the table columns with headers for the external data to populate
     sizes_table.add_column("Item", justify="center", vertical="middle")
     sizes_table.add_column("Name", justify="left", vertical="middle")
     sizes_table.add_column("Size", justify="left", vertical="middle")
     sizes_table.add_column("Price", justify="right", vertical="middle")
-
-    sizes_table.add_row("S", "Small", "8 Inches", f"{GB_currency(4.50)}")
-    sizes_table.add_row("M", "Medium", "10 Inches", f"{GB_currency(7.50)}")
-    sizes_table.add_row("L", "Large", "14 Inches", f"{GB_currency(10.50)}\n")
+    #  For loop to add the rows of data from 'menu'
+    for sizes in zip(*sizes):
+        sizes_table.add_row(*sizes)
 
     #  Prints the table with todays pizza choices from data above
     console.print(sizes_table)
