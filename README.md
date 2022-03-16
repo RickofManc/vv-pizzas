@@ -29,7 +29,7 @@ Vera's Vegan Pizzas is a popular South Manchester based food truck. The populari
     * [Surface](#Surface)
 * [Features](#Features)
 * [Data Model](#Data-Model)
-* [Testing](#Testing)
+* [Manual Testing](#Manual-Testing)
 * [Deployment](#Deployment)
 * [Credits](#Credit)
 
@@ -220,30 +220,39 @@ The Google Sheet can be viewed online at [VV Pizzas](https://docs.google.com/spr
 ***
 
 
-## Testing 
+## Manual Testing 
 
-Throughout the Build phase Python Tutor, PEP8 Online and Chrome Developer Tools are used to ensure all pages are being developed to remain intuitive, responsive and accessible across several screen widths. These tools and others were used for the Testing phase. Full details and results of this phase can be found within the project [Repo](https://github.com/RickofManc/vv-pizzas).
+Throughout the Build phase Python Tutor, PEP8 Online and Chrome Developer Tools are used to ensure the application is intuitive, responsive and accessible. These tools and others were used for the Testing phase. Full details and results of this phase can be found within the project [Repo](https://github.com/RickofManc/vv-pizzas).
 
 The following sections summarise the tests and results.
 
 
 ### Code 
 
-The code on each file has been tested using the appropriate validation service; W3C Markup for HTML and PEP8 Online for Python.
+The code on each file has been tested using the appropriate validation service; W3C Markup for HTML, W3C for CSS (within the HTML files) and PEP8 Online for Python.
 
 Below are the summarised results from these tests:
 
 * **run.py** - 0 Errors / 0 Warnings
 * **layout.html** - 0 Errors / 0 Warnings
-* **index.html** - 1 Errors / 2 Warnings; relating to the absence of boiler pate <!DOCTYPE HTML> which is to expected given the structure of the website and this being coded to the layout.html file.
-* **404.html** - 0 Errors / 0 Warnings
+* **index.html** - 1 Errors / 2 Warnings; relating to the absence of boiler pate <!DOCTYPE HTML> which is to expected given the structure of the website. The boiler plate code is stored within the layout.html file.
 
 
 ### Browser
 
+The website renders and is functional on the following browsers:
+* Google Chrome
+* Mozilla Firefox
+* Safari
+* Opera
+* Microsoft Edge
+* Microsoft Internet Explorer
+
+The website does not render on any previous versions of Internet Explorer.
 
 ### Device
 
+As anticipated the website was not functional on smartphones or tablet due primarily to terminal dimensions being fixed. However, functionality was as planned on devices that incorporated a keyboard to support navigation through the application. No issues were identified with desktop and laptop testing.
 
 ### Accessibility 
 
@@ -253,7 +262,7 @@ The homepage has been tested using the [Wave (Web Accessibility Evaluation Tool)
 ### Performance 
 
 
-![Lighthouse Test Results]()
+![Lighthouse Test Results](readme-images/vv-pizza-lighthouse-results.png)
 
 
 ### User Stories
@@ -261,7 +270,7 @@ The homepage has been tested using the [Wave (Web Accessibility Evaluation Tool)
 The leading user stories have been tested to ensure the priority aims of the website have been delivered. Below is a summary of the stories validation.
 
 
-### Issues
+### Bugs
 
 The issues listed in the table below we identified during March 2022.
 
@@ -432,14 +441,16 @@ Support with how to develop ideas into code also came from numerous online resou
 
 ### Software & Web Applications
 
-* [Balsamiq](https://balsamiq.com/) - Used to build wireframes in the Skelton phase. 
+* [Balsamiq](https://balsamiq.com/) - Used to build wireframes in the Skelton phase.
+* [LucidChart](https://www.lucidchart.com/pages/) - To map out the flow of data.
 * This website was coded using Python3, HTML5, CCS3 and JavScript with [GitPod](https://gitpod.io/) used for an IDE and [GitHub](https://github.com/) as a hosting repository.
 * [W3schools](https://www.w3schools.com/) - Source of 'How to...' information throughout the build.
 * [Stack Overflow](https://stackoverflow.com/) - Source of 'How to...' information on Python code.
 * [Python Tutor](https://pythontutor.com/) - For testing sections of code.
 * [Wave](https://wave.webaim.org/) - Accessibility Testing to ensure content is readable for all users.
 * [HTML Validator](https://validator.w3.org/) - For validating HMTL code.
+* [W3 CSS Validator](https://jigsaw.w3.org/css-validator/validator) - For validating CSS code.
 * [PEP8 Validator](http://pep8online.com/)  - For validating Python code.
-* [Code Beautify](https://codebeautify.org/) - For validating the layout of all code.
-* [IE NetREnderer](https://netrenderer.com/index.php) - For testing website functionality on IE versions 7-10.
-* [LambdaTest](https://www.lambdatest.com/) - For cross browser testing on macOS versions of Safari and Opera.
+* [Code Beautify](https://codebeautify.org/) - For validating the layout of code.
+* [IE NetREnderer](https://netrenderer.com/index.php) - For browser testing on Microsoft IE versions 7-10.
+* [LambdaTest](https://www.lambdatest.com/) - For cross browser testing including, macOS Safari and Opera.

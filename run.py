@@ -6,7 +6,6 @@ from datetime import datetime  # To add datetime to each order
 import sys  # To provide the user with an exit from the ordering system
 import time  # To add a pause between certain functions executing
 from time import sleep  # To support the progress bar in sending orders
-import locale  # To set the currency for pizza prices
 import random  # To create sequential order references
 import pandas as pd  # To receive data from the external Google Sheet
 from tabulate import tabulate  # To render pandas DataFrames
@@ -29,9 +28,6 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('vv_pizzas')
 console = Console(highlight=False)  # Provides Rich library default formatting
 install(show_locals=True)  # Allows Rich display local variable values
-locale.setlocale(locale.LC_ALL, '')  # Provides £ symbol
-# Code to call £ symbol for use with get_size()
-GB_currency = lambda x: locale.currency(x, grouping=True, symbol=True)
 
 
 def clear():
@@ -286,7 +282,7 @@ def get_cost(cust_size, qty):
         cost = qty * 7.50
     elif cust_size == ("Large"):
         cost = qty * 10.50
-    return f"{GB_currency(cost)}"
+    return f"{cost}"
 
 
 def get_time():
