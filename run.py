@@ -9,6 +9,7 @@ import locale  # To set the currency for pizza prices
 import random  # To create sequential order references
 from time import sleep  # To support the progress bar in sending orders
 import pandas as pd
+from tabulate import tabulate  # To render pandas dataframes
 import gspread  # To open and edit pizza ordering spreadsheet
 from google.oauth2.service_account import Credentials
 from rich.console import Console  # Add styling to string for improved UX
@@ -136,8 +137,9 @@ def get_pizza():
     console.print("Here's todays menu, which pizza would you like?"
                   "\n", style="bold")
     #  Menu options for current days pizzas from external spreadsheet
-    menu = pd.DataFrame(SHEET.worksheet("Pizzas").get_all_records())
-    print(menu)
+    menu_df = pd.DataFrame(SHEET.worksheet("Pizzas").get_all_records())
+    print(tabulate(
+        menu_df, headers='keys', tablefmt='psql', showindex="never"))
 
     #  While loop to request user inputs valid pizza choice between 1-4
     #  Provides opportunity for the user to restart order or exit to Main Menu
@@ -187,8 +189,9 @@ def get_size():
     #  Print statement to inform user of what content is displayed
     console.print("Which size would you like?\n", style="bold")
     #  Options for pizza size and cost from external spreadsheet
-    sizes = pd.DataFrame(SHEET.worksheet("Sizes").get_all_records())
-    console.print(sizes)
+    sizes_df = pd.DataFrame(SHEET.worksheet("Sizes").get_all_records())
+    print(tabulate(
+        sizes_df, headers='keys', tablefmt='psql', showindex="never"))
 
     #  While loop to request user inputs valid size of either S, M or L
     #  Provides opportunity for the user to restart order or exit to Main Menu
@@ -243,7 +246,7 @@ def get_quantity():
     while True:
         console.print("How many would you like?\n", style="bold")
         console.print("Please enter a quantity between 1-6\n"
-                      "Or enter:\n"
+                      "\nOr enter:\n"
                       "(P) to return to the previous question\n"
                       "(R) to restart your order\n"
                       "(E) to exit to the Main Menu\n")
@@ -424,7 +427,6 @@ def place_order():
         order_time,
         order_date
         ]
-    print(cust_order)
 
     #  Confirm order back to the customer and provide order reference
     console.print(f"Thanks {name.capitalize()}, you are ordering;\n"
@@ -467,6 +469,7 @@ def add_pizza():
     Provides an opportunity for the user to add more pizzas
     to their order.
     """
+    cust_order = ()
     clear()
     # Receives return value
     pizza = get_pizza()
@@ -480,7 +483,7 @@ def add_pizza():
     #  Calculates and returns the cost of the order
     cost = get_cost(cust_size, qty)
     cust_order.extend([pizza, cust_size, qty, cost])
-    print(cust_order)
+    return cust_order
 
 
 def view_live_orders():
@@ -498,13 +501,8 @@ def view_live_orders():
     orders_df = pd.DataFrame(SHEET.worksheet("Orders").get_all_records())
     orders_df = orders_df.drop(columns=["Phone Number", "Cost"])
     orders_df = orders_df[orders_df.Status != "Completed"]
-    orders_df.style.set_table_styles([{
-            "selector": "thead",
-            "props": [("background-color", "#F4F5F0"),
-                      ("color", "#008C45"),
-                      ("border", "1px solid blue")]
-            }])
-    print(orders_df)
+    print(tabulate(
+        orders_df, headers='keys', tablefmt='psql', showindex="never"))
 
     #  While loop to request user inputs valid quantity between 1-3
     #  If not valid, error message asks the user to try again
