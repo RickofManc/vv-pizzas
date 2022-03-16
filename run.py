@@ -322,7 +322,7 @@ def get_time():
             order_time: Used within place_order()
     """
     time_now = datetime.now()
-    order_time = time_now.strftime("%H:%M:%S")
+    order_time = time_now.strftime("%H:%M")
     return order_time
 
 
@@ -512,18 +512,19 @@ def view_live_orders():
             Removes columns with sensitive data; Phone Number, Cost
             Removes orders with 'Completed' status
         Returns:
-            df: DataFrame with current live orders  
+            df: DataFrame with current live orders
     """
     print("Here comes the current live orders...\n")
-    df = pd.DataFrame(SHEET.worksheet("Orders").get_all_records())
-    df = df.drop(columns=["Phone Number", "Cost"])
-    df = df[df.Status != "Completed"]
-    print(df)
+    current_orders = pd.DataFrame(SHEET.worksheet("Orders").get_all_records())
+    current_orders = current_orders.drop(columns=["Phone Number", "Cost"])
+    current_orders = current_orders[current_orders.Status != "Completed"]
+    print(current_orders)
 
     #  While loop to request user inputs valid quantity between 1-3
     #  If not valid, error message asks the user to try again
     while True:
-        console.print("\nWhen ready, please choose from the following options:\n", style="bold")
+        console.print("\nWhen ready, please choose from "
+                      "the following options:\n", style="bold")
         print("1. Return to Main Menu")
         print("2. Place An Order")
         print("3. Exit Ordering System")
