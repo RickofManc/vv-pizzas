@@ -58,8 +58,8 @@ def get_customer_name():
     #  If not valid, error message asks the user to try again
     while True:
         console.print("What would you like to do"
-                      " next?\n", style="blue on white bold")
-        print("1. Continue to provide your details")
+                      " next?\n", style="bold")
+        print("1. Continue to place your order")
         print("2. Exit to Main Menu\n")
         print("Please select an option by entering either 1 or 2\n")
         selection = input("Enter your choice here:\n")
@@ -156,8 +156,8 @@ def get_pizza():
     #  Provides opportunity for the user to restart order or exit to Main Menu
     #  If not valid, error message asks the user to try again
     while True:
-        console.print("Please choose and enter an item number from the table\n"
-                      "Or enter;\n"
+        console.print("Please select an item and enter the number below\n"
+                      "Or enter:\n"
                       "(R) to restart your order\n"
                       "(E) to exit to the Main Menu\n")
         pizza = input("Enter your choice here:\n")
@@ -198,7 +198,7 @@ def get_size():
             cust_size: used within place_order()
     """
     #  Print statement to inform user of what content is displayed
-    console.print("Which size would you like?\n", style="blue on white bold")
+    console.print("Which size would you like?\n", style="bold")
     #  Options for pizza size and cost from external spreadsheet
     sizes = SHEET.worksheet("Sizes").get_all_values()
     #  Removes header row to allow for code based headers below
@@ -221,8 +221,9 @@ def get_size():
     #  Provides opportunity for the user to restart order or exit to Main Menu
     #  If not valid, error message asks the user to try again
     while True:
-        console.print("Please choose and enter an item letter from the table\n"
-                      "Or enter;\n"
+        console.print("Please select an item and enter the letter below\n"
+                      "Or enter:\n"
+                      "(P) to return to the previous question\n"
                       "(R) to restart your order\n"
                       "(E) to exit to the Main Menu\n")
         cust_size = input("Enter your choice here:\n")
@@ -238,6 +239,9 @@ def get_size():
             cust_size = "Large"
             print("Thanks, you chose Large")
             return cust_size
+        elif cust_size.upper() == "P":
+            clear()
+            get_pizza()
         elif cust_size.upper() == "R":
             break
         elif cust_size.upper() == "E":
@@ -264,9 +268,9 @@ def get_quantity():
     #  Provides opportunity for the user to restart order or exit to Main Menu
     #  If not valid, error message asks the user to try again
     while True:
-        console.print("How many would you like?\n", style="blue on white bold")
+        console.print("How many would you like?\n", style="bold")
         console.print("Please enter a quantity between 1-6\n"
-                      "Or enter;\n"
+                      "Or enter:\n"
                       "(P) to return to the previous question\n"
                       "(R) to restart your order\n"
                       "(E) to exit to the Main Menu\n")
@@ -419,8 +423,11 @@ def place_order():
     time.sleep(2)
     #  Clears screen ready for next screen
     clear()
-    #  Requests and returns user choice of size and qty
+    #  Requests and returns user choice of pizza size
     cust_size = get_size()
+    #  Clears screen ready for next screen
+    clear()
+    #  Requests and returns user required quantity
     qty = get_quantity()
     #  Calculates and returns the cost of the order
     cost = get_cost(cust_size, qty)
