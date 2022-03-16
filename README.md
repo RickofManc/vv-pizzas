@@ -175,11 +175,20 @@ The colour palette signals 'Italy' to the customer, to convey the link with the 
 
 ### Current Features
 
-*
+* A welcome message greets the customer
+<p align="center">
+    <img src="readme-images/vv-pizza-f1-welcome-screen.png" alt="Image of welcome screen"/>
+</p
 
-##### Meta data
+* As the order process starts, the customer is ask for their name and mobile phone number
+    * An error message will inform the customer if their entry is not in the correct format
+<p align="center">
+    <img src="readme-images/vv-pizza-f2-request-name-and-number.png" alt="Image of name and number screen"/>
+</p>
 
-Meta data has been included within the website HTML head element to increase the traffic to the website. Furthermore the site page has been titled appropriately as another method of informing users of their location.
+
+
+
 
 
 ### Future Features
@@ -190,6 +199,11 @@ Here are a few of the immediate features that can be developed:
 * Website features i.e. About, Contact, Map, Social Media.
 * Pay online prior to collection
 * Real-time update on the order to customer via email/SMS.
+
+
+### Meta data
+
+Meta data has been included within the website HTML head element to increase the traffic to the website. Furthermore the site page has been titled appropriately as another method of informing users of their location.
 
 
 ***

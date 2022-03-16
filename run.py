@@ -224,7 +224,7 @@ def get_size():
             main()
         else:
             print("Invalid choice, please enter a size of either S, M or L\n"
-                  "or R for Restart, E for Exit\n")
+                  "or P for Previous, R to Restart, E to Exit\n")
             continue
     place_order()
 
@@ -401,6 +401,8 @@ def place_order():
     clear()
     #  Requests and returns user choice of pizza size
     cust_size = get_size()
+    #  Sets a delay to allow time for user to read message
+    time.sleep(2)
     #  Clears screen ready for next screen
     clear()
     #  Requests and returns user required quantity
@@ -497,6 +499,7 @@ def view_live_orders():
         Returns:
             df: DataFrame with current live orders
     """
+    clear()
     print("Here comes the current live orders...\n")
     orders_df = pd.DataFrame(SHEET.worksheet("Orders").get_all_records())
     orders_df = orders_df.drop(columns=["Phone Number", "Cost", "Date"])
