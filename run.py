@@ -139,7 +139,7 @@ def get_pizza():
     #  Menu options for current days pizzas from external spreadsheet
     menu_df = pd.DataFrame(SHEET.worksheet("Pizzas").get_all_records())
     print(tabulate(
-        menu_df, headers='keys', tablefmt='psql', showindex="never"))
+        menu_df, headers='keys', tablefmt='pretty', showindex="never"))
 
     #  While loop to request user inputs valid pizza choice between 1-4
     #  Provides opportunity for the user to restart order or exit to Main Menu
@@ -191,7 +191,7 @@ def get_size():
     #  Options for pizza size and cost from external spreadsheet
     sizes_df = pd.DataFrame(SHEET.worksheet("Sizes").get_all_records())
     print(tabulate(
-        sizes_df, headers='keys', tablefmt='psql', showindex="never"))
+        sizes_df, headers='keys', tablefmt='pretty', showindex="never"))
 
     #  While loop to request user inputs valid size of either S, M or L
     #  Provides opportunity for the user to restart order or exit to Main Menu
@@ -245,7 +245,7 @@ def get_quantity():
     #  If not valid, error message asks the user to try again
     while True:
         console.print("How many would you like?\n", style="bold")
-        console.print("Please enter a quantity between 1-6\n"
+        console.print("Please enter a quantity between 1-6 below\n"
                       "\nOr enter:\n"
                       "(P) to return to the previous question\n"
                       "(R) to restart your order\n"
@@ -482,7 +482,7 @@ def add_pizza():
     qty = get_quantity()
     #  Calculates and returns the cost of the order
     cost = get_cost(cust_size, qty)
-    cust_order.extend([pizza, cust_size, qty, cost])
+    cust_order.extend(pizza, cust_size, qty, cost)
     return cust_order
 
 
@@ -499,10 +499,10 @@ def view_live_orders():
     """
     print("Here comes the current live orders...\n")
     orders_df = pd.DataFrame(SHEET.worksheet("Orders").get_all_records())
-    orders_df = orders_df.drop(columns=["Phone Number", "Cost"])
+    orders_df = orders_df.drop(columns=["Phone Number", "Cost", "Date"])
     orders_df = orders_df[orders_df.Status != "Completed"]
     print(tabulate(
-        orders_df, headers='keys', tablefmt='psql', showindex="never"))
+        orders_df, headers='keys', tablefmt='pretty', showindex="never"))
 
     #  While loop to request user inputs valid quantity between 1-3
     #  If not valid, error message asks the user to try again
