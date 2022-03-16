@@ -1,8 +1,10 @@
 # VV Pizzas
 
-![Website Mockup]()
+<p align="center">
+  <img src="readme-images/vv-pizza-website-mockup.png" alt="Mockup of how the website looks on desktop, laptop and tablet"/>
+</p>
 
-[Link to Live Website](https://vv-pizzas.herokuapp.com/)
+[Link to Website](https://vv-pizzas.herokuapp.com/)
 
 [GitHub Repo](https://github.com/RickofManc/vv-pizzas)
 
