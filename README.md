@@ -181,13 +181,41 @@ The colour palette signals 'Italy' to the customer, to convey the link with the 
 </p
 
 * As the order process starts, the customer is ask for their name and mobile phone number
-    * An error message will inform the customer if their entry is not in the correct format
+* An error message informs the customer if their entry is not in the correct format
 <p align="center">
     <img src="readme-images/vv-pizza-f2-request-name-and-number.png" alt="Image of name and number screen"/>
 </p>
 
+* A table presenting the days choice of pizza is displayed. The customer is asked to make a choice to proceed, or has options to navigate elsewhere.
+<p align="center">
+    <img src="readme-images/vv-pizza-f3-display-menu.png" alt="Image of the pizza menu"/>
+</p>
 
+* A table presenting the options for sizes and the cost is displayed. The customer is asked to make a choice to proceed, or has options to navigate elsewhere.
+<p align="center">
+    <img src="readme-images/vv-pizza-f4-display-sizes.png" alt="Image of the differing sizes"/>
+</p>
 
+* Following a choice of pizza and size, the customer is asked how many they would like to order.
+<p align="center">
+    <img src="readme-images/vv-pizza-f4-display-sizes.png" alt="Image of the quantity question"/>
+</p>
+
+* The customers choices are played back to them, asking for confirmation in order to proceed to sending the order to the kitchen.
+<p align="center">
+    <img src="readme-images/vv-pizza-f6-confirm-order.png" alt="Image where the customer is asked to confirm order"/>
+</p>
+
+* The customers order is being sent to the kitchen.
+<p align="center">
+    <img src="readme-images/vv-pizza-f7-sending-order.png" alt="Bar showing the progress of the order being sent to the kitchen"/>
+</p>
+
+* From the Main Menu, users can choose to view the current live orders to anticipate when theirs will be ready within the 20 minutes window.
+* Sensitive data such as phone number and cost have been removed from view.
+<p align="center">
+    <img src="readme-images/vv-pizza-f8-view-live-orders.png" alt="Image showing the live orders table"/>
+</p>
 
 
 
@@ -250,17 +278,18 @@ The website renders and is functional on the following browsers:
 
 The website does not render on any previous versions of Internet Explorer.
 
+
 ### Device
 
 As anticipated the website was not functional on smartphones or tablet due primarily to terminal dimensions being fixed. However, functionality was as planned on devices that incorporated a keyboard to support navigation through the application. No issues were identified with desktop and laptop testing.
 
+
 ### Accessibility 
 
-The homepage has been tested using the [Wave (Web Accessibility Evaluation Tool)](https://wave.webaim.org/) with zero alerts or errors received. 
+The homepage has been tested using the [Wave (Web Accessibility Evaluation Tool)](https://wave.webaim.org/) with zero alerts and only 1 contrast error where the Footer text was triggering a low-contrast error. As a result, I increased the size of the text and separated over two lines to improve readability for users with low-vision. 
 
 
 ### Performance 
-
 
 ![Lighthouse Test Results](readme-images/vv-pizza-lighthouse-results.png)
 
