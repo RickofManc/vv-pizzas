@@ -24,6 +24,7 @@
    "workbench.colorTheme": "Gitpod Dark",
    "editor.defaultFormatter": "HookyQR.beautify",
    "cSpell.words": [
+      "Buildpacks",
       "prioritise"
    ]
 }

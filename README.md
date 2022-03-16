@@ -11,7 +11,7 @@
 
 ## About
 
-Vera's Vegan Pizzas is a popular South Manchester based food truck. The popularity of this delicious "can't believe it's vegan" pizza often leads to long wait times to order. Whilst most customers are happy to wait, Vera feels she is losing customers before they order due to the current phone ordering method. There is a single point of contact to place orders via phone, and if this is frequently engaged, some customers order elsewhere.  
+Vera's Vegan Pizzas is a popular South Manchester based food truck. The popularity of this delicious "can't believe it's vegan" pizza often leads to long wait times to order. Whilst most customers are happy to wait, Vera feels she is losing customers before they order due to an absence of online ordering. Currently, there is a single point of contact to place orders via phone, and if this is frequently engaged, some customers order elsewhere.  
 
 
 ***
@@ -40,37 +40,41 @@ Vera's Vegan Pizzas is a popular South Manchester based food truck. The populari
 
 ### Strategy
 
-Vera requires a solution that provides another method for customers to place orders. An online based ordering system should be simple and clear in design and layout and take a similar duration to ordering by phone. 
+Vera requires a solution that provides a new method for customers to place orders. An online based ordering system should be simple, and clear in design and layout,  taking a similar duration to ordering by phone. 
 
 A successful solution should reduce the amount of calls Vera is handling to allow her to focus on cooking.
-Furthermore, as the orders as received digitally to a Google based spreadsheet, Vera will be able to execute them in order from viewing the spreadsheet on a digital device.
+Furthermore, as the orders will be received digitally to a Google based spreadsheet, Vera will be able to execute them in order from viewing the spreadsheet on screen.
 
-There are additional benefits of moving to a digitally driven ordering system; in that Vera will have order data and her fingertips. Allowing Vera to analyse and forecast stock levels for a particular day and/or location far easier than the current paper based method.
+There are additional benefits of moving to a digitally driven ordering system; in that Vera will have order data and her fingertips. Allowing Vera to analyse and forecast stock levels for a particular day and/or location far easier than the current paper based method. Vera will also be able to make changes to the menu and costs within the spreadsheet negating the requirement for Developer services to update within the code.
 
 
 #### Leading User Stories
 
-* As a customer, I want to place an order with VV Pizzas at the first time of trying, so that I don't have to keep calling back.
-* As a customer, I want to understand how long it will take to cook my order, so that I can plan my journey time.
-* As a customer, I want to learn which pizzas are available, so I can choose my preferred option.
-* As a customer, I want to learn which sizes are available, so I can choose the appropriate size for my appetite.
-* As a customer, I want to order multiple pizzas, so I can provide food to more people.
-* As a customer, I want to be able to amend the order before committing, so that if a mistake is made I don't have to restart the order.
-* As the owner, I want to reduce the time spent on the phone and writing orders, so I can focus on executing the orders.
-* As the owner, I want to provide an easier method of ordering pizza, so that our customers are happier.
-* As the owner, I want to be able to control when we can and can't receive orders, so that the kitchen does not become overloaded and the wait time for customers increases.
-* As the owner, I want to have data from the days orders, so that I can learn of customers trends and forecast more accurately.
+* As a customer... 
+    * I want to place an order at the first time of trying, so that I don't have to keep calling back.
+    * I want to understand how long it will take to cook my order, so that I can plan my journey time.
+    * I want to learn which pizzas are available, so I can choose my preferred option.
+    * I want to learn which sizes are available, so I can choose the appropriate size for my appetite.
+    * I want to order multiple pizzas, so I can more food to more people.
+    * I want to be able to amend the order before committing, so that if a mistake is made I don't have to restart the order.
+* As the owner... 
+    * I want to reduce the time spent on the phone and writing orders, so I can focus on executing the orders.
+    * I want to provide an easier method of ordering pizza, so that our orders increase.
+    * I want to be able to inform customers of changes to the menu daily, so I can try new toppings and improve customer satisfaction.
+    * I want to have data from the days orders, so that I can learn of customers trends and forecast more accurately.
 
 
 #### Primary strategic aims for the website
 * The application will provide a method of receiving and executing orders from Vera's customers.
 * The application will be intuitive for the customer to follow, and take a similar amount of time as if ordering by phone.
-* Customers who had previously ordered elsewhere due a continually engaged phone line, will place an order with Vera, which in turn will increase revenue.
+* Customers who had previously ordered elsewhere due a continually engaged phone line, will place an order online, which in turn will increase revenue.
 
 
 The roadmap below highlights the high-level strategic opportunities versus the importance and viability/feasibility of development for the MVP (Minimal Viable Product):
 
-![Strategic Opportunities Roadmap](readme-images/strategic-opportunities-roadmap.png)
+<p align="center">
+  <img src="readme-images/strategic-opportunities-roadmap.png" alt="Strategic Opportunities Roadmap"/>
+</p>
 
 
 ### Scope
@@ -85,16 +89,13 @@ Below is a list of the leading features for the application.
 * Options for ordering different pizza toppings.
 * On screen confirmation of the order before placing with Vera.
 * Provide the order details in a spreadsheet to Vera as they are received.
-
-#### Potentially In Scope Features (Time Dependant for MVP launch)
-* Provide the customer with a price to be paid on collection.
+* Provide the customer with a cost to be paid on collection.
 * Add the value of each order within the spreadsheet.
-* Add totals for the days orders within the spreadsheet.
 
 #### Out of Scope Features (for a future release)
-* Mobile phone application. 
+* Develop application for smartphones. 
 * Options for ordering custom toppings.
-* Email confirmation of the placed order.
+* Email confirmation when the order is placed.
 * Provide the customer with the opportunity to pay online.
 * Provide the customer with an expected wait time dependent on current live orders.
 
@@ -111,6 +112,8 @@ This website will be structured with the following design considerations;
 * If the customer has requested all items then the order will be placed and the Google Sheet updated for Vera.
 * Finally the customer will be thanked and informed of the time for collection. customer.
 
+The final structure may differ slightly as development progresses and from user feedback.
+
 
 ### Skeleton
 
@@ -118,25 +121,28 @@ Key to the UX attributes is the ease for which customers can place an order. The
 
 The journey should take a similar amount of time to when ordering by phone which should ensure no customers are lost with the change in method. 
 
-Aesthetically the page background will inform the customer they are ordering pizza, whilst emoji's will be used within the interface to communicate some fun. However, they will not be used to replace words to avoid any confusion with the customer.
+Aesthetically the page will be clean with no images, and a clear header informing the user they are ordering with VV Pizzas. Use of the national colours of Italy will provide signals of the food theme. Within the interface, Emoji's will be used to communicate some fun. However, they will not be used to replace words to avoid any confusion with the customer.
 
-Should the customer make an error whilst ordering, they will have the ability to amend the order before committing, or by clicking a 'Restart Order' button.
+Should the customer make an error whilst navigating through the system, a message will appear guiding them on the steps to take, whilst also having the ability to navigate to the Main Menu and exit the system. Furthermore, customers will have the ability to restart the order from within the interface or  by clicking a 'Restart Order' button located on the browser page.
 
 #### Flowchart
 
 A flowchart outlining the customer journey has been created using [Lucidchart](https://www.lucidchart.com/pages/). The final application may differ slightly as development progresses and from user feedback.
 
-![Flowchart](readme-images/vv-pizzas-flowchart.png)
+<p align="center">
+    <img src="readme-images/vv-pizzas-flowchart.png" alt="VV Pizzas Flowchart"/>
+</p>
 
 
-#### Wireframes
+#### Wireframe
 
-As part of this phase wireframes for monitor and smartphone have been produced using [Balsamiq](https://balsamiq.com/wireframes/) (see image below - the wireframes are located within the project [Repo](https://github.com/RickofManc/vv-pizzas)).
+As part of this phase a wireframe for a browser has been produced using [Balsamiq](https://balsamiq.com/wireframes/) (see image below - the wireframe is located within the project [Repo](https://github.com/RickofManc/vv-pizzas)).
 
-The website is responsive through differing screen widths but currently not on mobile devices - a future development will see the app developed for smartphones. 
+The website is responsive through differing screen widths to a minimum of 800px wide. It is not yet developed for smartphones - a future sprint should see this delivered. 
 
-![Wireframes](readme-images/vv-pizza-wireframes.png)
-
+<p align="center">
+    <img src="readme-images/vv-pizza-wireframes.png" alt="VV Pizzas Wireframe" />
+</p>
 
 
 ### Surface 
@@ -146,21 +152,20 @@ The key aim for the MVP launch is to have a readable interface for the customer 
 
 #### Colour 
 
-The colour palette signals 'Italy' to the customer, to convey the link with the Italian food of pizza. The Savoy Azure Blue works well around the webpage as a bold colour to communicate information to the customer, it does not work as well within the interface against the black background. Where as the Green and Red from the Italian flag are still readable within the interface, whilst not being overly used to ensure all critical text is readable.
+The colour palette signals 'Italy' to the customer, to convey the link with the Italian food of pizza. The Savoy Azure Blue works well to provide some accents, however it does not work as well within the interface against the black background. Where as the Green and Red from the Italian flag are readable against the background. However, they have not been overly used to ensure all critical text is readable.
 
-![VV Pizza Palette](readme-images/vv-pizza-colour-palette.png)
+<p align="center">
+    <img src="readme-images/vv-pizza-colour-palette.png" alt="VV Pizzas Colour Palette"/>
+</p>
 
-
-#### Fonts
+#### Font
 
 'Fira Code' font has been selected for free commercial use from Google Fonts due to it's similar style to the interface font. Fira Code is an extension of the Fira Mono font containing a set of ligatures for common programming multi-character combinations. Whilst these ligatures won't be used within this build, it does highlight the font is quick and easy to read.
 
-![VV Pizza Font](readme-images/vv-pizza-font.png)
+<p align="center">
+    <img src="readme-images/vv-pizza-font.png" alt="VV Pizzas Fira Code Font Choice"/>
+</p
 
-
-#### Images & Icons
-
-To provide .
 
 ***
 
@@ -174,15 +179,12 @@ To provide .
 
 Meta data has been included within the website HTML head element to increase the traffic to the website. Furthermore the site page has been titled appropriately as another method of informing users of their location.
 
-##### Redirection
-
-A '404 Not Found' page has been added to the website in the event of a failed link or page. This page kindly informs the user of the error and provides a button to navigate them back to the homepage.
-
 
 ### Future Features
 
-Following a successful MVP launch, the application had the opportunity to be further developed over a relatively short period to improve the user experience. Here are a few of the immediate features that can be developed:
-* Application for mobile devices.
+Following a successful MVP launch, the application has the opportunity to be further developed over a relatively short period to improve UX.
+Here are a few of the immediate features that can be developed:
+* Application works on smartphones.
 * Website features i.e. About, Contact, Map, Social Media.
 * Pay online prior to collection
 * Real-time update on the order to customer via email/SMS.
@@ -193,7 +195,11 @@ Following a successful MVP launch, the application had the opportunity to be fur
 
 ## Data-Model 
 
+I have based the model on functions used as the steps to request, validate and return data from the customer. These functions are called from within the 'Place Order' function. As each function is executed, the return values are collated and confirmed back to the user before the order is sent to kitchen. 
 
+An external Google Sheet is used to receive this data in a format the kitchen can read, execute and update the order status. This Sheet is also used by the Owner to update the menu for the day, and any cost changes. Pandas has been incorporated to receive these tables of data into the source code as a DataFrame. The DataFrames are then formatted using Tabulate to display to the customer.
+
+The Google Sheet can be viewed online at [VV Pizzas](https://docs.google.com/spreadsheets/d/1-0Hu5_4mXknpqb36h5K3NuboPPn9xHJsGvmpaZjTMtU/edit#gid=1680754323). Data within is for the purposes of the MVP and therefore fictitious.
 
 ***
 
@@ -284,11 +290,14 @@ Create a Spreadsheet (Data Model)
 1. Login to your Google account, create an account if necessary
 1. Navigate to Sheets, Googles version of Microsoft Excel
 1. Start a new spreadsheet, amend the title at the top i.e. VV Pizzas
-1. Create 2 Sheets or Tabs, titling one 'Orders' and the other 'Cost'
+1. Create 3 Sheets/Tabs, titling 'Orders' 'Pizzas and 'Sizes'
 1. In the first row of the Orders sheet, add the following column headers;
-    * Name, TelNum, Pizza, Size, Time, Date, Quantity, Price
-1. In the first row of the Cost sheet, add the following column headers;
-    * Size, Price
+    * Name, TelNum, Pizza, Size, Quantity, Cost, Time, Date, Status 
+1. In the first row of the Pizza sheet, add the following column headers;
+    * Item, Pizza, Topping
+1. In the first row of the Sizes sheet, add the following column headers;
+    * Item, Name, Size, Cost
+
 
 Setup API
 1. Navigate to [Google Cloud Platform](https://cloud.google.com/gcp?utm_source=google&utm_medium=cpc&utm_campaign=emea-gb-all-en-bkws-all-all-trial-e-gcp-1011340&utm_content=text-ad-none-any-DEV_c-CRE_500227884420-ADGP_Hybrid%20%7C%20BKWS%20-%20EXA%20%7C%20Txt%20~%20GCP%20~%20General%23v1-KWID_43700060384861702-kwd-26415313501-userloc_9041106&utm_term=KW_google%20cloud%20platform-NET_g-PLAC_&gclid=CjwKCAiAvaGRBhBlEiwAiY-yMH6ZzZToth-9fTjp0B_qAE91ulGwN7jIb0KBGW5TbmN8Z5w9JE1noRoCSmIQAvD_BwE&gclsrc=aw.ds)
@@ -315,7 +324,7 @@ Setup API
     * Select 'Add Key' dropdown -> Create New Key.
     * Select 'JSON' -> Create - the file will download to your machine
     * From your local downloads folder, add file directly to your Gitpod workspace, and rename the file to creds.json
-    * Within the file, copy the value for 'client email'. Paste this email address into the 'Share' area of your Google Spreadsheet, assigning the role of Editor
+    * Within the file, copy the value for 'client email'. Paste this email address into the 'Share' area of your Google Sheet, assigning the role of Editor
 
 Enable API within IDE
 1. From within your Gitpod IDE terminal, enter 'pip3 install gspread google-auth'
@@ -381,16 +390,28 @@ Enable API within IDE
 
 ### People
 
-* Mentor Brian Macharia for guiding and advising throughout the projects lifecycle.
-* Code Institute Slack community for peer reviewing the code.
+* Mentor Brian Macharia for guiding and advising throughout the projects lifecycle on how to improve UX and my code.
+
+Support with how to develop ideas into code also came from numerous online resources:
+
+* [Validating Mobile Phone Number Format](https://stackoverflow.com/questions/16135069/how-do-i-validate-a-mobile-number-using-python)
+* [Converting String Inputs to Integers](https://stackoverflow.com/questions/13207697/how-to-remove-square-brackets-from-list-in-python)
+* [Applying Date and Time to Orders](https://www.programiz.com/python-programming/datetime/current-datetime)
+* [Clearing Screen Between Menus](https://www.geeksforgeeks.org/clear-screen-python/)
+* [Adding Time Delay to Function Calls](https://www.pythoncentral.io/pythons-time-sleep-pause-wait-sleep-stop-your-code/)
+* [Visualising a Progress Bar](https://www.freecodecamp.org/news/use-the-rich-library-in-python/)
+* [Providing System Exit Method](https://stackoverflow.com/questions/543309/programmatically-stop-execution-of-python-script)
 
 
-### Python Libraries
+### Python Library Dependencies and Packages
 
+* [Google Sheet](https://docs.google.com/spreadsheets/d/1-0Hu5_4mXknpqb36h5K3NuboPPn9xHJsGvmpaZjTMtU/edit#gid=1680754323) to display the orders for the kitchen, and to allow the Owner to update the menu and cost.
+* [Rich Console](https://rich.readthedocs.io/en/stable/console.html) to style terminal text, provide a Progress Bar when sending orders, and as formatted traceback for development.
+* [Pandas](https://pandas.pydata.org/) to receive data from the external Google Sheet into a DataFrame.
+* [Tabulate](https://pypi.org/project/tabulate/) to render pandas DataFrames.
 * [Regular Expression (or RE)](https://docs.python.org/3/library/re.html) to validate the customers mobile number structure
 * [Datetime](https://docs.python.org/3/library/datetime.html) to add the date and time to the order before sending to the kitchen.
-* [Google Spreadsheet](https://docs.google.com/spreadsheets/d/1-0Hu5_4mXknpqb36h5K3NuboPPn9xHJsGvmpaZjTMtU/edit#gid=1680754323) as the data model for which orders are received.
-* [Rich Console](https://rich.readthedocs.io/en/stable/console.html) to style the terminal content.
+* [Time](https://docs.python.org/3/library/time.html) in conjunction with [Sleep](https://realpython.com/python-sleep/) to delay functions executing which for the customer provides time to read messages before moving to the next screen. 
 
 
 ### Software & Web Applications
@@ -400,7 +421,6 @@ Enable API within IDE
 * [W3schools](https://www.w3schools.com/) - Source of 'How to...' information throughout the build.
 * [Stack Overflow](https://stackoverflow.com/) - Source of 'How to...' information on Python code.
 * [Python Tutor](https://pythontutor.com/) - For testing sections of code.
-* [FreeConvert](https://www.freeconvert.com/) - For converting and compressing images to improve performance.
 * [Wave](https://wave.webaim.org/) - Accessibility Testing to ensure content is readable for all users.
 * [HTML Validator](https://validator.w3.org/) - For validating HMTL code.
 * [PEP8 Validator](http://pep8online.com/)  - For validating Python code.

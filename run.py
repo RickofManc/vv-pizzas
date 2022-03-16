@@ -5,11 +5,11 @@ import re  # To support name and phone number validation
 from datetime import datetime  # To add datetime to each order
 import sys  # To provide the user with an exit from the ordering system
 import time  # To add a pause between certain functions executing
+from time import sleep  # To support the progress bar in sending orders
 import locale  # To set the currency for pizza prices
 import random  # To create sequential order references
-from time import sleep  # To support the progress bar in sending orders
-import pandas as pd
-from tabulate import tabulate  # To render pandas dataframes
+import pandas as pd  # To receive data from the external Google Sheet
+from tabulate import tabulate  # To render pandas DataFrames
 import gspread  # To open and edit pizza ordering spreadsheet
 from google.oauth2.service_account import Credentials
 from rich.console import Console  # Add styling to string for improved UX
