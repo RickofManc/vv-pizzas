@@ -13,7 +13,6 @@ import gspread  # To open and edit pizza ordering spreadsheet
 from google.oauth2.service_account import Credentials
 from rich.console import Console  # Add styling to string for improved UX
 from rich.traceback import install  # Render tracebacks with syntax formatting
-from rich.table import Table  # To set the pizza and size options in a table
 from rich.progress import track  # To add a progress bar for sending orders
 
 
@@ -137,27 +136,15 @@ def get_pizza():
     console.print("Here's todays menu, which pizza would you like?"
                   "\n", style="bold")
     #  Menu options for current days pizzas from external spreadsheet
-    menu = SHEET.worksheet("Pizzas").get_all_values()
-    #  Removes header row to allow for code based headers below
-    menu.pop(0)
-    #  Setting the table columns with headers for the external data to populate
-    pizza_table = Table(show_header=True, header_style="bold")
-    pizza_table.add_column("Item", justify="center", vertical="middle")
-    pizza_table.add_column("Pizza", justify="left", vertical="middle")
-    pizza_table.add_column("Topping", justify="left", vertical="middle")
-    #  For loop to add the rows of data from 'menu'
-    for menu in zip(*menu):
-        pizza_table.add_row(*menu)
-
-    #  Prints the table with todays pizza choices from data above
-    console.print(pizza_table)
+    menu = pd.DataFrame(SHEET.worksheet("Pizzas").get_all_records())
+    print(menu)
 
     #  While loop to request user inputs valid pizza choice between 1-4
     #  Provides opportunity for the user to restart order or exit to Main Menu
     #  If not valid, error message asks the user to try again
     while True:
-        console.print("Please select an item and enter the number below\n"
-                      "Or enter:\n"
+        console.print("\nPlease select an item and enter the number below\n"
+                      "\nOr enter:\n"
                       "(R) to restart your order\n"
                       "(E) to exit to the Main Menu\n")
         pizza = input("Enter your choice here:\n")
@@ -200,29 +187,15 @@ def get_size():
     #  Print statement to inform user of what content is displayed
     console.print("Which size would you like?\n", style="bold")
     #  Options for pizza size and cost from external spreadsheet
-    sizes = SHEET.worksheet("Sizes").get_all_values()
-    #  Removes header row to allow for code based headers below
-    sizes.pop(0)
-    #  Table variable used to present sizes to the customer
-    sizes_table = Table(show_header=True, header_style="bold")
-    #  Setting the table columns with headers for the external data to populate
-    sizes_table.add_column("Item", justify="center", vertical="middle")
-    sizes_table.add_column("Name", justify="left", vertical="middle")
-    sizes_table.add_column("Size", justify="left", vertical="middle")
-    sizes_table.add_column("Price", justify="right", vertical="middle")
-    #  For loop to add the rows of data from 'menu'
-    for sizes in zip(*sizes):
-        sizes_table.add_row(*sizes)
-
-    #  Prints the table with todays pizza choices from data above
-    console.print(sizes_table)
+    sizes = pd.DataFrame(SHEET.worksheet("Sizes").get_all_records())
+    console.print(sizes)
 
     #  While loop to request user inputs valid size of either S, M or L
     #  Provides opportunity for the user to restart order or exit to Main Menu
     #  If not valid, error message asks the user to try again
     while True:
-        console.print("Please select an item and enter the letter below\n"
-                      "Or enter:\n"
+        console.print("\nPlease select an item and enter the letter below\n"
+                      "\nOr enter:\n"
                       "(P) to return to the previous question\n"
                       "(R) to restart your order\n"
                       "(E) to exit to the Main Menu\n")
@@ -522,10 +495,16 @@ def view_live_orders():
             df: DataFrame with current live orders
     """
     print("Here comes the current live orders...\n")
-    current_orders = pd.DataFrame(SHEET.worksheet("Orders").get_all_records())
-    current_orders = current_orders.drop(columns=["Phone Number", "Cost"])
-    current_orders = current_orders[current_orders.Status != "Completed"]
-    print(current_orders)
+    orders_df = pd.DataFrame(SHEET.worksheet("Orders").get_all_records())
+    orders_df = orders_df.drop(columns=["Phone Number", "Cost"])
+    orders_df = orders_df[orders_df.Status != "Completed"]
+    orders_df.style.set_table_styles([{
+            "selector": "thead",
+            "props": [("background-color", "#F4F5F0"),
+                      ("color", "#008C45"),
+                      ("border", "1px solid blue")]
+            }])
+    print(orders_df)
 
     #  While loop to request user inputs valid quantity between 1-3
     #  If not valid, error message asks the user to try again
