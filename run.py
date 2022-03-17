@@ -71,7 +71,7 @@ def get_customer_name():
         clear()
         name = console.input("Please provide your name:\n").strip()
         if re.match(r"[\s\S\?]", name):
-            console.print(f"Hi {name.capitalize()} :waving_hand:\n")
+            console.print(f"Hi {name.title()} :waving_hand:\n")
         else:
             print("Invalid name, please try again\n")
             continue
@@ -417,7 +417,7 @@ def place_order():
     #  List collate the returned values from functions to confirm order
     cust_order = [
         order_ref,
-        name.capitalize(),
+        name.title()(),
         telnum,
         pizza,
         cust_size,
@@ -428,7 +428,7 @@ def place_order():
         ]
 
     #  Confirm order back to the customer and provide order reference
-    console.print(f"Thanks {name.capitalize()}, you are ordering;\n"
+    console.print(f"Thanks {name.title()()}, you are ordering;\n"
                   f"{qty} {cust_size} {pizza} for £{cost} :pizza:\n"
                   f"Your reference for this order is {order_ref}\n")
     #  While loop to either send the confirmed order or restart
