@@ -26,7 +26,7 @@ CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('vv_pizzas')
-console = Console(highlight=False)  # Provides Rich library default formatting
+console = Console(highlight=False)  # Provides Rich formatting print()
 install(show_locals=True)  # Allows Rich display local variable values
 
 
@@ -57,7 +57,7 @@ def get_customer_name():
     #  While loop to provide sub-menu options
     #  If not valid, error message asks the user to try again
     while True:
-        selection = input("Enter your choice here:\n")
+        selection = input("Enter your choice here:\n").strip()
         if selection == "1":
             break
         elif selection == "2":
@@ -145,18 +145,18 @@ def get_pizza():
                       "\nOr enter:\n"
                       "(R) to restart your order\n"
                       "(E) to exit to the Main Menu\n")
-        pizza = input("Enter your choice here:\n")
+        pizza = input("Enter your choice here:\n").strip()
         if pizza == "1":
-            console.print(":yum: a Margherita!\n")
+            console.print(":yum:\nMargherita!\n")
             return "Margherita"
         elif pizza == "2":
-            console.print(":yum: a Giardiniera!\n")
+            console.print(":yum:\nGiardiniera!\n")
             return "Giardiniera"
         elif pizza == "3":
-            console.print(":yum: a Diavolo!\n")
+            console.print(":yum:\nDiavolo!\n")
             return "Diavolo"
         elif pizza == "4":
-            console.print(":yum: a Forza!\n")
+            console.print(":yum:\nForza!\n")
             return "Forza"
         elif pizza.upper() == "R":
             break
@@ -197,16 +197,16 @@ def get_size():
                   "(R) to restart your order\n"
                   "(E) to exit to the Main Menu\n")
     while True:
-        cust_size = input("Enter your choice here:\n")
-        if cust_size.upper() == ("S"):
+        cust_size = input("Enter your choice here:\n").strip()
+        if cust_size.upper() == "S":
             cust_size = "Small"
             print("Thanks, you chose Small\n")
             return cust_size
-        elif cust_size.upper() == ("M"):
+        elif cust_size.upper() == "M":
             cust_size = "Medium"
             print("Thanks, you chose Medium\n")
             return cust_size
-        elif cust_size.upper() == ("L"):
+        elif cust_size.upper() == "L":
             cust_size = "Large"
             print("Thanks, you chose Large")
             return cust_size
@@ -241,7 +241,7 @@ def get_quantity():
     #  Provides opportunity for the user to restart order or exit to Main Menu
     #  If not valid, error message asks the user to try again
     while True:
-        qty = input("Enter your choice here:\n")
+        qty = input("Enter your choice here:\n").strip()
         if qty.isnumeric() == 1:
             return int(qty)
         if qty.isnumeric() == 2:
@@ -260,7 +260,7 @@ def get_quantity():
             main()
         else:
             print("Invalid choice, please enter a number between 1-6\n"
-                  "or letters R or E\n")
+                  "or R to Restart, E to Exit\n")
             continue
     place_order()
 
@@ -377,10 +377,9 @@ def place_order():
     Global functions are called in a logical order.
     These functions return values that are compiled into the order.
     While loop is used to ask the user to either;
-        a. Confirm the order
-        b. Add pizza
-        c. Remove pizza
-        d. Exit to main menu
+        S. Send order to the kitchen
+        R. Restart order
+        E. Exit to main menu
     """
     #  Clears screen ready for next screen
     clear()
@@ -440,8 +439,8 @@ def place_order():
                   "(R) to restart your order\n"
                   "(E) to exit to the Main Menu\n")
     while True:
-        user_confirm = input("Enter your choice here:\n")
-        if user_confirm.upper() == ('S'):
+        user_confirm = input("Enter your choice here:\n").strip()
+        if user_confirm.upper() == "S":
             update_order_worksheet(cust_order)
         elif user_confirm.upper() == "R":
             break
@@ -451,7 +450,7 @@ def place_order():
             print("Invalid choice, please enter a letter, either S, R or E\n")
             continue
     place_order()
-  
+
 
 def view_live_orders():
     """
@@ -474,14 +473,13 @@ def view_live_orders():
 
     #  While loop to request user inputs valid quantity between 1-3
     #  If not valid, error message asks the user to try again
+    console.print("\nWhen ready, please choose from "
+                  "the following options:\n", style="bold")
+    print("1. Return to Main Menu")
+    print("2. Place An Order")
+    print("3. Exit Ordering System")
     while True:
-        console.print("\nWhen ready, please choose from "
-                      "the following options:\n", style="bold")
-        print("1. Return to Main Menu")
-        print("2. Place An Order")
-        print("3. Exit Ordering System")
-        print("Please select an option by entering a number between 1-3\n")
-        selection = input("Enter your choice here:\n")
+        selection = input("\nEnter your choice here:\n").strip()
         if selection == "1":
             main()
         elif selection == "2":
@@ -505,18 +503,18 @@ def main():
             3: exits system using sys.exit()
             Else requests the user tries again
     """
+    clear()  # Clears any previous content to print welcome and menu below
+    console.print("[#008C45]Thank you[/] [#F4F5F0]for choosing[/]"
+                  " [#CD212A]Vera's Vegan Pizzas![/]\n", style="bold")
+    console.print("Main Menu", style="bold")
+    print("1. Place An Order")
+    print("2. View Live Orders")
+    print("3. Exit Ordering System\n")
+    print("Please select an option by entering a number between 1-3\n")
     #  While loop to request user inputs valid quantity between 1-3
     #  If not valid, error message asks the user to try again
     while True:
-        clear()  # Clears any previous content to print welcome and menu below
-        console.print("[#008C45]Thank you[/] [#F4F5F0]for choosing[/]"
-                      " [#CD212A]Vera's Vegan Pizzas![/]\n", style="bold")
-        console.print("Main Menu", style="bold")
-        print("1. Place An Order")
-        print("2. View Live Orders")
-        print("3. Exit Ordering System\n")
-        print("Please select an option by entering a number between 1-3\n")
-        selection = input("Enter your choice here:\n")
+        selection = input("Enter your choice here:\n").strip()
         if selection == "1":
             place_order()
         elif selection == "2":
