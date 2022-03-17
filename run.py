@@ -192,12 +192,11 @@ def get_size():
     #  While loop to request user inputs valid size of either S, M or L
     #  Provides opportunity for the user to restart order or exit to Main Menu
     #  If not valid, error message asks the user to try again
+    console.print("\nPlease select an item and enter the letter below\n"
+                  "\nOr enter:\n"
+                  "(R) to restart your order\n"
+                  "(E) to exit to the Main Menu\n")
     while True:
-        console.print("\nPlease select an item and enter the letter below\n"
-                      "\nOr enter:\n"
-                      "(P) to return to the previous question\n"
-                      "(R) to restart your order\n"
-                      "(E) to exit to the Main Menu\n")
         cust_size = input("Enter your choice here:\n")
         if cust_size.upper() == ("S"):
             cust_size = "Small"
@@ -211,16 +210,13 @@ def get_size():
             cust_size = "Large"
             print("Thanks, you chose Large")
             return cust_size
-        elif cust_size.upper() == "P":
-            clear()
-            get_pizza()
         elif cust_size.upper() == "R":
             break
         elif cust_size.upper() == "E":
             main()
         else:
             print("Invalid choice, please enter a size of either S, M or L\n"
-                  "or P for Previous, R to Restart, E to Exit\n")
+                  "or R to Restart, E to Exit\n")
             continue
     place_order()
 
@@ -239,7 +235,6 @@ def get_quantity():
     console.print("How many would you like?\n", style="bold")
     console.print("Please enter a quantity between 1-6 below\n"
                   "\nOr enter:\n"
-                  "(P) to return to the previous question\n"
                   "(R) to restart your order\n"
                   "(E) to exit to the Main Menu\n")
     #  While loop to request user inputs valid quantity between 1-6
@@ -247,20 +242,27 @@ def get_quantity():
     #  If not valid, error message asks the user to try again
     while True:
         qty = input("Enter your choice here:\n")
-        if qty.isnumeric() in range(1, 7, 1):
+        if qty.isnumeric() == 1:
             return int(qty)
-        elif qty.upper() == "P":
-            break
+        if qty.isnumeric() == 2:
+            return int(qty)
+        if qty.isnumeric() == 3:
+            return int(qty)
+        if qty.isnumeric() == 4:
+            return int(qty)
+        if qty.isnumeric() == 5:
+            return int(qty)
+        if qty.isnumeric() == 6:
+            return int(qty)
         elif qty.upper() == "R":
-            place_order()
+            break
         elif qty.upper() == "E":
             main()
         else:
             print("Invalid choice, please enter a number between 1-6\n"
                   "or letters R or E\n")
             continue
-    clear()
-    get_size()
+    place_order()
 
 
 def get_cost(cust_size, qty):
@@ -429,60 +431,27 @@ def place_order():
     #  Confirm order back to the customer and provide order reference
     console.print(f"Thanks {name.capitalize()}, you are ordering;\n"
                   f"{qty} {cust_size} {pizza} for £{cost} :pizza:\n"
-                  f"Your reference for the order is {order_ref}\n")
-    #  While loop to request user confirms order is complete
-    #  If not complete, user has options to order more items
-    #  If not ordering more items, options to amend this order
+                  f"Your reference for this order is {order_ref}\n")
+    #  While loop to either send the confirmed order or restart
     #  If not a valid input, error message asks the user to try again
+    console.print("\nIs your order ready to go to the kitchen?\n")
+    console.print("\nPlease enter:\n"
+                  "(S) to send your order\n"
+                  "(R) to restart your order\n"
+                  "(E) to exit to the Main Menu\n")
     while True:
-        user_confirm = input(
-            "Is your order ready to go to the kitchen? Y/N:\n")
-        if user_confirm.upper() == ('Y'):
+        user_confirm = input("Enter your choice here:\n")
+        if user_confirm.upper() == ('S'):
             update_order_worksheet(cust_order)
-        elif user_confirm.upper() == ('N'):
-            more_items = input("Would you like to add another pizza? Y/N\n")
-            if more_items.upper() == ('Y'):
-                add_pizza()
-            elif more_items.upper() == ('N'):
-                amend_order = input(
-                    "Would you like remove a pizza? Y/N\n"
-                    )
-                if amend_order.upper() == ('Y'):
-                    print("I need to code how to amend the order")
-                elif amend_order.upper() == ('N'):
-                    place_order()
-                else:
-                    print("Invalid choice, please enter either Y or N\n")
-                    continue
-            else:
-                print("Invalid choice, please enter either Y or N\n")
-                continue
+        elif user_confirm.upper() == "R":
+            break
+        elif user_confirm.upper() == "E":
+            main()
         else:
-            print("Invalid choice, please enter either Y or N\n")
+            print("Invalid choice, please enter a letter, either S, R or E\n")
             continue
-
-
-def add_pizza():
-    """
-    Provides an opportunity for the user to add more pizzas
-    to their order.
-    """
-    cust_order = ()
-    clear()
-    # Receives return value
-    pizza = get_pizza()
-    #  Sets a delay to allow time for user to read message
-    time.sleep(2)
-    #  Clears screen ready for next screen
-    clear()
-    #  Requests and returns user choice of size and qty
-    cust_size = get_size()
-    qty = get_quantity()
-    #  Calculates and returns the cost of the order
-    cost = get_cost(cust_size, qty)
-    cust_order(pizza, cust_size, qty, cost)
-    return cust_order
-
+    place_order()
+  
 
 def view_live_orders():
     """
