@@ -176,34 +176,34 @@ The colour palette signals 'Italy' to the customer, to convey the link with the 
 ### Current Features
 
 * A welcome message greets the customer
-<p align="left">
+<p align="center">
     <img src="readme-images/vv-pizza-f1-welcome-screen.png" alt="Image of welcome screen"/>
 </p
 
 * As the order process starts, the customer is ask for their name and mobile phone number
 * An error message informs the customer if their entry is not in the correct format
 <p align="center">
-    <img src="readme-images/vv-pizza-f2-request-name-and-number.png" alt="Image of name and number screen"/>
+    <img src="readme-images/vv-pizza-f2-request-name-and-number.png" alt="Requesting customer name and contact number"/>
 </p>
 
 * A table presenting the days choice of pizza is displayed. The customer is asked to make a choice to proceed, or has options to navigate elsewhere.
 <p align="center">
-    <img src="readme-images/vv-pizza-f3-display-menu.png" alt="Image of the pizza menu"/>
+    <img src="readme-images/vv-pizza-f3-display-menu.png" alt="Table showing the choice of pizzas today"/>
 </p>
 
 * A table presenting the options for sizes and the cost is displayed. The customer is asked to make a choice to proceed, or has options to navigate elsewhere.
 <p align="center">
-    <img src="readme-images/vv-pizza-f4-display-sizes.png" alt="Image of the differing sizes"/>
+    <img src="readme-images/vv-pizza-f4-display-sizes.png" alt="Table showing the pizza sizes and cost"/>
 </p>
 
 * Following a choice of pizza and size, the customer is asked how many they would like to order.
 <p align="center">
-    <img src="readme-images/vv-pizza-f5-request-qty.png" alt="Image of the quantity question"/>
+    <img src="readme-images/vv-pizza-f5-request-qty.png" alt="Question asking the customer how many they would like"/>
 </p>
 
 * The customers choices are played back to them, asking for confirmation in order to proceed to sending the order to the kitchen.
 <p align="center">
-    <img src="readme-images/vv-pizza-f6-confirm-order.png" alt="Image where the customer is asked to confirm order"/>
+    <img src="readme-images/vv-pizza-f6-confirm-order.png" alt="Question asking the customer to confirm order"/>
 </p>
 
 * The customers order is being sent to the kitchen.
@@ -214,7 +214,7 @@ The colour palette signals 'Italy' to the customer, to convey the link with the 
 * From the Main Menu, users can choose to view the current live orders to anticipate when theirs will be ready within the 20 minutes window.
 * Sensitive data such as phone number and cost have been removed from view.
 <p align="center">
-    <img src="readme-images/vv-pizza-f8-view-live-orders.png" alt="Image showing the live orders table"/>
+    <img src="readme-images/vv-pizza-f8-view-live-orders.png" alt="Live orders table"/>
 </p>
 
 
@@ -295,7 +295,9 @@ Using Lighthouse performance testing within Chrome Developer Tools, the website 
 
 Test occurred using Lighthouse within Chrome Dev Tools on 16/03/2022 with the following results:
 
-![Lighthouse Test Results](readme-images/vv-pizza-lighthouse-results.png)
+<p align="center">
+    <img src="readme-images/vv-pizza-lighthouse-results.png" alt="Summary of Lighthouse test results"/>
+</p>
 
 
 ### User Stories

@@ -247,7 +247,7 @@ def get_quantity():
     #  If not valid, error message asks the user to try again
     while True:
         qty = input("Enter your choice here:\n")
-        if qty in range(1, 6, 1):
+        if qty.isnumeric() in range(1, 7, 1):
             return int(qty)
         elif qty.upper() == "P":
             break
