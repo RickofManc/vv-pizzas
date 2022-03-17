@@ -57,7 +57,7 @@ There are additional benefits of moving to a digitally driven ordering system; i
     * I want to understand how long it will take to cook my order, so that I can plan my journey time.
     * I want to learn which pizzas are available, so I can choose my preferred option.
     * I want to learn which sizes are available, so I can choose the appropriate size for my appetite.
-    * I want to order multiple pizzas, so I can more food to more people.
+    * I want to order multiple pizzas, so I can provide food to more people.
     * I want to be able to amend the order before committing, so that if a mistake is made I don't have to restart the order.
 * As the owner... 
     * I want to reduce the time spent on the phone and writing orders, so I can focus on executing the orders.
@@ -176,7 +176,7 @@ The colour palette signals 'Italy' to the customer, to convey the link with the 
 ### Current Features
 
 * A welcome message greets the customer
-<p align="center">
+<p align="left">
     <img src="readme-images/vv-pizza-f1-welcome-screen.png" alt="Image of welcome screen"/>
 </p
 
@@ -198,7 +198,7 @@ The colour palette signals 'Italy' to the customer, to convey the link with the 
 
 * Following a choice of pizza and size, the customer is asked how many they would like to order.
 <p align="center">
-    <img src="readme-images/vv-pizza-f4-display-sizes.png" alt="Image of the quantity question"/>
+    <img src="readme-images/vv-pizza-f5-request-qty.png" alt="Image of the quantity question"/>
 </p>
 
 * The customers choices are played back to them, asking for confirmation in order to proceed to sending the order to the kitchen.
@@ -263,7 +263,7 @@ Below are the summarised results from these tests:
 
 * **run.py** - 0 Errors / 0 Warnings
 * **layout.html** - 0 Errors / 0 Warnings
-* **index.html** - 1 Errors / 2 Warnings; relating to the absence of boiler pate <!DOCTYPE HTML> which is to expected given the structure of the website. The boiler plate code is stored within the layout.html file.
+* **index.html** - 1 Errors / 2 Warnings; relating to the absence of boiler pate ```<!DOCTYPE HTML>``` which is anticipated given the structure of the website. This dta is coded into the layout.html file along with the Head element.
 
 
 ### Browser
@@ -291,12 +291,40 @@ The homepage has been tested using the [Wave (Web Accessibility Evaluation Tool)
 
 ### Performance 
 
+Using Lighthouse performance testing within Chrome Developer Tools, the website has been tested for use on Desktop only. The website scored highly across all criteria, however some further work is required to improve the contrast of the background to foreground for Accessibility, and also potentially to use passive listeners to improve scrolling performance. Furthermore, the initial load time could be improved by eliminating render-blocking resources.
+
+Test occurred using Lighthouse within Chrome Dev Tools on 16/03/2022 with the following results:
+
 ![Lighthouse Test Results](readme-images/vv-pizza-lighthouse-results.png)
 
 
 ### User Stories
 
-The leading user stories have been tested to ensure the priority aims of the website have been delivered. Below is a summary of the stories validation.
+The leading user stories have been tested to ensure the priority aims of the website have been delivered. 
+Below is a summary of the stories validation.
+
+Reference  | Description                                                                                                                                                                                     
+---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+US01       | As a customer, I want to place an order with VV Pizzas at the first time of trying, so that I don't have to keep calling back.                                                                  
+Validation | Customers can navigate to the website and place an order online                                                                                                                                 
+US02       | As a customer, I want to understand how long it will take to cook my order, so that I can plan my journey time.                                                                                 
+Validation | Customers are advised to collect 20 minutes after they order, furthermore there is an option to 'View Live Orders' to check the order status. This is currently updated manually by the kitchen.
+US03       | As a customer, I want to learn which pizzas are available, so I can choose my preferred option.                                                                                                 
+Validation | In step 3 of placing an order, the menu highlighting which 4 pizzas are available is displayed.                                                                                                 
+US04       | As a customer, I want to learn which sizes are available, so I can choose the appropriate size for my appetite.                                                                                 
+Validation | In step 4 of placing an order, a table is displayed showing the size options and the respective cost.                                                                                           
+US05       | As a customer, I want to order multiple pizzas, so I can provide food to more people.                                                                                                           
+Validation | In step 5 of placing an order, the customer is asked to choose a quantity between 1-6.                                                                                                          
+US06       | As a customer, I want to be able to amend the order before committing, so that if a mistake is made I don't have to restart the order.                                                          
+Validation | This user story has not been deployed - several differing solutions to build this functionality have been attempted. Further time is required.                                                  
+US07       | As the owner, I want to reduce the time spent on the phone and writing orders, so I can focus on executing the orders.                                                                          
+Validation | Vera can view orders as they are received on a screen within the kitchen.                                                                                                                       
+US08       | As the owner, I want to provide an easier method of ordering pizza, so that our orders increase.                                                                                                
+Validation | Vera can communicate the website address to customers so they can use this method next time.                                                                                                    
+US09       | I want to be able to inform customers of changes to the menu daily, so I can try new toppings and improve customer satisfaction.                                                                
+Validation | Vera can update the menu daily from within the external spreadsheet - this then populates the table within the code that the customer sees.                                                     
+US10       | As the owner, I want to have data from the days orders, so that I can learn of customers trends and forecast more accurately.                                                                   
+Validation | Vera can copy the data received on the order spreadsheet and paste into a data model that performance this type of analysis.                                                                    
 
 
 ### Bugs

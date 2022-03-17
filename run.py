@@ -50,21 +50,20 @@ def get_customer_name():
             Print statement confirming input is valid
             Name (str): used within place_order()
     """
+    console.print("What would you like to do next?\n", style="bold")
+    print("1. Continue to place your order")
+    print("2. Exit to Main Menu\n")
+    print("Please select an option by entering either 1 or 2\n")
     #  While loop to provide sub-menu options
     #  If not valid, error message asks the user to try again
     while True:
-        console.print("What would you like to do"
-                      " next?\n", style="bold")
-        print("1. Continue to place your order")
-        print("2. Exit to Main Menu\n")
-        print("Please select an option by entering either 1 or 2\n")
         selection = input("Enter your choice here:\n")
         if selection == "1":
             break
         elif selection == "2":
             main()
         else:
-            print("Invalid choice, please enter a number between 1-3")
+            print("\nInvalid choice, please enter a number between 1-3\n")
             continue
     #  If option 1, While loop to request users details
     #  If not valid, error message asks the user to try again
@@ -90,6 +89,9 @@ def get_customer_number():
             Print statement confirming input is valid
             telnum (str): used within place_order()
     """
+    print("Please provide a mobile phone number, that starts with 07"
+          " and is 11 digits\n")
+
     def validate_mobile(telnum):
         """
         Validates user contact phone number.
@@ -104,14 +106,12 @@ def get_customer_number():
     #  While loop to request user inputs valid contact phone number
     #  If not valid, error message asks the user to try again
     while True:
-        print("Please provide a mobile phone number, that starts with a zero"
-              " and is 11 digits\n")
         telnum = input("Enter your number here:\n")
         if validate_mobile(telnum):
-            print(f"Thanks, we will use {telnum} to contact you if"
+            print(f"\nThanks, we will use {telnum} to contact you if"
                   " there are any issues.\n")
         else:
-            print("Invalid number. 11 digits required, starting with 0,"
+            print("\nInvalid number. 11 digits required, starting with 0,"
                   " please try again\n")
             continue
         return telnum
@@ -236,31 +236,31 @@ def get_quantity():
         Returns:
             qty(int): used within place_order()
     """
+    console.print("How many would you like?\n", style="bold")
+    console.print("Please enter a quantity between 1-6 below\n"
+                  "\nOr enter:\n"
+                  "(P) to return to the previous question\n"
+                  "(R) to restart your order\n"
+                  "(E) to exit to the Main Menu\n")
     #  While loop to request user inputs valid quantity between 1-6
     #  Provides opportunity for the user to restart order or exit to Main Menu
     #  If not valid, error message asks the user to try again
     while True:
-        console.print("How many would you like?\n", style="bold")
-        console.print("Please enter a quantity between 1-6 below\n"
-                      "\nOr enter:\n"
-                      "(P) to return to the previous question\n"
-                      "(R) to restart your order\n"
-                      "(E) to exit to the Main Menu\n")
         qty = input("Enter your choice here:\n")
-        if qty.isnumeric() in range(1, 7, 1):
+        if qty in range(1, 6, 1):
             return int(qty)
         elif qty.upper() == "P":
-            clear()
-            get_size()
-        elif qty.upper() == "R":
             break
+        elif qty.upper() == "R":
+            place_order()
         elif qty.upper() == "E":
             main()
         else:
             print("Invalid choice, please enter a number between 1-6\n"
                   "or letters R or E\n")
             continue
-    place_order()
+    clear()
+    get_size()
 
 
 def get_cost(cust_size, qty):
@@ -275,14 +275,14 @@ def get_cost(cust_size, qty):
             f string with calculated cost and GBP symbol
             Used within place_order()
     """
-    cost = 0
+    cost = 0.00
     if cust_size == ("Small"):
         cost = qty * 4.50
     elif cust_size == ("Medium"):
         cost = qty * 7.50
     elif cust_size == ("Large"):
         cost = qty * 10.50
-    return f"{cost}"
+    return cost
 
 
 def get_time():
@@ -428,7 +428,7 @@ def place_order():
 
     #  Confirm order back to the customer and provide order reference
     console.print(f"Thanks {name.capitalize()}, you are ordering;\n"
-                  f"{qty} {cust_size} {pizza} for {cost} :pizza:\n"
+                  f"{qty} {cust_size} {pizza} for £{cost} :pizza:\n"
                   f"Your reference for the order is {order_ref}\n")
     #  While loop to request user confirms order is complete
     #  If not complete, user has options to order more items
@@ -480,7 +480,7 @@ def add_pizza():
     qty = get_quantity()
     #  Calculates and returns the cost of the order
     cost = get_cost(cust_size, qty)
-    cust_order.extend(pizza, cust_size, qty, cost)
+    cust_order(pizza, cust_size, qty, cost)
     return cust_order
 
 
