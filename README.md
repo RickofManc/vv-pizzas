@@ -154,11 +154,13 @@ The key aim for the MVP launch is to have a readable interface for the customer 
 
 #### Colour 
 
-The colour palette signals 'Italy' to the customer, to convey the link with the Italian food of pizza. The Savoy Azure Blue works well to provide accents; however, it does not work as well within the interface against the black background. Whereas the Green and Red from the Italian flag are readable against the background. However, they have not been overly used to ensure all critical text is readable.
+The colour palette signals 'Italy' to the customer, to convey the link with the Italian food of pizza. The Savoy Azure Blue works well to provide accents; however, it does not work as well within the interface against the black background. Whereas the Green and Red from the Italian flag are readable against the background. However, they have not been overly used to ensure all critical text is readable. The Philippine Green from the Italian flag has also been used for the webpage background, as well as communicating Italy food, Green is often associated with Vegan or Vegetarian food.
+
 
 <p align="center">
     <img src="readme-images/vv-pizza-colour-palette.png" alt="VV Pizzas Colour Palette"/>
 </p>
+
 
 #### Font
 

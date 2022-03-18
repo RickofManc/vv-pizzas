@@ -277,13 +277,13 @@ def get_cost(cust_size, qty):
             f string with calculated cost and GBP symbol
             Used within place_order()
     """
-    cost = 0.00
+    pizza_cost = pd.DataFrame(SHEET.worksheet("Cost").get_all_records())
     if cust_size == ("Small"):
-        cost = qty * 4.50
+        cost = qty * pizza_cost.at[0, 'Cost']
     elif cust_size == ("Medium"):
-        cost = qty * 7.50
+        cost = qty * pizza_cost.at[1, 'Cost']
     elif cust_size == ("Large"):
-        cost = qty * 10.50
+        cost = qty * pizza_cost.at[2, 'Cost']
     return cost
 
 
